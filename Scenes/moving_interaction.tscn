@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://cyic6ghoa0be8"]
+[gd_scene load_steps=9 format=3 uid="uid://cyic6ghoa0be8"]
 
 [ext_resource type="Script" uid="uid://bgcrnc4xjyu14" path="res://Scripts/MovingInteraction.gd" id="1_7gupg"]
 [ext_resource type="Shader" uid="uid://kil43yqdmd1" path="res://Shaders/mi_circle.tres" id="2_7gupg"]
@@ -15,11 +15,31 @@ shader_parameter/CircleAlpha = 0.5
 shader_parameter/InteractionColor = Color(0, 0.788235, 1, 1)
 shader_parameter/MainColor = Color(1, 0.588235, 0, 1)
 
+[sub_resource type="ImmediateMesh" id="ImmediateMesh_7gupg"]
+
+[sub_resource type="ImmediateMesh" id="ImmediateMesh_t046b"]
+
+[sub_resource type="ImmediateMesh" id="ImmediateMesh_qrckv"]
+
+[sub_resource type="ImmediateMesh" id="ImmediateMesh_shvf7"]
+
 [node name="MovingInteraction" type="Node3D"]
 script = ExtResource("1_7gupg")
 
-[node name="meshAzimuthDistance" type="MeshInstance3D" parent="."]
+[node name="circleAzimuthDistance" type="MeshInstance3D" parent="."]
 transform = Transform3D(20, 0, 0, 0, 20, 0, 0, 0, 20, 0, 0, 0)
 instance_shader_parameters/InteractionRadius = 5.0
 mesh = SubResource("PlaneMesh_yvapd")
 surface_material_override/0 = SubResource("ShaderMaterial_t046b")
+
+[node name="lineAzimuthDistance" type="MeshInstance3D" parent="."]
+mesh = SubResource("ImmediateMesh_7gupg")
+
+[node name="lineAltitude" type="MeshInstance3D" parent="."]
+mesh = SubResource("ImmediateMesh_t046b")
+
+[node name="lineResult" type="MeshInstance3D" parent="."]
+mesh = SubResource("ImmediateMesh_qrckv")
+
+[node name="circleResult" type="MeshInstance3D" parent="."]
+mesh = SubResource("ImmediateMesh_shvf7")
