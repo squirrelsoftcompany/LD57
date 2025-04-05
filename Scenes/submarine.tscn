@@ -50,5 +50,5 @@ mesh = SubResource("CylinderMesh_74qfh")
 
 [node name="OmniLight3D" type="OmniLight3D" parent="."]
 shadow_enabled = true
-omni_range = 100.0
-omni_attenuation = 0.2
+omni_range = 50.0
+omni_attenuation = 0.5

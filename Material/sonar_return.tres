@@ -1,0 +1,10 @@
+[gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://dmg37doa3e5j6"]
+
+[ext_resource type="Shader" uid="uid://t1atg6mxg47k" path="res://Material/Shader/sonar_return.tres" id="1_xedsn"]
+
+[resource]
+render_priority = 0
+shader = ExtResource("1_xedsn")
+shader_parameter/Color = Color(0.0392157, 0.0392157, 1, 1)
+shader_parameter/line_width = 0.25
+shader_parameter/minimum = 0.236
