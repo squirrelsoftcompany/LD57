@@ -1,0 +1,25 @@
+[gd_scene load_steps=5 format=3 uid="uid://cyic6ghoa0be8"]
+
+[ext_resource type="Script" uid="uid://bgcrnc4xjyu14" path="res://Scripts/MovingInteraction.gd" id="1_7gupg"]
+[ext_resource type="Shader" uid="uid://kil43yqdmd1" path="res://Shaders/mi_circle.tres" id="2_7gupg"]
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_yvapd"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_t046b"]
+render_priority = 10
+shader = ExtResource("2_7gupg")
+shader_parameter/MainRadius = 10.0
+shader_parameter/Tolerance = 0.1
+shader_parameter/CircleEdgeAlpha = 1.0
+shader_parameter/CircleAlpha = 0.5
+shader_parameter/InteractionColor = Color(0, 0.788235, 1, 1)
+shader_parameter/MainColor = Color(1, 0.588235, 0, 1)
+
+[node name="MovingInteraction" type="Node3D"]
+script = ExtResource("1_7gupg")
+
+[node name="meshAzimuthDistance" type="MeshInstance3D" parent="."]
+transform = Transform3D(20, 0, 0, 0, 20, 0, 0, 0, 20, 0, 0, 0)
+instance_shader_parameters/InteractionRadius = 5.0
+mesh = SubResource("PlaneMesh_yvapd")
+surface_material_override/0 = SubResource("ShaderMaterial_t046b")
