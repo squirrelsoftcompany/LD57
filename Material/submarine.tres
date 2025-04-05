@@ -1,0 +1,8 @@
+[gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://drbx2dl3osytb"]
+
+[ext_resource type="Shader" uid="uid://cdxbxunobnejh" path="res://Material/Shader/submarine.tres" id="1_7lt77"]
+
+[resource]
+render_priority = 0
+shader = ExtResource("1_7lt77")
+shader_parameter/Color = Color(0.300356, 0.656854, 1, 1)

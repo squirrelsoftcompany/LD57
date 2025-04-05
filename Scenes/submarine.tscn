@@ -1,0 +1,49 @@
+[gd_scene load_steps=6 format=3 uid="uid://cs5gpseipyj5g"]
+
+[ext_resource type="Material" uid="uid://drbx2dl3osytb" path="res://Material/submarine.tres" id="1_hyx2r"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_h82ph"]
+radius = 1.0
+height = 5.0
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_3uq8f"]
+height = 0.5
+cap_top = false
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_k4f85"]
+top_radius = 0.6
+height = 0.5
+cap_top = false
+cap_bottom = false
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_74qfh"]
+top_radius = 0.35
+bottom_radius = 0.3
+height = 0.5
+cap_top = false
+
+[node name="Submarine" type="Node3D"]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0)
+material_override = ExtResource("1_hyx2r")
+mesh = SubResource("CapsuleMesh_h82ph")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="MeshInstance3D"]
+transform = Transform3D(0.8, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0.585611, -1.07157)
+material_override = ExtResource("1_hyx2r")
+mesh = SubResource("CylinderMesh_3uq8f")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="MeshInstance3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2.7945, 1.22151e-07)
+material_override = ExtResource("1_hyx2r")
+mesh = SubResource("CylinderMesh_k4f85")
+
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="MeshInstance3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2.63534, 1.15194e-07)
+material_override = ExtResource("1_hyx2r")
+mesh = SubResource("CylinderMesh_74qfh")
+
+[node name="OmniLight3D" type="OmniLight3D" parent="."]
+light_color = Color(1, 0, 0.817138, 1)
+omni_range = 50.0
