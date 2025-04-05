@@ -1,0 +1,34 @@
+[gd_scene load_steps=6 format=3 uid="uid://ciwcfka75trn2"]
+
+[ext_resource type="Shader" uid="uid://t1atg6mxg47k" path="res://Material/Shader/sonar_return.tres" id="1_a0snn"]
+[ext_resource type="PackedScene" uid="uid://cs5gpseipyj5g" path="res://Scenes/submarine.tscn" id="2_ht1xv"]
+[ext_resource type="PackedScene" uid="uid://cavo4y7twdfwx" path="res://Scenes/world_environment.tscn" id="3_ht1xv"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_uwfvw"]
+render_priority = 0
+shader = ExtResource("1_a0snn")
+shader_parameter/color = Color(0.105882, 0.192157, 1, 1)
+shader_parameter/saturation = 15.0
+shader_parameter/minimum = 0.3
+
+[sub_resource type="TorusMesh" id="TorusMesh_xfw24"]
+flip_faces = true
+inner_radius = 2.0
+outer_radius = 20.0
+
+[node name="SonarTest" type="Node3D"]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 9.58443e-05, 0)
+material_override = SubResource("ShaderMaterial_uwfvw")
+mesh = SubResource("TorusMesh_xfw24")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="MeshInstance3D"]
+cast_shadow = 3
+mesh = SubResource("TorusMesh_xfw24")
+skeleton = NodePath("../..")
+
+[node name="Submarine" parent="." instance=ExtResource("2_ht1xv")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.2456, 0, 0)
+
+[node name="WorldEnvironment" parent="." instance=ExtResource("3_ht1xv")]

@@ -27,23 +27,28 @@ cap_top = false
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0)
 material_override = ExtResource("1_hyx2r")
+cast_shadow = 0
 mesh = SubResource("CapsuleMesh_h82ph")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="MeshInstance3D"]
 transform = Transform3D(0.8, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0.585611, -1.07157)
 material_override = ExtResource("1_hyx2r")
+cast_shadow = 0
 mesh = SubResource("CylinderMesh_3uq8f")
 
 [node name="MeshInstance3D2" type="MeshInstance3D" parent="MeshInstance3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2.7945, 1.22151e-07)
 material_override = ExtResource("1_hyx2r")
+cast_shadow = 0
 mesh = SubResource("CylinderMesh_k4f85")
 
 [node name="MeshInstance3D3" type="MeshInstance3D" parent="MeshInstance3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2.63534, 1.15194e-07)
 material_override = ExtResource("1_hyx2r")
+cast_shadow = 0
 mesh = SubResource("CylinderMesh_74qfh")
 
 [node name="OmniLight3D" type="OmniLight3D" parent="."]
-light_color = Color(1, 0, 0.817138, 1)
-omni_range = 50.0
+shadow_enabled = true
+omni_range = 100.0
+omni_attenuation = 0.2

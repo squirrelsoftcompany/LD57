@@ -33,3 +33,14 @@ enabled=PackedStringArray("res://addons/orbit_camera/plugin.cfg")
 
 renderer/rendering_method="gl_compatibility"
 renderer/rendering_method.mobile="gl_compatibility"
+
+[shader_globals]
+
+sonar_layer={
+"type": "vec2",
+"value": Vector2(5, -5)
+}
+line_dist={
+"type": "float",
+"value": 5.0
+}
