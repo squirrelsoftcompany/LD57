@@ -2,8 +2,8 @@
 
 [ext_resource type="Script" uid="uid://bcblre3d3gb7m" path="res://addons/orbit_camera/orbit_camera.gd" id="1_3dogw"]
 [ext_resource type="Material" uid="uid://dmg37doa3e5j6" path="res://Material/sonar_return.tres" id="1_hb2xm"]
-[ext_resource type="PackedScene" uid="uid://cs5gpseipyj5g" path="res://Scenes/submarine.tscn" id="2_ak5v8"]
-[ext_resource type="PackedScene" uid="uid://cavo4y7twdfwx" path="res://Scenes/world_environment.tscn" id="4_x033f"]
+[ext_resource type="PackedScene" path="res://Scenes/submarine.tscn" id="2_ak5v8"]
+[ext_resource type="PackedScene" path="res://Scenes/world_environment.tscn" id="4_x033f"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_6w285"]
 
