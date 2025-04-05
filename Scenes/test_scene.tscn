@@ -1,6 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://bdujusajoavl0"]
+[gd_scene load_steps=7 format=3 uid="uid://bdujusajoavl0"]
 
 [ext_resource type="Script" uid="uid://bcblre3d3gb7m" path="res://addons/orbit_camera/orbit_camera.gd" id="1_3dogw"]
+[ext_resource type="Material" uid="uid://dmg37doa3e5j6" path="res://Material/sonar_return.tres" id="1_hb2xm"]
+[ext_resource type="PackedScene" uid="uid://cs5gpseipyj5g" path="res://Scenes/submarine.tscn" id="2_ak5v8"]
+[ext_resource type="PackedScene" uid="uid://cavo4y7twdfwx" path="res://Scenes/world_environment.tscn" id="4_x033f"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_6w285"]
 
@@ -12,11 +15,13 @@ point_count = 2
 [node name="TestScene" type="Node3D"]
 
 [node name="OmniLight3D" type="OmniLight3D" parent="."]
+visible = false
 omni_range = 1000.0
 omni_attenuation = 0.0
 
 [node name="World" type="CSGCombiner3D" parent="."]
 layers = 4
+material_override = ExtResource("1_hb2xm")
 use_collision = true
 collision_mask = 2
 
@@ -53,8 +58,11 @@ radius = 20.0
 
 [node name="Player" type="Node3D" parent="."]
 
+[node name="Submarine" parent="Player" instance=ExtResource("2_ak5v8")]
+
 [node name="PlayerMesh" type="MeshInstance3D" parent="Player"]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0)
+visible = false
 mesh = SubResource("CapsuleMesh_6w285")
 skeleton = NodePath("../..")
 
@@ -69,3 +77,5 @@ ZOOM_DISTANCE_FACTOR = SubResource("Curve_3dogw")
 ROTATE_SPEED = 0.2
 ANCHOR_NODE_PATH = NodePath("..")
 metadata/_custom_type_script = "uid://bcblre3d3gb7m"
+
+[node name="WorldEnvironment" parent="." instance=ExtResource("4_x033f")]
