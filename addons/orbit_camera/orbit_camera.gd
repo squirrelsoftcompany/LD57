@@ -4,6 +4,8 @@ extends Camera3D
 @export var SCROLL_SPEED: float = 10 # Speed when use scroll mouse
 @export var ZOOM_SPEED: float = 5 # Speed use when is_zoom_in or is_zoom_out is true
 @export var DEFAULT_DISTANCE: float = 20 # Default distance of the Node
+@export var RANGE_DISTANCE: Vector2 = Vector2(5, 100) # Default distance of the Node
+@export var ZOOM_DISTANCE_FACTOR: Curve # Default distance of the Node
 @export var ROTATE_SPEED: float = 10
 @export var ANCHOR_NODE_PATH: NodePath
 @export var MOUSE_ZOOM_SPEED: float = 10
@@ -24,15 +26,15 @@ var _distance: float
 var _anchor_node: Node3D
 
 func _ready():
-	_distance = DEFAULT_DISTANCE
+	_distance = clamp(DEFAULT_DISTANCE, RANGE_DISTANCE.x, RANGE_DISTANCE.y)
 	_anchor_node = self.get_node(ANCHOR_NODE_PATH)
 	_rotation = _anchor_node.transform.basis.get_rotation_quaternion().get_euler()
 
 func _process(delta: float):
 	if is_zoom_in:
-		_scroll_speed = -1 * ZOOM_SPEED
+		_scroll_speed = -1 * ZOOM_SPEED * computeZoomFactor()
 	if is_zoom_out:
-		_scroll_speed = 1 * ZOOM_SPEED
+		_scroll_speed = 1 * ZOOM_SPEED * computeZoomFactor()
 	_process_transformation(delta)
 
 func _process_transformation(delta: float):
@@ -47,8 +49,7 @@ func _process_transformation(delta: float):
 	
 	# Update distance
 	_distance += _scroll_speed * delta
-	if _distance < 0:
-		_distance = 0
+	_distance = clamp(_distance, RANGE_DISTANCE.x, RANGE_DISTANCE.y)
 	_scroll_speed = 0
 	
 	self.set_identity()
@@ -70,11 +71,17 @@ func _process_mouse_rotation_event(e: InputEventMouseMotion):
 	if Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT):
 		_move_speed = e.relative
 
+func computeZoomFactor() -> float:
+	if is_instance_valid(ZOOM_DISTANCE_FACTOR):
+		var percent_distance = (_distance - RANGE_DISTANCE.x) / RANGE_DISTANCE.y
+		return ZOOM_DISTANCE_FACTOR.sample(percent_distance)
+	return 1
+
 func _process_mouse_scroll_event(e: InputEventMouseButton):
 	if e.button_index == MOUSE_BUTTON_WHEEL_UP:
-		_scroll_speed = -1 * SCROLL_SPEED
+		_scroll_speed = -1 * SCROLL_SPEED * computeZoomFactor()
 	elif e.button_index == MOUSE_BUTTON_WHEEL_DOWN:
-		_scroll_speed = 1 * SCROLL_SPEED
+		_scroll_speed = 1 * SCROLL_SPEED * computeZoomFactor()
 
 func _process_touch_rotation_event(e: InputEventScreenDrag):
 	if _touches.has(e.index):
@@ -85,7 +92,7 @@ func _process_touch_rotation_event(e: InputEventScreenDrag):
 		var _pos_finger_2 = _touches[_keys[1]] as Vector2
 		var _dist = _pos_finger_1.distance_to(_pos_finger_2)
 		if _old_touche_dist != -1:
-			_scroll_speed = (_dist - _old_touche_dist) * MOUSE_ZOOM_SPEED
+			_scroll_speed = (_dist - _old_touche_dist) * MOUSE_ZOOM_SPEED * computeZoomFactor()
 		if TOUCH_INVERT_ZOOM:
 			_scroll_speed = -1 * _scroll_speed
 		_old_touche_dist = _dist
