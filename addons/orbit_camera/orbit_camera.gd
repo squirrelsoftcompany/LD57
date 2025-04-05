@@ -72,7 +72,7 @@ func _process_mouse_rotation_event(e: InputEventMouseMotion):
 		_move_speed = e.relative
 
 func computeZoomFactor() -> float:
-	if is_instance_valid(ZOOM_DISTANCE_FACTOR):
+	if ZOOM_DISTANCE_FACTOR != null:
 		var percent_distance = (_distance - RANGE_DISTANCE.x) / RANGE_DISTANCE.y
 		return ZOOM_DISTANCE_FACTOR.sample(percent_distance)
 	return 1
