@@ -1,34 +1,37 @@
 [gd_scene load_steps=6 format=3 uid="uid://ciwcfka75trn2"]
 
-[ext_resource type="Shader" uid="uid://t1atg6mxg47k" path="res://Material/Shader/sonar_return.tres" id="1_a0snn"]
+[ext_resource type="Material" uid="uid://dmg37doa3e5j6" path="res://Material/sonar_return.tres" id="1_ht1xv"]
 [ext_resource type="PackedScene" uid="uid://cs5gpseipyj5g" path="res://Scenes/submarine.tscn" id="2_ht1xv"]
 [ext_resource type="PackedScene" uid="uid://cavo4y7twdfwx" path="res://Scenes/world_environment.tscn" id="3_ht1xv"]
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_uwfvw"]
-render_priority = 0
-shader = ExtResource("1_a0snn")
-shader_parameter/color = Color(0.105882, 0.192157, 1, 1)
-shader_parameter/saturation = 15.0
-shader_parameter/minimum = 0.3
-
 [sub_resource type="TorusMesh" id="TorusMesh_xfw24"]
 flip_faces = true
-inner_radius = 2.0
-outer_radius = 20.0
+inner_radius = 4.0
+outer_radius = 30.0
+
+[sub_resource type="QuadMesh" id="QuadMesh_ht1xv"]
+size = Vector2(50, 50)
 
 [node name="SonarTest" type="Node3D"]
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 9.58443e-05, 0)
-material_override = SubResource("ShaderMaterial_uwfvw")
+[node name="doughnut" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.394455, 0.918915, 0, -0.918915, 0.394455, 0, 0, 0, 1, 0, 12.3482, 0)
+material_override = ExtResource("1_ht1xv")
 mesh = SubResource("TorusMesh_xfw24")
 
-[node name="MeshInstance3D2" type="MeshInstance3D" parent="MeshInstance3D"]
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="doughnut"]
+transform = Transform3D(1, 2.98023e-08, 0, -2.98023e-08, 1, 0, 0, 0, 1, 0, 0, 0)
 cast_shadow = 3
 mesh = SubResource("TorusMesh_xfw24")
 skeleton = NodePath("../..")
 
 [node name="Submarine" parent="." instance=ExtResource("2_ht1xv")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.2456, 0, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.248, 0, 0)
 
 [node name="WorldEnvironment" parent="." instance=ExtResource("3_ht1xv")]
+
+[node name="quad" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.789748, -0.613431, 0, 0.613431, 0.789748, 0, 0, -4.8159)
+visible = false
+material_override = ExtResource("1_ht1xv")
+mesh = SubResource("QuadMesh_ht1xv")
