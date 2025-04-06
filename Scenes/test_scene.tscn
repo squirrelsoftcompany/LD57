@@ -1,9 +1,11 @@
-[gd_scene load_steps=7 format=3 uid="uid://bdujusajoavl0"]
+[gd_scene load_steps=9 format=3 uid="uid://bdujusajoavl0"]
 
 [ext_resource type="Script" uid="uid://bcblre3d3gb7m" path="res://addons/orbit_camera/orbit_camera.gd" id="1_3dogw"]
 [ext_resource type="Material" uid="uid://dmg37doa3e5j6" path="res://Material/sonar_return.tres" id="1_hb2xm"]
-[ext_resource type="PackedScene" path="res://Scenes/submarine.tscn" id="2_ak5v8"]
-[ext_resource type="PackedScene" path="res://Scenes/world_environment.tscn" id="4_x033f"]
+[ext_resource type="PackedScene" uid="uid://cs5gpseipyj5g" path="res://Scenes/submarine.tscn" id="2_ak5v8"]
+[ext_resource type="PackedScene" uid="uid://cyic6ghoa0be8" path="res://Scenes/moving_interaction.tscn" id="2_r5l72"]
+[ext_resource type="Script" uid="uid://c7ga8q35vtvdu" path="res://Scripts/player.gd" id="2_x033f"]
+[ext_resource type="PackedScene" uid="uid://cavo4y7twdfwx" path="res://Scenes/world_environment.tscn" id="4_x033f"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_6w285"]
 
@@ -57,6 +59,7 @@ operation = 2
 radius = 20.0
 
 [node name="Player" type="Node3D" parent="."]
+script = ExtResource("2_x033f")
 
 [node name="Submarine" parent="Player" instance=ExtResource("2_ak5v8")]
 
@@ -77,5 +80,8 @@ ZOOM_DISTANCE_FACTOR = SubResource("Curve_3dogw")
 ROTATE_SPEED = 0.2
 ANCHOR_NODE_PATH = NodePath("..")
 metadata/_custom_type_script = "uid://bcblre3d3gb7m"
+
+[node name="MovingInteraction" parent="Player" instance=ExtResource("2_r5l72")]
+visible = false
 
 [node name="WorldEnvironment" parent="." instance=ExtResource("4_x033f")]

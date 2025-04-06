@@ -1,4 +1,5 @@
 extends Node3D
+class_name MovingInteraction
 
 
 @export var distance_range := Vector2(4, 20)
