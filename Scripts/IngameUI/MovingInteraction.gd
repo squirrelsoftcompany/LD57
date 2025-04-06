@@ -39,14 +39,14 @@ func _on_visibility_changed() -> void:
 func _process(_delta: float) -> void:
 	if !visible:
 		return
-	
+
 	var camera := get_viewport().get_camera_3d()
 	var behind := false
 	if camera.global_position.y > _circleAzimuthDistance.global_position.y:
 		behind = _circleResult.global_position.y < _circleAzimuthDistance.global_position.y
 	else:
 		behind = _circleResult.global_position.y > _circleAzimuthDistance.global_position.y
-	
+
 	if behind != _behind:
 		_behind = behind
 		update_render_priority()

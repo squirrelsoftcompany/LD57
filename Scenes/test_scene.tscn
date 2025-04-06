@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://bdujusajoavl0"]
+[gd_scene load_steps=9 format=3 uid="uid://bdujusajoavl0"]
 
 [ext_resource type="Script" uid="uid://bcblre3d3gb7m" path="res://addons/orbit_camera/orbit_camera.gd" id="1_3dogw"]
 [ext_resource type="Material" uid="uid://dmg37doa3e5j6" path="res://Material/sonar_return.tres" id="1_hb2xm"]
@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://cyic6ghoa0be8" path="res://Scenes/moving_interaction.tscn" id="2_r5l72"]
 [ext_resource type="Script" uid="uid://c7ga8q35vtvdu" path="res://Scripts/player.gd" id="2_x033f"]
 [ext_resource type="PackedScene" path="res://Scenes/world_environment.tscn" id="4_x033f"]
+[ext_resource type="PackedScene" uid="uid://3hh1h3nvrtpo" path="res://Scenes/IngameUI/archive_visitor.tscn" id="7_rdbpf"]
 
 [sub_resource type="Curve" id="Curve_3dogw"]
 _limits = [1.0, 30.0, 0.0, 1.0]
@@ -77,3 +78,5 @@ metadata/_custom_type_script = "uid://bcblre3d3gb7m"
 visible = false
 
 [node name="WorldEnvironment" parent="." instance=ExtResource("4_x033f")]
+
+[node name="ArchiveVisitor" parent="." instance=ExtResource("7_rdbpf")]

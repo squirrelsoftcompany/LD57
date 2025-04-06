@@ -18,6 +18,8 @@ config/icon="res://icon.svg"
 [autoload]
 
 GlobalPlayerStates="*res://Scripts/global_player_states.gd"
+GlobalArchive="*res://Scripts/Autoload/Archive.gd"
+GlobalEventHolder="*res://Scripts/Autoload/EventHolder.gd"
 
 [editor_plugins]
 
