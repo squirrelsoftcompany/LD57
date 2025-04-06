@@ -69,6 +69,7 @@ default_value = Color(0, 0.788235, 1, 1)
 
 [sub_resource type="VisualShaderNodeFloatParameter" id="VisualShaderNodeFloatParameter_ywr55"]
 parameter_name = "MainRadius"
+qualifier = 2
 default_value_enabled = true
 default_value = 10.0
 
@@ -108,7 +109,7 @@ operator = 2
 code = "shader_type spatial;
 render_mode blend_mix, depth_draw_always, cull_disabled, diffuse_lambert, specular_schlick_ggx;
 
-uniform float MainRadius = 10.0;
+instance uniform float MainRadius = 10.0;
 uniform float Tolerance = 0.20000000298023;
 instance uniform float InteractionRadius = 5.0;
 uniform float CircleEdgeAlpha = 1.0;
@@ -272,7 +273,7 @@ void fragment() {
 
 }
 "
-graph_offset = Vector2(-553.968, -123.972)
+graph_offset = Vector2(-2227.81, 134.236)
 modes/depth_draw = 1
 modes/cull = 2
 nodes/fragment/0/position = Vector2(960, 920)
@@ -289,21 +290,21 @@ nodes/fragment/10/position = Vector2(-1520, 540)
 nodes/fragment/11/node = SubResource("VisualShaderNodeVectorLen_o6yiu")
 nodes/fragment/11/position = Vector2(-860, 720)
 nodes/fragment/12/node = SubResource("VisualShaderNodeColorParameter_ywr55")
-nodes/fragment/12/position = Vector2(-980, 2340)
+nodes/fragment/12/position = Vector2(-980, 2300)
 nodes/fragment/13/node = SubResource("VisualShaderNodeFloatParameter_1qysl")
 nodes/fragment/13/position = Vector2(120, 240)
 nodes/fragment/14/node = SubResource("VisualShaderNodeFloatParameter_tqi2q")
 nodes/fragment/14/position = Vector2(-180, 720)
 nodes/fragment/27/node = SubResource("VisualShaderNodeCompare_petsw")
-nodes/fragment/27/position = Vector2(-420, 720)
+nodes/fragment/27/position = Vector2(-420, 860)
 nodes/fragment/28/node = SubResource("VisualShaderNodeCompare_5yf4q")
 nodes/fragment/28/position = Vector2(-860, 1120)
 nodes/fragment/29/node = SubResource("VisualShaderNodeCompare_yyqg6")
 nodes/fragment/29/position = Vector2(-860, 1380)
 nodes/fragment/30/node = SubResource("VisualShaderNodeSwitch_petsw")
-nodes/fragment/30/position = Vector2(-480, 1160)
+nodes/fragment/30/position = Vector2(-420, 1160)
 nodes/fragment/31/node = SubResource("VisualShaderNodeSwitch_5yf4q")
-nodes/fragment/31/position = Vector2(-20, 1040)
+nodes/fragment/31/position = Vector2(120, 1040)
 nodes/fragment/33/node = SubResource("VisualShaderNodeCompare_cu0x1")
 nodes/fragment/33/position = Vector2(-120, 340)
 nodes/fragment/34/node = SubResource("VisualShaderNodeSwitch_s4n1h")
@@ -313,19 +314,19 @@ nodes/fragment/35/position = Vector2(180, 500)
 nodes/fragment/36/node = SubResource("VisualShaderNodeFloatParameter_petsw")
 nodes/fragment/36/position = Vector2(-1620, 1580)
 nodes/fragment/37/node = SubResource("VisualShaderNodeFloatOp_5yf4q")
-nodes/fragment/37/position = Vector2(-780, 380)
+nodes/fragment/37/position = Vector2(-760, 380)
 nodes/fragment/38/node = SubResource("VisualShaderNodeColorParameter_petsw")
-nodes/fragment/38/position = Vector2(-980, 2100)
+nodes/fragment/38/position = Vector2(-980, 2060)
 nodes/fragment/39/node = SubResource("VisualShaderNodeIf_petsw")
-nodes/fragment/39/position = Vector2(-480, 1960)
+nodes/fragment/39/position = Vector2(-420, 1960)
 nodes/fragment/40/node = SubResource("VisualShaderNodeFloatParameter_5yf4q")
 nodes/fragment/40/position = Vector2(-1620, 1840)
 nodes/fragment/41/node = SubResource("VisualShaderNodeReroute_yyqg6")
-nodes/fragment/41/position = Vector2(-980, 860)
+nodes/fragment/41/position = Vector2(-980, 840)
 nodes/fragment/42/node = SubResource("VisualShaderNodeCompare_s4n1h")
-nodes/fragment/42/position = Vector2(-480, 1420)
+nodes/fragment/42/position = Vector2(-420, 1420)
 nodes/fragment/43/node = SubResource("VisualShaderNodeSwitch_3nihd")
-nodes/fragment/43/position = Vector2(-240, 1280)
+nodes/fragment/43/position = Vector2(-180, 1280)
 nodes/fragment/44/node = SubResource("VisualShaderNodeClamp_bawwv")
 nodes/fragment/44/position = Vector2(-1140, 1840)
 nodes/fragment/45/node = SubResource("VisualShaderNodeUVFunc_qly8u")

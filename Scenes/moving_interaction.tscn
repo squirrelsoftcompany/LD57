@@ -1,19 +1,24 @@
-[gd_scene load_steps=9 format=3 uid="uid://cyic6ghoa0be8"]
+[gd_scene load_steps=11 format=3 uid="uid://cyic6ghoa0be8"]
 
 [ext_resource type="Script" uid="uid://bgcrnc4xjyu14" path="res://Scripts/MovingInteraction.gd" id="1_7gupg"]
 [ext_resource type="Shader" uid="uid://kil43yqdmd1" path="res://Shaders/mi_circle.tres" id="2_7gupg"]
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_yvapd"]
+size = Vector2(1, 1)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_t046b"]
-render_priority = 10
+render_priority = 0
 shader = ExtResource("2_7gupg")
-shader_parameter/MainRadius = 10.0
 shader_parameter/Tolerance = 0.1
 shader_parameter/CircleEdgeAlpha = 1.0
 shader_parameter/CircleAlpha = 0.5
 shader_parameter/InteractionColor = Color(0, 0.788235, 1, 1)
 shader_parameter/MainColor = Color(1, 0.588235, 0, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_7gupg"]
+cull_mode = 2
+emission_enabled = true
+emission = Color(1, 0, 0, 1)
 
 [sub_resource type="ImmediateMesh" id="ImmediateMesh_7gupg"]
 
@@ -21,7 +26,17 @@ shader_parameter/MainColor = Color(1, 0.588235, 0, 1)
 
 [sub_resource type="ImmediateMesh" id="ImmediateMesh_qrckv"]
 
-[sub_resource type="ImmediateMesh" id="ImmediateMesh_shvf7"]
+[sub_resource type="PlaneMesh" id="PlaneMesh_7gupg"]
+size = Vector2(1, 1)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_7gupg"]
+render_priority = -1
+shader = ExtResource("2_7gupg")
+shader_parameter/Tolerance = 0.2
+shader_parameter/CircleEdgeAlpha = 1.0
+shader_parameter/CircleAlpha = 0.5
+shader_parameter/InteractionColor = Color(0, 0.788235, 1, 1)
+shader_parameter/MainColor = Color(1, 0.588235, 0, 1)
 
 [node name="MovingInteraction" type="Node3D"]
 script = ExtResource("1_7gupg")
@@ -33,13 +48,20 @@ mesh = SubResource("PlaneMesh_yvapd")
 surface_material_override/0 = SubResource("ShaderMaterial_t046b")
 
 [node name="lineAzimuthDistance" type="MeshInstance3D" parent="."]
+material_override = SubResource("StandardMaterial3D_7gupg")
 mesh = SubResource("ImmediateMesh_7gupg")
 
 [node name="lineAltitude" type="MeshInstance3D" parent="."]
+material_override = SubResource("StandardMaterial3D_7gupg")
 mesh = SubResource("ImmediateMesh_t046b")
 
 [node name="lineResult" type="MeshInstance3D" parent="."]
+material_override = SubResource("StandardMaterial3D_7gupg")
 mesh = SubResource("ImmediateMesh_qrckv")
 
 [node name="circleResult" type="MeshInstance3D" parent="."]
-mesh = SubResource("ImmediateMesh_shvf7")
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1, 0)
+instance_shader_parameters/InteractionRadius = 5.0
+instance_shader_parameters/MainRadius = 5.0
+mesh = SubResource("PlaneMesh_7gupg")
+surface_material_override/0 = SubResource("ShaderMaterial_7gupg")
