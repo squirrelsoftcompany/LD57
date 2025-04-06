@@ -18,6 +18,40 @@ func _ready():
 		_on_tp_added(i, GlobalArchive._archive[i])
 
 
+func _input(event: InputEvent) -> void:
+	if GlobalEventHolder._moving: return
+
+	if event is InputEventKey:
+		if event.is_action_pressed("av_back", false, true):
+			navigate_back()
+		if event.is_action_pressed("av_forward", false, true):
+			navigate_forward()
+		if event.is_action_pressed("av_quit", false, true):
+			quit_navigation()
+
+
+var _visiting_idx := -1
+func navigate_back():
+	if _visiting_idx <= 0: return
+	_visiting_idx -= 1
+	GlobalEventHolder.emit_signal("player_navigate_archive", _visiting_idx, GlobalArchive._archive[_visiting_idx])
+
+
+func navigate_forward():
+	if _visiting_idx >= GlobalArchive._archive.size()-2:
+		quit_navigation()
+		return
+	_visiting_idx += 1
+	GlobalEventHolder.emit_signal("player_navigate_archive", _visiting_idx, GlobalArchive._archive[_visiting_idx])
+
+
+func quit_navigation():
+	if _visiting_idx == GlobalArchive._archive.size()-1:
+		return
+	_visiting_idx = GlobalArchive._archive.size()-1
+	GlobalEventHolder.emit_signal("player_quit_navigating_archive", _visiting_idx, GlobalArchive._archive[_visiting_idx])
+
+
 func _on_tp_cleared() -> void:
 	_polygon.queue_free()
 	_polygon = null
@@ -28,6 +62,8 @@ func _on_tp_added(_idx: int, tp: Archive.TimePoint) -> void:
 	_path3d.curve.add_point(tp.player_position)
 	if _polygon == null and is_path_valid_for_polygon():
 		generate_polygon()
+	if !GlobalEventHolder._navigating_archive:
+		_visiting_idx = _path3d.curve.point_count-1
 
 
 func _on_last_tp_updated(_idx: int, tp: Archive.TimePoint) -> void:

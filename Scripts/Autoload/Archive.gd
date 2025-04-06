@@ -7,6 +7,7 @@ class TimePoint:
 	var time_of_departure :int= int(INF)
 	var scaled_time :int= 0
 	var player_position:Vector3
+	var player_rotation:Vector3
 
 
 signal tp_cleared()
@@ -18,14 +19,9 @@ var _archive : Array[TimePoint]
 
 
 func _ready() -> void:
-	GlobalEventHolder.connect("player_start_moving", func(_x): self._leave_last_timepoint())
-	GlobalEventHolder.connect("player_start_moving", func(x): self.add_timepoint(x))
-	GlobalEventHolder.connect("player_moving", func(x): self.update_last_timepoint(x))
-	pass
-
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(_delta: float) -> void:
+	GlobalEventHolder.connect("player_start_moving", func(_x, _y): self._leave_last_timepoint())
+	GlobalEventHolder.connect("player_start_moving", add_timepoint)
+	GlobalEventHolder.connect("player_moving", update_last_timepoint)
 	pass
 
 
@@ -42,10 +38,11 @@ func _leave_last_timepoint():
 	back_tp.time_of_departure = Time.get_ticks_usec()
 
 
-func add_timepoint(player_position : Vector3):
+func add_timepoint(player_position : Vector3, player_rotation : Vector3):
 	var tp := TimePoint.new()
 	tp.time_of_arrival = Time.get_ticks_usec()
 	tp.player_position = player_position
+	tp.player_rotation = player_rotation
 	if _archive.is_empty():
 		tp.scaled_time = 0
 	else:
@@ -55,12 +52,13 @@ func add_timepoint(player_position : Vector3):
 	emit_signal("tp_added", _archive.size()-1, _archive.back())
 
 
-func update_last_timepoint(player_position : Vector3):
+func update_last_timepoint(player_position : Vector3, player_rotation : Vector3):
 	if _archive.is_empty():
 		push_error("Trying to update last timepoint but _archive is empty")
 		return
 	var back_tp := _archive.back() as TimePoint
 	back_tp.player_position = player_position
+	back_tp.player_rotation = player_rotation
 	var neo_engine_time_of_arrival = Time.get_ticks_usec()
 	back_tp.scaled_time += neo_engine_time_of_arrival - back_tp.time_of_arrival
 	back_tp.time_of_arrival = neo_engine_time_of_arrival

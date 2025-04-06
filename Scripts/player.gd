@@ -13,11 +13,13 @@ var _selecting_movement := false
 
 func _ready() -> void:
 	GlobalArchive.clear()
-	GlobalArchive.add_timepoint(position)
+	GlobalArchive.add_timepoint(position, rotation)
+	GlobalEventHolder.connect("player_navigate_archive", _on_player_navigate_archive)
+	GlobalEventHolder.connect("player_quit_navigating_archive", _on_player_quit_navigating_archive)
 
 
 func _input(event: InputEvent) -> void:
-	if GlobalEventHolder._moving:
+	if GlobalEventHolder._moving or GlobalEventHolder._navigating_archive:
 		return
 
 	if event is InputEventKey:
@@ -31,7 +33,7 @@ func _input(event: InputEvent) -> void:
 
 
 func _move_player(final_position : Vector3) -> void:
-	GlobalEventHolder.emit_signal("player_start_moving", position)
+	GlobalEventHolder.emit_signal("player_start_moving", position, $Submarine.rotation)
 	var duration := position.distance_to(final_position) / speed
 	var angular_duration := position.distance_to(final_position) / angular_speed
 	var forward := (final_position-position).normalized()
@@ -41,14 +43,20 @@ func _move_player(final_position : Vector3) -> void:
 	var tween := get_tree().create_tween()
 	tween.set_parallel()
 	tween.tween_property(self, "global_position", final_position, duration)
-	tween.tween_method(func(x): GlobalEventHolder.emit_signal("player_moving", x),
+	tween.tween_method(func(pos): GlobalEventHolder.emit_signal("player_moving", pos, $Submarine.rotation),
 							position, final_position, duration)
 	tween.tween_property($Submarine, "quaternion", final_quaternion, angular_duration)
-	tween.chain().tween_callback(func (): GlobalEventHolder.emit_signal("player_finish_moving", final_position))
+	tween.chain().tween_callback(func (): GlobalEventHolder.emit_signal("player_finish_moving", final_position, $Submarine.rotation))
 
 
-func _process(_delta: float) -> void:
-	pass
+func _on_player_navigate_archive(_idx: int, tp: Archive.TimePoint) -> void:
+	global_position = tp.player_position
+	$Submarine.global_rotation = tp.player_rotation
+
+
+func _on_player_quit_navigating_archive(_idx: int, tp: Archive.TimePoint) -> void:
+	global_position = tp.player_position
+	$Submarine.global_rotation = tp.player_rotation
 
 
 func _toggle_selecting_movement() -> void:
