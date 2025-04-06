@@ -53,9 +53,10 @@ cast_shadow = 0
 mesh = SubResource("CylinderMesh_74qfh")
 
 [node name="OmniLight3D" type="OmniLight3D" parent="."]
+light_energy = 2.0
 shadow_enabled = true
 omni_range = 50.0
-omni_attenuation = 0.5
+omni_attenuation = 0.2
 
 [node name="Area3D" type="Area3D" parent="."]
 script = ExtResource("2_74qfh")

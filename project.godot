@@ -68,3 +68,7 @@ line_dist={
 "type": "float",
 "value": 5.0
 }
+true_sight={
+"type": "bool",
+"value": true
+}

@@ -1,7 +1,7 @@
 [gd_scene load_steps=6 format=3 uid="uid://ciwcfka75trn2"]
 
 [ext_resource type="Material" uid="uid://dmg37doa3e5j6" path="res://Material/sonar_return.tres" id="1_ht1xv"]
-[ext_resource type="PackedScene" uid="uid://cs5gpseipyj5g" path="res://Scenes/submarine.tscn" id="2_ht1xv"]
+[ext_resource type="PackedScene" uid="uid://dqbw1tiffrucc" path="res://Scenes/submarine.tscn" id="2_ht1xv"]
 [ext_resource type="PackedScene" uid="uid://cavo4y7twdfwx" path="res://Scenes/world_environment.tscn" id="3_ht1xv"]
 
 [sub_resource type="TorusMesh" id="TorusMesh_xfw24"]
