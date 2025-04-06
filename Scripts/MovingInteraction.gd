@@ -15,18 +15,37 @@ extends Node3D
 var _candidate_azimuth_distance := Vector3(0,0,0)
 var _candidate_position := Vector3(0,0,0)
 var _candidate_altitude := 0.0
+var _behind := true
 
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	_circleAzimuthDistance.scale = Vector3.ONE * distance_range.y * 2
 	_circleAzimuthDistance.set_instance_shader_parameter("MainRadius", distance_range.y)
+	update_render_priority()
 	pass # Replace with function body.
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta: float) -> void:
-	pass
+	if !visible:
+		return
+	
+	var camera := get_viewport().get_camera_3d()
+	var behind := false
+	if camera.global_position.y > _circleAzimuthDistance.global_position.y:
+		behind = _circleResult.global_position.y < _circleAzimuthDistance.global_position.y
+	else:
+		behind = _circleResult.global_position.y > _circleAzimuthDistance.global_position.y
+	
+	if behind != _behind:
+		_behind = behind
+		update_render_priority()
+
+
+func update_render_priority():
+	var render_priority = _circleAzimuthDistance.get_surface_override_material(0).render_priority + (-1 if _behind else +1)
+	_circleResult.get_surface_override_material(0).render_priority = render_priority
 
 
 func _unhandled_input(event: InputEvent) -> void:
