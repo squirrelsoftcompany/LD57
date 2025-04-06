@@ -41,6 +41,7 @@ curve = SubResource("Curve3D_3unq2")
 transform = Transform3D(0.000478698, 0.0024625, 0.999991, -1.16415e-10, 0.999991, -0.0024625, -0.999995, 1.17868e-06, 0.000478697, 1.5591, -0.00674731, -0.00254944)
 
 [node name="Area3D" type="Area3D" parent="." groups=["Fishs"]]
+collision_layer = 4
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
 shape = SubResource("SphereShape3D_3unq2")

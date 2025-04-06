@@ -6,11 +6,16 @@ var charged : bool = true
 
 @onready  var timer = $Timer
 @onready  var mesh = $MultiMeshInstance3D
+@onready  var energy_sound = $EnergySound
 
 func used() -> int :
-	charged = false
+	if(not charged):
+		return 0
+		
+	energy_sound.play()
 	mesh.hide()
 	timer.start()
+	charged = false
 	return energy_value
 
 func _on_timer_timeout() -> void:

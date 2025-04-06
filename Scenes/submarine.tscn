@@ -1,7 +1,8 @@
-[gd_scene load_steps=8 format=3 uid="uid://dqbw1tiffrucc"]
+[gd_scene load_steps=9 format=3 uid="uid://dqbw1tiffrucc"]
 
 [ext_resource type="Material" uid="uid://drbx2dl3osytb" path="res://Material/submarine.tres" id="1_hyx2r"]
 [ext_resource type="Script" uid="uid://c50o8q85h8swa" path="res://Scripts/submarine_collision.gd" id="2_74qfh"]
+[ext_resource type="AudioStream" uid="uid://b3eksy1eph2sc" path="res://SFX/AlarmShort.mp3" id="3_tq48s"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_h82ph"]
 radius = 1.0
@@ -62,5 +63,10 @@ script = ExtResource("2_74qfh")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
 transform = Transform3D(4, 0, 0, 0, -1.74846e-07, -4, 0, 4, -1.74846e-07, 0, 0, 0)
 shape = SubResource("CapsuleShape3D_hyx2r")
+
+[node name="AlarmSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_tq48s")
+volume_db = -9.0
+bus = &"SFX"
 
 [connection signal="area_entered" from="Area3D" to="Area3D" method="_on_area_entered"]
