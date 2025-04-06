@@ -43,24 +43,29 @@ script = ExtResource("1_7gupg")
 
 [node name="circleAzimuthDistance" type="MeshInstance3D" parent="."]
 transform = Transform3D(20, 0, 0, 0, 20, 0, 0, 0, 20, 0, 0, 0)
+cast_shadow = 0
 instance_shader_parameters/InteractionRadius = 5.0
 mesh = SubResource("PlaneMesh_yvapd")
 surface_material_override/0 = SubResource("ShaderMaterial_t046b")
 
 [node name="lineAzimuthDistance" type="MeshInstance3D" parent="."]
 material_override = SubResource("StandardMaterial3D_7gupg")
+cast_shadow = 0
 mesh = SubResource("ImmediateMesh_7gupg")
 
 [node name="lineAltitude" type="MeshInstance3D" parent="."]
 material_override = SubResource("StandardMaterial3D_7gupg")
+cast_shadow = 0
 mesh = SubResource("ImmediateMesh_t046b")
 
 [node name="lineResult" type="MeshInstance3D" parent="."]
 material_override = SubResource("StandardMaterial3D_7gupg")
+cast_shadow = 0
 mesh = SubResource("ImmediateMesh_qrckv")
 
 [node name="circleResult" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1, 0)
+cast_shadow = 0
 instance_shader_parameters/InteractionRadius = 5.0
 instance_shader_parameters/MainRadius = 5.0
 mesh = SubResource("PlaneMesh_7gupg")
