@@ -70,16 +70,16 @@ func _unhandled_input(event: InputEvent) -> void:
 
 
 func _compute_azimuth_distance(mouse_pos:Vector2):
-	var plane := Plane(Vector3.UP, position.y)
+	var plane := Plane(Vector3.UP, global_position.y)
 	var camera := get_viewport().get_camera_3d()
 	var position3d = plane.intersects_ray(
 						camera.project_ray_origin(mouse_pos),
 						camera.project_ray_normal(mouse_pos))
 	if position3d != null:
-		var distance : float = position3d.distance_to(position)
+		var distance : float = position3d.distance_to(global_position)
 		if distance < distance_range.x or distance > distance_range.y:
-			var direction = (position3d-position).normalized()
-			position3d = position + direction * clamp(distance, distance_range.x, distance_range.y)
+			var direction = (position3d-global_position).normalized()
+			position3d = global_position + direction * clamp(distance, distance_range.x, distance_range.y)
 		_candidate_azimuth_distance = position3d
 		_candidate_position = _candidate_azimuth_distance + Vector3.UP * _candidate_altitude
 		_update_drawings()
@@ -94,7 +94,7 @@ func _compute_altitude(mouse_pos:Vector2):
 						camera.project_ray_origin(mouse_pos),
 						camera.project_ray_normal(mouse_pos))
 	if position3d != null:
-		_candidate_altitude = position3d.y - position.y
+		_candidate_altitude = position3d.y - global_position.y
 		if abs(_candidate_altitude) > distance_range.y:
 			_candidate_altitude = sign(_candidate_altitude) * distance_range.y
 		_candidate_position = _candidate_azimuth_distance + Vector3.UP * _candidate_altitude
@@ -102,13 +102,13 @@ func _compute_altitude(mouse_pos:Vector2):
 
 
 func _update_drawings():
-	_circleAzimuthDistance.set_instance_shader_parameter("InteractionRadius", _candidate_azimuth_distance.distance_to(position))
-	#_draw_line(_lineAzimuthDistance.mesh, position, _candidate_azimuth_distance, Color.RED)
+	_circleAzimuthDistance.set_instance_shader_parameter("InteractionRadius", _candidate_azimuth_distance.distance_to(global_position))
+	#_draw_line(_lineAzimuthDistance.mesh, global_position, _candidate_azimuth_distance, Color.RED)
 	#_draw_line(_lineAltitude.mesh, _candidate_azimuth_distance, _candidate_position, Color.GREEN)
-	#_draw_line(_lineResult.mesh, position, _candidate_position, Color.BLUE)
-	_draw_cylinder(_lineAzimuthDistance, position, _candidate_azimuth_distance)
+	#_draw_line(_lineResult.mesh, global_position, _candidate_position, Color.BLUE)
+	_draw_cylinder(_lineAzimuthDistance, global_position, _candidate_azimuth_distance)
 	_draw_cylinder(_lineAltitude, _candidate_azimuth_distance, _candidate_position)
-	_draw_cylinder(_lineResult, position, _candidate_position)
+	_draw_cylinder(_lineResult, global_position, _candidate_position)
 	_circleResult.global_position = _candidate_position + Vector3.UP * 0.1
 
 
