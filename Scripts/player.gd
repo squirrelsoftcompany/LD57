@@ -1,10 +1,15 @@
 extends Node3D
 
 
+@export var speed := 10.0 # m/s
+@export var angular_speed := 20 # deg/s
+
+
 @onready var _moving_interaction : MovingInteraction = $MovingInteraction
 
 
 var _selecting_movement := false
+var _moving := false
 
 
 func _ready() -> void:
@@ -12,14 +17,32 @@ func _ready() -> void:
 
 
 func _input(event: InputEvent) -> void:
+	if _moving:
+		return
+
 	if event is InputEventKey:
 		if event.is_action_pressed("mi_toggle", false, true):
 			_toggle_selecting_movement()
-	
+
 	if event is InputEventMouseButton:
 		if event.button_index == MOUSE_BUTTON_RIGHT and _selecting_movement:
 			_finish_selecting_movement()
-			#_moving_interaction._candidate_position
+			_move_player(_moving_interaction._candidate_position)
+
+
+func _move_player(final_position : Vector3) -> void:
+	_moving = true
+	var tween := get_tree().create_tween()
+	var duration := position.distance_to(final_position) / speed
+	var angular_duration := position.distance_to(final_position) / angular_speed
+	var forward := (final_position-position).normalized()
+	var left := Vector3.UP.cross(forward).normalized()
+	var up := forward.cross(left).normalized()
+	var final_quaternion := Quaternion(Basis(left,up,forward))
+	tween.set_parallel()
+	tween.tween_property(self, "global_position", final_position, duration)
+	tween.tween_property($Submarine, "quaternion", final_quaternion, angular_duration)
+	tween.chain().tween_property(self, "_moving", false, 0.0)
 
 
 func _process(_delta: float) -> void:
