@@ -10,15 +10,15 @@ size = Vector2(1, 1)
 render_priority = 0
 shader = ExtResource("2_7gupg")
 shader_parameter/Tolerance = 0.1
-shader_parameter/CircleEdgeAlpha = 1.0
-shader_parameter/CircleAlpha = 0.5
 shader_parameter/InteractionColor = Color(0, 0.788235, 1, 1)
 shader_parameter/MainColor = Color(1, 0.588235, 0, 1)
+shader_parameter/CircleEdgeAlpha = 1.0
+shader_parameter/CircleAlpha = 0.5
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_7gupg"]
 cull_mode = 2
-emission_enabled = true
-emission = Color(1, 0, 0, 1)
+shading_mode = 0
+albedo_color = Color(1, 0, 0, 1)
 
 [sub_resource type="ImmediateMesh" id="ImmediateMesh_7gupg"]
 
@@ -30,13 +30,13 @@ emission = Color(1, 0, 0, 1)
 size = Vector2(1, 1)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_7gupg"]
-render_priority = -1
+render_priority = 1
 shader = ExtResource("2_7gupg")
 shader_parameter/Tolerance = 0.2
-shader_parameter/CircleEdgeAlpha = 1.0
-shader_parameter/CircleAlpha = 0.5
 shader_parameter/InteractionColor = Color(0, 0.788235, 1, 1)
 shader_parameter/MainColor = Color(1, 0.588235, 0, 1)
+shader_parameter/CircleEdgeAlpha = 1.0
+shader_parameter/CircleAlpha = 0.5
 
 [node name="MovingInteraction" type="Node3D"]
 script = ExtResource("1_7gupg")
