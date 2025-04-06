@@ -1,0 +1,9 @@
+[gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://djnjvaelugxea"]
+
+[ext_resource type="Shader" uid="uid://cqkdq301fceow" path="res://Shaders/mine.tres" id="1_kb25i"]
+
+[resource]
+render_priority = 0
+shader = ExtResource("1_kb25i")
+shader_parameter/DistortionVector = Vector3(1, 1, 1)
+shader_parameter/ColorParameter = Color(0.334572, 0.875, 0.376862, 1)

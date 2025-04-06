@@ -1,13 +1,13 @@
 [gd_scene load_steps=11 format=3 uid="uid://dbk6cslda8hf"]
 
-[ext_resource type="Material" uid="uid://dmg37doa3e5j6" path="res://Material/sonar_return.tres" id="1_htifl"]
 [ext_resource type="Script" uid="uid://c7ga8q35vtvdu" path="res://Scripts/player.gd" id="2_hpmha"]
 [ext_resource type="PackedScene" uid="uid://dqbw1tiffrucc" path="res://Scenes/submarine.tscn" id="3_jxywu"]
 [ext_resource type="Script" uid="uid://bcblre3d3gb7m" path="res://addons/orbit_camera/orbit_camera.gd" id="4_5ahhx"]
 [ext_resource type="PackedScene" uid="uid://cyic6ghoa0be8" path="res://Scenes/moving_interaction.tscn" id="5_nntnt"]
-[ext_resource type="PackedScene" path="res://Scenes/world_environment.tscn" id="6_qojcl"]
+[ext_resource type="PackedScene" uid="uid://cavo4y7twdfwx" path="res://Scenes/world_environment.tscn" id="6_qojcl"]
 [ext_resource type="PackedScene" uid="uid://cr6h145xeg0sk" path="res://Scenes/Foes/mine.tscn" id="7_laals"]
 [ext_resource type="PackedScene" uid="uid://cao25obr6us7l" path="res://Scenes/Energy/energyZone.tscn" id="8_hyyws"]
+[ext_resource type="PackedScene" uid="uid://ch33d4mqh5ac2" path="res://Scenes/map.tscn" id="9_hpmha"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_pofpa"]
 
@@ -17,49 +17,6 @@ _data = [Vector2(0, 1), 0.0, 29.2414, 0, 0, Vector2(1, 30), 28.8709, 0.0, 0, 0]
 point_count = 2
 
 [node name="CollisionsTestDebug" type="Node3D"]
-
-[node name="OmniLight3D" type="OmniLight3D" parent="."]
-visible = false
-omni_range = 1000.0
-omni_attenuation = 0.0
-
-[node name="World" type="CSGCombiner3D" parent="."]
-visible = false
-layers = 4
-material_override = ExtResource("1_htifl")
-use_collision = true
-collision_mask = 2
-
-[node name="CSGBox3D" type="CSGBox3D" parent="World"]
-flip_faces = true
-size = Vector3(1000, 1000, 1000)
-
-[node name="CSGCylinder3D" type="CSGCylinder3D" parent="World"]
-operation = 2
-radius = 8.0
-height = 110.0
-
-[node name="CSGCylinder3D2" type="CSGCylinder3D" parent="World"]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, -20, -20)
-operation = 2
-radius = 8.0
-height = 110.0
-
-[node name="CSGCylinder3D3" type="CSGCylinder3D" parent="World"]
-transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 20, 40, 0)
-operation = 2
-radius = 8.0
-height = 110.0
-
-[node name="CSGSphere3D" type="CSGSphere3D" parent="World"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -21.9065, 0)
-operation = 2
-radius = 20.0
-
-[node name="CSGSphere3D2" type="CSGSphere3D" parent="World"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 39.668, 0)
-operation = 2
-radius = 20.0
 
 [node name="Player" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 2.285)
@@ -95,3 +52,5 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 11.011)
 
 [node name="EnergyZone" parent="." instance=ExtResource("8_hyyws")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -11.0374)
+
+[node name="Map" parent="." instance=ExtResource("9_hpmha")]

@@ -9,9 +9,9 @@ func generate_instances():
 	random.randomize()
 	
 	for i in range(cube_count):
-		var position = Transform3D()
-		position = position.translated(Vector3(randfn(0.0,0.2) * cluster_radius, randfn(0.0,0.2) * cluster_radius, randfn(0.0,0.2) * cluster_radius))
-		multimesh.set_instance_transform(i, position)
+		var new_position = Transform3D()
+		new_position = new_position.translated(Vector3(randfn(0.0,0.2) * cluster_radius, randfn(0.0,0.2) * cluster_radius, randfn(0.0,0.2) * cluster_radius))
+		multimesh.set_instance_transform(i, new_position)
 
 func _ready():
 	generate_instances()
