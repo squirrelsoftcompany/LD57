@@ -15,9 +15,19 @@ run/main_scene="uid://bdujusajoavl0"
 config/features=PackedStringArray("4.4", "GL Compatibility")
 config/icon="res://icon.svg"
 
+[autoload]
+
+GlobalPlayerStates="*res://Scripts/global_player_states.gd"
+
 [editor_plugins]
 
 enabled=PackedStringArray("res://addons/orbit_camera/plugin.cfg")
+
+[global_group]
+
+Mine=""
+Energy=""
+Fishs=""
 
 [input]
 

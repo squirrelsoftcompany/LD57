@@ -6,8 +6,8 @@ extends Node3D
 
 # PathFollow3D node to follow the path
 @onready var path_follow = $Path3D/PathFollow3D
-@onready var body = $RigidBody3D
-@onready var multimesh = $RigidBody3D/MultiMeshInstance3D
+@onready var body = $Area3D
+@onready var multimesh = $Area3D/MultiMeshInstance3D
 
 func _ready():
 	# Initialize the PathFollow3D position to the start of the path

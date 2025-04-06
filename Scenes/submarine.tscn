@@ -1,6 +1,7 @@
-[gd_scene load_steps=6 format=3 uid="uid://cs5gpseipyj5g"]
+[gd_scene load_steps=8 format=3 uid="uid://dqbw1tiffrucc"]
 
 [ext_resource type="Material" uid="uid://drbx2dl3osytb" path="res://Material/submarine.tres" id="1_hyx2r"]
+[ext_resource type="Script" uid="uid://c50o8q85h8swa" path="res://Scripts/submarine_collision.gd" id="2_74qfh"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_h82ph"]
 radius = 1.0
@@ -21,6 +22,8 @@ top_radius = 0.35
 bottom_radius = 0.3
 height = 0.5
 cap_top = false
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_hyx2r"]
 
 [node name="Submarine" type="Node3D"]
 
@@ -52,3 +55,12 @@ mesh = SubResource("CylinderMesh_74qfh")
 shadow_enabled = true
 omni_range = 50.0
 omni_attenuation = 0.5
+
+[node name="Area3D" type="Area3D" parent="."]
+script = ExtResource("2_74qfh")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+transform = Transform3D(4, 0, 0, 0, -1.74846e-07, -4, 0, 4, -1.74846e-07, 0, 0, 0)
+shape = SubResource("CapsuleShape3D_hyx2r")
+
+[connection signal="area_entered" from="Area3D" to="Area3D" method="_on_area_entered"]
