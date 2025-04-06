@@ -14,9 +14,13 @@ func _ready():
 	GlobalArchive.connect("tp_cleared", _on_tp_cleared)
 	GlobalArchive.connect("tp_added", _on_tp_added)
 	GlobalArchive.connect("last_tp_updated", _on_last_tp_updated)
+	for i in GlobalArchive._archive.size():
+		_on_tp_added(i, GlobalArchive._archive[i])
 
 
 func _on_tp_cleared() -> void:
+	_polygon.queue_free()
+	_polygon = null
 	_path3d.curve.clear_points()
 
 
@@ -43,7 +47,8 @@ func generate_polygon():
 
 func is_path_valid_for_polygon() -> bool:
 	if _path3d.curve.point_count >= 2:
-		if _path3d.curve.get_point_position(0).distance_to(_path3d.curve.get_point_position(1)) > 0.2:
+		var distance = _path3d.curve.get_point_position(0).distance_to(_path3d.curve.get_point_position(1))
+		if distance > 0.2:
 			return true
 	return false
 

@@ -12,8 +12,8 @@ var _selecting_movement := false
 
 
 func _ready() -> void:
+	GlobalArchive.clear()
 	GlobalArchive.add_timepoint(position)
-	pass
 
 
 func _input(event: InputEvent) -> void:
