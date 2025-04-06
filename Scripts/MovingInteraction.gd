@@ -21,10 +21,18 @@ var _behind := true
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	connect("visibility_changed", self._on_visibility_changed)
 	_circleAzimuthDistance.scale = Vector3.ONE * distance_range.y * 2
 	_circleAzimuthDistance.set_instance_shader_parameter("MainRadius", distance_range.y)
 	update_render_priority()
 	pass # Replace with function body.
+
+
+func _on_visibility_changed() -> void:
+	if visible:
+		_candidate_altitude = 0
+		_candidate_position = _candidate_azimuth_distance
+		_update_drawings()
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
