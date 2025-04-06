@@ -1,6 +1,6 @@
 [gd_scene load_steps=11 format=3 uid="uid://cyic6ghoa0be8"]
 
-[ext_resource type="Script" uid="uid://bgcrnc4xjyu14" path="res://Scripts/MovingInteraction.gd" id="1_7gupg"]
+[ext_resource type="Script" uid="uid://bgcrnc4xjyu14" path="res://Scripts/IngameUI/MovingInteraction.gd" id="1_7gupg"]
 [ext_resource type="Shader" uid="uid://kil43yqdmd1" path="res://Shaders/mi_circle.tres" id="2_7gupg"]
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_yvapd"]
