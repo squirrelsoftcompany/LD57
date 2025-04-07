@@ -9,11 +9,15 @@ extends CSGCombiner3D
 
 var caverns : Array[Path3D]
 var cavities : Array[CSGSphere3D]
+var shadow : CSGCombiner3D
 
 func _ready():
 	cavity_max_size = cavity_max_size if cavity_max_size < cavern_width else cavern_width
 	cavern_nb = cavern_nb if cavern_nb > 1 else 1
 	cavern_points_nb = cavern_points_nb if cavern_points_nb > 2 else 2
+	shadow = CSGCombiner3D.new()
+	shadow.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_SHADOWS_ONLY
+	add_sibling.call_deferred(shadow)
 	generate_world()
 
 func generate_world():
@@ -21,6 +25,7 @@ func generate_world():
 	var rock : CSGBox3D = CSGBox3D.new()
 	rock.size = Vector3(world_size*1.2,world_size*1.2,world_size*1.2)
 	add_child(rock)
+	shadow.add_child(rock.duplicate())
 	var networked_nodes : Array[Vector3]
 	for i in cavern_nb :
 		var cavern_path = Path3D.new()
@@ -81,6 +86,7 @@ func generate_world():
 		cavern.mode = CSGPolygon3D.MODE_PATH
 		cavern.path_node = cavern_path.get_path()
 		cavern.operation = CSGShape3D.OPERATION_SUBTRACTION
+		shadow.add_child(cavern.duplicate())
 	generate_cavities()
 
 func generate_nodes() -> Array[Vector3] :
@@ -125,4 +131,5 @@ func generate_cavities():
 		cavity.position += Vector3(randf_range(-cavity.radius,cavity.radius),randf_range(-cavity.radius,cavity.radius),randf_range(-cavity.radius,cavity.radius))
 		cavity.scale = Vector3(randf_range(0.9,1.1),randf_range(0.6,1),randf_range(0.9,1.1))
 		add_child(cavity)
+		shadow.add_child(cavity.duplicate())
 		cavities.append(cavity)
