@@ -12,7 +12,7 @@ albedo_color = Color(1, 0, 0.921748, 1)
 
 [sub_resource type="SphereMesh" id="SphereMesh_p3ir5"]
 
-[node name="Map" type="CSGCombiner3D"]
+[node name="Map" type="CSGCombiner3D" groups=["Map"]]
 material_override = ExtResource("1_26yhd")
 use_collision = true
 script = ExtResource("2_p3ir5")
@@ -39,16 +39,3 @@ fish_template = ExtResource("5_w7jjh")
 visible = false
 material_override = SubResource("StandardMaterial3D_26yhd")
 mesh = SubResource("SphereMesh_p3ir5")
-
-[node name="CSGPolygon3D" type="CSGPolygon3D" parent="."]
-mode = 2
-path_node = NodePath("")
-path_interval_type = 0
-path_interval = 1.0
-path_simplify_angle = 0.0
-path_rotation = 2
-path_rotation_accurate = false
-path_local = false
-path_continuous_u = true
-path_u_distance = 1.0
-path_joined = false
