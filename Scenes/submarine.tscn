@@ -1,9 +1,10 @@
-[gd_scene load_steps=15 format=3 uid="uid://dqbw1tiffrucc"]
+[gd_scene load_steps=16 format=3 uid="uid://dqbw1tiffrucc"]
 
 [ext_resource type="Material" uid="uid://drbx2dl3osytb" path="res://Material/submarine.tres" id="1_hyx2r"]
 [ext_resource type="Shader" uid="uid://dk4sm3onhvv5y" path="res://Material/Shader/Battery.tres" id="1_ue3ij"]
 [ext_resource type="Script" uid="uid://c50o8q85h8swa" path="res://Scripts/submarine_collision.gd" id="2_74qfh"]
 [ext_resource type="Script" uid="uid://q3d6ji8vvuui" path="res://Scripts/Scanner/sonar.gd" id="3_je60v"]
+[ext_resource type="Script" uid="uid://fbxmq0aom74v" path="res://Scripts/battery.gd" id="3_s8co7"]
 [ext_resource type="AudioStream" uid="uid://b3eksy1eph2sc" path="res://SFX/AlarmShort.mp3" id="3_tq48s"]
 [ext_resource type="AudioStream" uid="uid://civsstm6861iv" path="res://SFX/Bonk.mp3" id="6_a07w3"]
 
@@ -12,7 +13,7 @@ render_priority = 0
 shader = ExtResource("1_ue3ij")
 shader_parameter/max_charge = 5.0
 shader_parameter/mesh_length = 4.0
-shader_parameter/charge = 2.905
+shader_parameter/charge = 0.0
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_a07w3"]
 height = 4.0
@@ -51,6 +52,7 @@ transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 
 material_override = SubResource("ShaderMaterial_je60v")
 cast_shadow = 0
 mesh = SubResource("CapsuleMesh_a07w3")
+script = ExtResource("3_s8co7")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0)
