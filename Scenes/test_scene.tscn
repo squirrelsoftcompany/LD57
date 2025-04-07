@@ -1,17 +1,9 @@
-[gd_scene load_steps=9 format=3 uid="uid://bdujusajoavl0"]
+[gd_scene load_steps=5 format=3 uid="uid://bdujusajoavl0"]
 
-[ext_resource type="Script" uid="uid://bcblre3d3gb7m" path="res://addons/orbit_camera/orbit_camera.gd" id="1_3dogw"]
-[ext_resource type="Material" uid="uid://dmg37doa3e5j6" path="res://Material/sonar_return.tres" id="1_hb2xm"]
-[ext_resource type="PackedScene" uid="uid://dqbw1tiffrucc" path="res://Scenes/submarine.tscn" id="2_ak5v8"]
-[ext_resource type="PackedScene" uid="uid://cyic6ghoa0be8" path="res://Scenes/IngameUI/moving_interaction.tscn" id="2_r5l72"]
-[ext_resource type="Script" uid="uid://c7ga8q35vtvdu" path="res://Scripts/player.gd" id="2_x033f"]
-[ext_resource type="PackedScene" path="res://Scenes/world_environment.tscn" id="4_x033f"]
+[ext_resource type="PackedScene" uid="uid://ch33d4mqh5ac2" path="res://Scenes/map.tscn" id="1_oho3u"]
+[ext_resource type="PackedScene" uid="uid://cv6ur380qfy8o" path="res://Scenes/player.tscn" id="2_hb2xm"]
+[ext_resource type="PackedScene" uid="uid://cavo4y7twdfwx" path="res://Scenes/world_environment.tscn" id="4_x033f"]
 [ext_resource type="PackedScene" uid="uid://3hh1h3nvrtpo" path="res://Scenes/IngameUI/archive_visitor.tscn" id="7_rdbpf"]
-
-[sub_resource type="Curve" id="Curve_3dogw"]
-_limits = [1.0, 30.0, 0.0, 1.0]
-_data = [Vector2(0, 1), 0.0, 29.2414, 0, 0, Vector2(1, 30), 28.8709, 0.0, 0, 0]
-point_count = 2
 
 [node name="TestScene" type="Node3D"]
 
@@ -20,65 +12,9 @@ visible = false
 omni_range = 1000.0
 omni_attenuation = 0.0
 
-[node name="World" type="CSGCombiner3D" parent="."]
-layers = 4
-material_override = ExtResource("1_hb2xm")
-use_collision = true
-collision_mask = 2
+[node name="Map" parent="." instance=ExtResource("1_oho3u")]
 
-[node name="CSGBox3D" type="CSGBox3D" parent="World"]
-flip_faces = true
-size = Vector3(1000, 1000, 1000)
-
-[node name="CSGCylinder3D" type="CSGCylinder3D" parent="World"]
-operation = 2
-radius = 8.0
-height = 110.0
-
-[node name="CSGCylinder3D2" type="CSGCylinder3D" parent="World"]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, -20, -20)
-operation = 2
-radius = 8.0
-height = 110.0
-
-[node name="CSGCylinder3D3" type="CSGCylinder3D" parent="World"]
-transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 20, 40, 0)
-operation = 2
-radius = 8.0
-height = 110.0
-
-[node name="CSGSphere3D" type="CSGSphere3D" parent="World"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -21.9065, 0)
-operation = 2
-radius = 20.0
-
-[node name="CSGSphere3D2" type="CSGSphere3D" parent="World"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 39.668, 0)
-operation = 2
-radius = 20.0
-
-[node name="Player" type="Node3D" parent="."]
-script = ExtResource("2_x033f")
-
-[node name="Submarine" parent="Player" instance=ExtResource("2_ak5v8")]
-
-[node name="AnchorCamera" type="Node3D" parent="Player"]
-
-[node name="OrbitCamera" type="Camera3D" parent="Player/AnchorCamera"]
-current = true
-script = ExtResource("1_3dogw")
-SCROLL_SPEED = 30.0
-RANGE_DISTANCE = Vector2(10, 100)
-ZOOM_DISTANCE_FACTOR = SubResource("Curve_3dogw")
-ROTATE_SPEED = 0.2
-ANCHOR_NODE_PATH = NodePath("..")
-metadata/_custom_type_script = "uid://bcblre3d3gb7m"
-
-[node name="MovingInteraction" parent="Player" instance=ExtResource("2_r5l72")]
-visible = false
-
-[node name="ShaderGlobalsOverride" type="ShaderGlobalsOverride" parent="Player"]
-params/sonar_layer = Vector2(10, -10)
+[node name="Player" parent="." instance=ExtResource("2_hb2xm")]
 
 [node name="WorldEnvironment" parent="." instance=ExtResource("4_x033f")]
 

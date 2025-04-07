@@ -1,0 +1,31 @@
+[gd_scene load_steps=6 format=3 uid="uid://cv6ur380qfy8o"]
+
+[ext_resource type="Script" uid="uid://c7ga8q35vtvdu" path="res://Scripts/player.gd" id="1_vgqql"]
+[ext_resource type="PackedScene" uid="uid://dqbw1tiffrucc" path="res://Scenes/submarine.tscn" id="2_fkybt"]
+[ext_resource type="Script" uid="uid://bcblre3d3gb7m" path="res://addons/orbit_camera/orbit_camera.gd" id="3_x3wgy"]
+[ext_resource type="PackedScene" uid="uid://cyic6ghoa0be8" path="res://Scenes/IngameUI/moving_interaction.tscn" id="4_3smsa"]
+
+[sub_resource type="Curve" id="Curve_3dogw"]
+_limits = [1.0, 30.0, 0.0, 1.0]
+_data = [Vector2(0, 1), 0.0, 29.2414, 0, 0, Vector2(1, 30), 28.8709, 0.0, 0, 0]
+point_count = 2
+
+[node name="Player" type="Node3D"]
+script = ExtResource("1_vgqql")
+
+[node name="Submarine" parent="." instance=ExtResource("2_fkybt")]
+
+[node name="AnchorCamera" type="Node3D" parent="."]
+
+[node name="OrbitCamera" type="Camera3D" parent="AnchorCamera"]
+current = true
+script = ExtResource("3_x3wgy")
+SCROLL_SPEED = 30.0
+RANGE_DISTANCE = Vector2(10, 100)
+ZOOM_DISTANCE_FACTOR = SubResource("Curve_3dogw")
+ROTATE_SPEED = 0.2
+ANCHOR_NODE_PATH = NodePath("..")
+metadata/_custom_type_script = "uid://bcblre3d3gb7m"
+
+[node name="MovingInteraction" parent="." instance=ExtResource("4_3smsa")]
+visible = false
