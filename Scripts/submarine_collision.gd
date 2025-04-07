@@ -10,7 +10,7 @@ func _on_area_entered(area: Area3D) -> void:
 		GlobalPlayerStates.add_energy(area.get_parent().used())
 
 
-func _on_innerBody_body_entered(body: Node3D) -> void:
+func _on_innerBody_body_entered(_body: Node3D) -> void:
 	bonk_sound.play()
 	var parent = get_parent()
 	if parent is Player :
