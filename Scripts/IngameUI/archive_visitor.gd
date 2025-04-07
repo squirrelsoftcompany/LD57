@@ -14,20 +14,11 @@ func _ready():
 	GlobalArchive.connect("tp_cleared", _on_tp_cleared)
 	GlobalArchive.connect("tp_added", _on_tp_added)
 	GlobalArchive.connect("last_tp_updated", _on_last_tp_updated)
+	GlobalEventHolder.connect("ask_prev_entry", navigate_back)
+	GlobalEventHolder.connect("ask_next_entry", navigate_forward)
+	GlobalEventHolder.connect("ask_present", quit_navigation)
 	for i in GlobalArchive._archive.size():
 		_on_tp_added(i, GlobalArchive._archive[i])
-
-
-func _input(event: InputEvent) -> void:
-	if !GlobalEventHolder.CanNavigate(): return
-
-	if event is InputEventKey:
-		if event.is_action_pressed("av_back", false, true):
-			navigate_back()
-		if event.is_action_pressed("av_forward", false, true):
-			navigate_forward()
-		if event.is_action_pressed("av_quit", false, true):
-			quit_navigation()
 
 
 var _visiting_idx := -1

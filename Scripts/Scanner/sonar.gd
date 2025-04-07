@@ -16,16 +16,9 @@ func _ready() -> void:
 	GlobalEventHolder.connect("player_finish_moving", _on_player_finish_moving)
 	GlobalEventHolder.connect("player_navigate_archive", _on_player_navigate_archive)
 	GlobalEventHolder.connect("player_quit_navigating_archive", _on_player_quit_navigating_moving)
+	GlobalEventHolder.connect("ask_sonar", func(): _animate_huge_sonar(global_position))
 	self.omni_range = 0
 	_animate_mini_sonar(global_position)
-
-
-func _input(event: InputEvent) -> void:
-	if !GlobalEventHolder.CanScan(): return
-	
-	if event is InputEventKey:
-		if event.is_action_pressed("scan_huge_sonar"):
-			_animate_huge_sonar(global_position)
 
 
 func _on_player_start_moving(_player_position: Vector3, _player_rotation: Vector3):

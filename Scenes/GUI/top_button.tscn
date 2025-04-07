@@ -17,8 +17,6 @@ anchor_bottom = 0.114
 offset_right = -33.6
 offset_bottom = -47.872
 script = ExtResource("1_o3fap")
-ask_signal_name = null
-disabled = null
 
 [node name="Button" type="Button" parent="."]
 layout_mode = 2

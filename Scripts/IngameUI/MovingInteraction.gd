@@ -18,15 +18,16 @@ var _candidate_azimuth_distance := Vector3(0,0,0)
 var _candidate_position := Vector3(0,0,0)
 var _candidate_altitude := 0.0
 var _behind := true
+var _switched := false
 
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	GlobalEventHolder.connect("ask_switch", func (): _switched = !_switched)
 	connect("visibility_changed", self._on_visibility_changed)
 	_circleAzimuthDistance.scale = Vector3.ONE * distance_range.y * 2
 	_circleAzimuthDistance.set_instance_shader_parameter("MainRadius", distance_range.y)
 	update_render_priority()
-	pass # Replace with function body.
 
 
 func _on_visibility_changed() -> void:
@@ -59,13 +60,8 @@ func update_render_priority():
 	_circleResult.get_surface_override_material(0).render_priority = render_priority
 
 
-var _switched := false
 func _unhandled_input(event: InputEvent) -> void:
 	if !visible: return
-
-	if event is InputEventKey:
-		if event.is_action_pressed("mi_switch"):
-			_switched = !_switched
 
 	if event is InputEventMouseMotion:
 		if _switched:

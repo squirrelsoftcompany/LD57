@@ -29,3 +29,11 @@ func set_disabled(value):
 	disabled = value
 	$Button.disabled = disabled
 
+
+func _ready() -> void:
+	$Button.connect("pressed", _on_button_pressed)
+
+
+func _on_button_pressed() -> void:
+	print("button pressed -> ", ask_signal_name)
+	GlobalEventHolder.emit_signal(ask_signal_name)

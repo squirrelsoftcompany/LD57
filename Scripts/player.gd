@@ -23,14 +23,11 @@ func _ready() -> void:
 	GlobalArchive.add_timepoint(position, rotation)
 	GlobalEventHolder.connect("player_navigate_archive", _on_player_navigate_archive)
 	GlobalEventHolder.connect("player_quit_navigating_archive", _on_player_quit_navigating_archive)
+	GlobalEventHolder.connect("ask_move", _toggle_selecting_movement)
 
 
 func _input(event: InputEvent) -> void:
 	if !GlobalEventHolder.CanMove(): return
-
-	if event is InputEventKey:
-		if event.is_action_pressed("mi_toggle", false, true):
-			_toggle_selecting_movement()
 
 	if event is InputEventMouseButton:
 		if event.button_index == MOUSE_BUTTON_RIGHT and _selecting_movement:

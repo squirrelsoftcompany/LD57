@@ -9,6 +9,25 @@ signal player_quit_navigating_archive(idx: int, tp: Archive.TimePoint)
 #scanner
 signal player_start_scanning(state: Archive.SonarState)
 signal player_finish_scanning(state: Archive.SonarState)
+#ask
+@warning_ignore("unused_signal")
+signal ask_sonar()
+@warning_ignore("unused_signal")
+signal ask_heatmap()
+@warning_ignore("unused_signal")
+signal ask_beacon()
+@warning_ignore("unused_signal")
+signal ask_move()
+@warning_ignore("unused_signal")
+signal ask_switch()
+@warning_ignore("unused_signal")
+signal ask_prev_entry()
+@warning_ignore("unused_signal")
+signal ask_next_entry()
+@warning_ignore("unused_signal")
+signal ask_present()
+@warning_ignore("unused_signal")
+signal ask_show_help()
 
 
 var _moving := false

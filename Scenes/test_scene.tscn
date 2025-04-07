@@ -1,8 +1,9 @@
-[gd_scene load_steps=5 format=3 uid="uid://bdujusajoavl0"]
+[gd_scene load_steps=6 format=3 uid="uid://bdujusajoavl0"]
 
 [ext_resource type="PackedScene" uid="uid://ch33d4mqh5ac2" path="res://Scenes/map.tscn" id="1_oho3u"]
 [ext_resource type="PackedScene" uid="uid://cv6ur380qfy8o" path="res://Scenes/player.tscn" id="2_hb2xm"]
 [ext_resource type="PackedScene" uid="uid://cavo4y7twdfwx" path="res://Scenes/world_environment.tscn" id="4_x033f"]
+[ext_resource type="PackedScene" uid="uid://cl7b76mxru8tl" path="res://Scenes/GUI/gui.tscn" id="5_ak5v8"]
 [ext_resource type="PackedScene" uid="uid://3hh1h3nvrtpo" path="res://Scenes/IngameUI/archive_visitor.tscn" id="7_rdbpf"]
 
 [node name="TestScene" type="Node3D"]
@@ -19,3 +20,5 @@ omni_attenuation = 0.0
 [node name="WorldEnvironment" parent="." instance=ExtResource("4_x033f")]
 
 [node name="ArchiveVisitor" parent="." instance=ExtResource("7_rdbpf")]
+
+[node name="Gui" parent="." instance=ExtResource("5_ak5v8")]
