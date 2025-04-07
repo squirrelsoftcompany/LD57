@@ -34,6 +34,10 @@ signal ask_next_entry()
 signal ask_present()
 @warning_ignore("unused_signal")
 signal ask_show_help()
+@warning_ignore("unused_signal")
+signal mine_state_changed()
+@warning_ignore("unused_signal")
+signal energy_state_changed()
 
 
 var _moving := false
