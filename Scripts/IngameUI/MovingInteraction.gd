@@ -32,6 +32,7 @@ func _on_visibility_changed() -> void:
 	if visible:
 		_candidate_altitude = 0
 		_candidate_position = _candidate_azimuth_distance
+		_switched = false
 		_update_drawings()
 
 
@@ -57,12 +58,16 @@ func update_render_priority():
 	_circleResult.get_surface_override_material(0).render_priority = render_priority
 
 
+var _switched := false
 func _unhandled_input(event: InputEvent) -> void:
-	if !visible:
-		return
-	
+	if !visible: return
+
+	if event is InputEventKey:
+		if event.is_action_pressed("mi_switch"):
+			_switched = !_switched
+
 	if event is InputEventMouseMotion:
-		if Input.is_action_pressed("mi_switch"):
+		if _switched:
 			_compute_altitude(event.position)
 		else:
 			_compute_azimuth_distance(event.position)
