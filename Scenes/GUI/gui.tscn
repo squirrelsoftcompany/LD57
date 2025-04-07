@@ -1,8 +1,9 @@
-[gd_scene load_steps=16 format=3 uid="uid://cl7b76mxru8tl"]
+[gd_scene load_steps=18 format=3 uid="uid://cl7b76mxru8tl"]
 
 [ext_resource type="Script" uid="uid://dxacdxwlt5ufc" path="res://Scripts/GUI/gui.gd" id="1_jyhc4"]
 [ext_resource type="PackedScene" uid="uid://csf7h3tyeu5ea" path="res://Scenes/GUI/top_button.tscn" id="1_psa72"]
 [ext_resource type="PackedScene" uid="uid://bg5tc4tw3t6bv" path="res://Scenes/GUI/bottom_button.tscn" id="2_gm40n"]
+[ext_resource type="Texture2D" uid="uid://d4d1682bns04p" path="res://Sprites/right_click.png" id="4_b4lgj"]
 
 [sub_resource type="InputEventAction" id="InputEventAction_gm40n"]
 action = &"mi_switch"
@@ -10,6 +11,9 @@ pressed = true
 
 [sub_resource type="Shortcut" id="Shortcut_jyhc4"]
 events = [SubResource("InputEventAction_gm40n")]
+
+[sub_resource type="LabelSettings" id="LabelSettings_jtdjp"]
+font_size = 10
 
 [sub_resource type="InputEventAction" id="InputEventAction_b4lgj"]
 action = &"scan_huge_sonar"
@@ -77,8 +81,6 @@ offset_bottom = 0.0
 grow_horizontal = 0
 key = "H"
 help = "HELP"
-ask_signal_name = "ask_something"
-disabled = false
 metadata/_edit_use_anchors_ = true
 
 [node name="VBoxContainer" type="VBoxContainer" parent="Control"]
@@ -90,17 +92,35 @@ offset_top = -60.0
 offset_right = 244.0
 grow_vertical = 0
 
-[node name="HBoxContainer3" type="HBoxContainer" parent="Control/VBoxContainer"]
+[node name="AdvancedMoveHelp" type="HBoxContainer" parent="Control/VBoxContainer"]
 layout_mode = 2
 
-[node name="SwitchButton" parent="Control/VBoxContainer/HBoxContainer3" instance=ExtResource("2_gm40n")]
+[node name="SwitchButton" parent="Control/VBoxContainer/AdvancedMoveHelp" instance=ExtResource("2_gm40n")]
 layout_mode = 2
 key = "TAB"
 help = "SWITCH
-ALT / HEADING"
+ALTITUDE
+HEADING"
 shortcut = SubResource("Shortcut_jyhc4")
 ask_signal_name = "ask_switch"
-disabled = false
+
+[node name="ValidateRect" type="VBoxContainer" parent="Control/VBoxContainer/AdvancedMoveHelp"]
+layout_mode = 2
+alignment = 2
+
+[node name="Label" type="Label" parent="Control/VBoxContainer/AdvancedMoveHelp/ValidateRect"]
+layout_mode = 2
+text = "VALIDATE
+POSITION
+"
+label_settings = SubResource("LabelSettings_jtdjp")
+horizontal_alignment = 1
+vertical_alignment = 1
+uppercase = true
+
+[node name="TextureRect" type="TextureRect" parent="Control/VBoxContainer/AdvancedMoveHelp/ValidateRect"]
+layout_mode = 2
+texture = ExtResource("4_b4lgj")
 
 [node name="HBoxContainer" type="HBoxContainer" parent="Control/VBoxContainer"]
 layout_mode = 2
@@ -111,7 +131,6 @@ key = "S"
 help = "SONAR"
 shortcut = SubResource("Shortcut_jtdjp")
 ask_signal_name = "ask_sonar"
-disabled = false
 metadata/_edit_use_anchors_ = true
 
 [node name="HeatmapButton" parent="Control/VBoxContainer/HBoxContainer" instance=ExtResource("2_gm40n")]
@@ -119,7 +138,6 @@ layout_mode = 2
 key = "D"
 help = "HEATMAP"
 ask_signal_name = "ask_heatmap"
-disabled = false
 metadata/_edit_use_anchors_ = true
 
 [node name="BeaconButton" parent="Control/VBoxContainer/HBoxContainer" instance=ExtResource("2_gm40n")]
@@ -127,7 +145,7 @@ layout_mode = 2
 key = "SPACE"
 help = "BEACON"
 ask_signal_name = "ask_beacon"
-disabled = false
+mode = 1
 metadata/_edit_use_anchors_ = true
 
 [node name="MoveButton" parent="Control/VBoxContainer/HBoxContainer" instance=ExtResource("2_gm40n")]
@@ -136,7 +154,7 @@ key = "M"
 help = "MOVE"
 shortcut = SubResource("Shortcut_b4lgj")
 ask_signal_name = "ask_move"
-disabled = false
+mode = 2
 metadata/_edit_use_anchors_ = true
 
 [node name="Label" type="Label" parent="Control/VBoxContainer"]
@@ -168,7 +186,6 @@ help = "PREV
 ENTRY"
 shortcut = SubResource("Shortcut_vh4xu")
 ask_signal_name = "ask_prev_entry"
-disabled = false
 
 [node name="NextButton" parent="Control/VBoxContainer2/HBoxContainer2" instance=ExtResource("2_gm40n")]
 layout_mode = 2
@@ -177,7 +194,6 @@ help = "next
 entry"
 shortcut = SubResource("Shortcut_p8y2k")
 ask_signal_name = "ask_next_entry"
-disabled = false
 
 [node name="PresentButton" parent="Control/VBoxContainer2/HBoxContainer2" instance=ExtResource("2_gm40n")]
 layout_mode = 2
@@ -185,7 +201,6 @@ key = "ESC"
 help = "present"
 shortcut = SubResource("Shortcut_5m8o7")
 ask_signal_name = "ask_present"
-disabled = false
 
 [node name="Label" type="Label" parent="Control/VBoxContainer2"]
 layout_mode = 2

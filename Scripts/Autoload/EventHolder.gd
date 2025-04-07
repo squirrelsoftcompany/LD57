@@ -1,6 +1,10 @@
 extends Node
 
 # moving
+@warning_ignore("unused_signal")
+signal player_start_mi()
+@warning_ignore("unused_signal")
+signal player_finish_mi()
 signal player_start_moving(start_position:Vector3, player_rotation : Vector3)
 signal player_finish_moving(finish_position:Vector3, player_rotation : Vector3)
 #archive
@@ -15,7 +19,9 @@ signal ask_sonar()
 @warning_ignore("unused_signal")
 signal ask_heatmap()
 @warning_ignore("unused_signal")
-signal ask_beacon()
+signal ask_beacon_start()
+@warning_ignore("unused_signal")
+signal ask_beacon_finish()
 @warning_ignore("unused_signal")
 signal ask_move()
 @warning_ignore("unused_signal")
@@ -33,11 +39,13 @@ signal ask_show_help()
 var _moving := false
 var _navigating_archive := false
 var _scanning := false
+var _asking_beacon := false
 
 
-func CanMove() -> bool: return !_moving and !_navigating_archive and !_scanning
-func CanNavigate() -> bool: return !_moving and !_scanning
-func CanScan() -> bool: return !_moving and !_navigating_archive and !_scanning
+func CanMove() -> bool: return !_moving and !_navigating_archive and !_scanning and !_asking_beacon
+func CanNavigate() -> bool: return !_moving and !_scanning and !_asking_beacon
+func CanScan() -> bool: return !_moving and !_navigating_archive and !_scanning and !_asking_beacon
+func CanBeacon() -> bool: return !_moving and !_navigating_archive and !_scanning
 
 
 func _ready() -> void:
@@ -47,3 +55,5 @@ func _ready() -> void:
 	connect("player_quit_navigating_archive", func(_x, _y): _navigating_archive = false)
 	connect("player_start_scanning", func(_x): _scanning = true)
 	connect("player_finish_scanning", func(_x): _scanning = false)
+	connect("ask_beacon_start", func(): _asking_beacon = true)
+	connect("ask_beacon_finish", func(): _asking_beacon = false)

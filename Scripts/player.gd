@@ -59,7 +59,7 @@ func _move_player(final_position : Vector3) -> void:
 	_moving_sound.play()
 
 func _process(_delta: float) -> void:
-	if Input.is_action_pressed("mi_launch"):
+	if GlobalEventHolder._asking_beacon:
 		_launch_is_charging = true
 		if _launch_charge_power < launch_max_charge:
 			_launch_charge_power += _delta

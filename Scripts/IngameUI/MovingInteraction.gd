@@ -32,10 +32,13 @@ func _ready() -> void:
 
 func _on_visibility_changed() -> void:
 	if visible:
+		GlobalEventHolder.emit_signal("player_start_mi")
 		_candidate_altitude = 0
 		_candidate_position = _candidate_azimuth_distance
 		_switched = false
 		_update_drawings()
+	else:
+		GlobalEventHolder.emit_signal("player_finish_mi")
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
