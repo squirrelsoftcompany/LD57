@@ -77,6 +77,9 @@ metadata/_custom_type_script = "uid://bcblre3d3gb7m"
 [node name="MovingInteraction" parent="Player" instance=ExtResource("2_r5l72")]
 visible = false
 
+[node name="ShaderGlobalsOverride" type="ShaderGlobalsOverride" parent="Player"]
+params/sonar_layer = Vector2(10, -10)
+
 [node name="WorldEnvironment" parent="." instance=ExtResource("4_x033f")]
 
 [node name="ArchiveVisitor" parent="." instance=ExtResource("7_rdbpf")]
