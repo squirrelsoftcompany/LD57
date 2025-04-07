@@ -313,7 +313,6 @@ void fragment() {
 	var_cam_dir_world = vec3(0.0);
 }
 "
-graph_offset = Vector2(-400.383, -119.487)
 modes/blend = 1
 modes/specular = 1
 varyings/sdf_altitude_lines = "1,0"

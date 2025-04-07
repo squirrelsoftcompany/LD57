@@ -1,0 +1,7 @@
+[gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://dnkb66whei130"]
+
+[ext_resource type="Shader" uid="uid://dj66je24pfai2" path="res://Material/Shader/beacon.tres" id="1_yosln"]
+
+[resource]
+render_priority = 0
+shader = ExtResource("1_yosln")

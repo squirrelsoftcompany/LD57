@@ -3,12 +3,16 @@ extends Node3D
 
 @export var speed := 10.0 # m/s
 @export var angular_speed := 20 # deg/s
-
+@export var launch_max_charge := 20
+@export var launch_speed := 20
+@export var beacon_scene_path: String = "res://Scenes/beacon.tscn"
 
 @onready var _moving_interaction : MovingInteraction = $MovingInteraction
 
 
 var _selecting_movement := false
+var _launch_is_charging := false
+var _launch_charge_power := 0.0
 
 
 func _ready() -> void:
@@ -47,6 +51,18 @@ func _move_player(final_position : Vector3) -> void:
 	tween.tween_callback(func (): GlobalEventHolder.emit_signal("player_finish_moving", final_position, $Submarine.rotation))
 
 
+func _process(_delta: float) -> void:
+	if Input.is_action_pressed("mi_launch"):
+		_launch_is_charging = true
+		if _launch_charge_power < launch_max_charge:
+			_launch_charge_power += _delta
+	else:
+		if _launch_is_charging:
+			launch_beacon(_launch_charge_power)
+			_launch_is_charging = false
+			_launch_charge_power = 0.0
+	pass
+
 func _on_player_navigate_archive(_idx: int, tp: Archive.TimePoint) -> void:
 	global_position = tp.player_position
 	$Submarine.global_rotation = tp.player_rotation
@@ -72,3 +88,14 @@ func _start_selecting_movement() -> void:
 func _finish_selecting_movement() -> void:
 	_moving_interaction.visible = false
 	_selecting_movement = false
+	
+func launch_beacon(power : float) -> void:
+	# Load beacon scene and create instancew
+	var beacon_scene = load(beacon_scene_path)
+	var beacon_instance = beacon_scene.instantiate()
+	get_parent().add_child(beacon_instance)
+	beacon_instance.global_transform.origin = global_transform.origin
+	var total_force = (power * launch_speed)
+	var direction = $Submarine.global_transform.basis.z.normalized()
+	beacon_instance.apply_central_impulse(direction * total_force)
+	return

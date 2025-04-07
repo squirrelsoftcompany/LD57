@@ -1,7 +1,7 @@
-[gd_scene load_steps=10 format=3 uid="uid://b7os2ay0p0dab"]
+[gd_scene load_steps=9 format=3 uid="uid://b7os2ay0p0dab"]
 
 [ext_resource type="Script" uid="uid://bj75nnhvkk4xg" path="res://Scripts/Foes/fishs.gd" id="1_8oyus"]
-[ext_resource type="Shader" uid="uid://cqkdq301fceow" path="res://Shaders/mine.tres" id="1_j3ulx"]
+[ext_resource type="Material" uid="uid://djnjvaelugxea" path="res://Material/fishs.tres" id="2_3unq2"]
 [ext_resource type="Script" uid="uid://dfkgrkkemn2lq" path="res://Scripts/Foes/foes_visu.gd" id="2_8oyus"]
 
 [sub_resource type="Curve3D" id="Curve3D_3unq2"]
@@ -13,14 +13,8 @@ point_count = 2
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_3unq2"]
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_jvt65"]
-render_priority = 0
-shader = ExtResource("1_j3ulx")
-shader_parameter/DistortionVector = Vector3(1, 1, 1)
-shader_parameter/ColorParameter = Color(0.31933, 0.339817, 0.753906, 1)
-
 [sub_resource type="BoxMesh" id="BoxMesh_auc4j"]
-material = SubResource("ShaderMaterial_jvt65")
+material = ExtResource("2_3unq2")
 
 [sub_resource type="MultiMesh" id="MultiMesh_mwvl2"]
 transform_format = 1

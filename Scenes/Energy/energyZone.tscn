@@ -1,18 +1,12 @@
-[gd_scene load_steps=9 format=3 uid="uid://cao25obr6us7l"]
+[gd_scene load_steps=8 format=3 uid="uid://cao25obr6us7l"]
 
 [ext_resource type="Script" uid="uid://bsra1b6fvbne8" path="res://Scripts/Energy/energyZone.gd" id="1_7nu2g"]
-[ext_resource type="Shader" uid="uid://cqkdq301fceow" path="res://Shaders/mine.tres" id="2_sx2dy"]
+[ext_resource type="Material" uid="uid://bmuf4evonw7m0" path="res://Material/energy.tres" id="2_sx2dy"]
 [ext_resource type="Script" uid="uid://dfkgrkkemn2lq" path="res://Scripts/Foes/foes_visu.gd" id="3_kevkx"]
 [ext_resource type="AudioStream" uid="uid://be7fgbfpeh3ha" path="res://SFX/Energy.mp3" id="4_sx2dy"]
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_xbil8"]
-render_priority = 0
-shader = ExtResource("2_sx2dy")
-shader_parameter/DistortionVector = Vector3(2, 2, 2)
-shader_parameter/ColorParameter = Color(0.793685, 0.804688, 0.143396, 1)
-
 [sub_resource type="BoxMesh" id="BoxMesh_qtsk4"]
-material = SubResource("ShaderMaterial_xbil8")
+material = ExtResource("2_sx2dy")
 
 [sub_resource type="MultiMesh" id="MultiMesh_7cwmi"]
 transform_format = 1

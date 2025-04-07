@@ -1,30 +1,38 @@
-[gd_scene load_steps=7 format=3 uid="uid://wbh2ygobh5qw"]
+[gd_scene load_steps=9 format=3 uid="uid://wbh2ygobh5qw"]
 
-[ext_resource type="Material" uid="uid://djnjvaelugxea" path="res://Material/objects.tres" id="1_x0u1c"]
-[ext_resource type="Script" uid="uid://dfkgrkkemn2lq" path="res://Scripts/Foes/foes_visu.gd" id="2_q0lr3"]
+[ext_resource type="Script" uid="uid://bn41p57iyfsnc" path="res://Scripts/beacon.gd" id="1_q0lr3"]
+[ext_resource type="Material" uid="uid://dnkb66whei130" path="res://Material/beacon.tres" id="2_m62sl"]
 [ext_resource type="AudioStream" uid="uid://dcsab8fh063bq" path="res://SFX/Beacon_launch.mp3" id="3_m62sl"]
-
-[sub_resource type="SphereMesh" id="SphereMesh_q0lr3"]
-material = ExtResource("1_x0u1c")
-
-[sub_resource type="MultiMesh" id="MultiMesh_y73ge"]
-transform_format = 1
-instance_count = 1
-mesh = SubResource("SphereMesh_q0lr3")
-buffer = PackedFloat32Array(-221426, 8.29569e-43, -222399, 8.29569e-43, -227872, 8.29569e-43, -227651, 8.29569e-43, -228049, 8.29569e-43, -228005, 8.29569e-43)
+[ext_resource type="Shader" uid="uid://dxtkql3acyfdt" path="res://Shaders/beacon_area.tres" id="3_q0lr3"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_xx8nj"]
 
-[node name="Beacon" type="Node3D"]
+[sub_resource type="SphereMesh" id="SphereMesh_m62sl"]
+material = ExtResource("2_m62sl")
 
-[node name="MultiMeshInstance3D" type="MultiMeshInstance3D" parent="."]
-cast_shadow = 0
-multimesh = SubResource("MultiMesh_y73ge")
-script = ExtResource("2_q0lr3")
-cube_count = 1
-cluster_radius = 0.0
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_m62sl"]
+render_priority = 40
+shader = ExtResource("3_q0lr3")
 
-[node name="Area3D" type="Area3D" parent="." groups=["Mine"]]
+[sub_resource type="SphereMesh" id="SphereMesh_gqavp"]
+material = SubResource("ShaderMaterial_m62sl")
+
+[node name="Beacon" type="RigidBody3D"]
+mass = 10.0
+linear_damp = 1.0
+script = ExtResource("1_q0lr3")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("SphereShape3D_xx8nj")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("SphereMesh_m62sl")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="MeshInstance3D"]
+transform = Transform3D(10, 0, 0, 0, 10, 0, 0, 0, 10, 0, 0, 0)
+mesh = SubResource("SphereMesh_gqavp")
+
+[node name="Area3D" type="Area3D" parent="." groups=["Beacon"]]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
 shape = SubResource("SphereShape3D_xx8nj")
@@ -32,4 +40,3 @@ shape = SubResource("SphereShape3D_xx8nj")
 [node name="BeaconSound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("3_m62sl")
 volume_db = -9.0
-bus = &"SFX"

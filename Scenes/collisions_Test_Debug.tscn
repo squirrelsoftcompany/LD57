@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://c7ga8q35vtvdu" path="res://Scripts/player.gd" id="2_hpmha"]
 [ext_resource type="PackedScene" uid="uid://dqbw1tiffrucc" path="res://Scenes/submarine.tscn" id="3_jxywu"]
 [ext_resource type="Script" uid="uid://bcblre3d3gb7m" path="res://addons/orbit_camera/orbit_camera.gd" id="4_5ahhx"]
-[ext_resource type="PackedScene" uid="uid://cyic6ghoa0be8" path="res://Scenes/moving_interaction.tscn" id="5_nntnt"]
+[ext_resource type="PackedScene" uid="uid://cyic6ghoa0be8" path="res://Scenes/IngameUI/moving_interaction.tscn" id="5_nntnt"]
 [ext_resource type="PackedScene" uid="uid://cavo4y7twdfwx" path="res://Scenes/world_environment.tscn" id="6_qojcl"]
 [ext_resource type="PackedScene" uid="uid://cr6h145xeg0sk" path="res://Scenes/Foes/mine.tscn" id="7_laals"]
 [ext_resource type="PackedScene" uid="uid://cao25obr6us7l" path="res://Scenes/Energy/energyZone.tscn" id="8_hyyws"]
