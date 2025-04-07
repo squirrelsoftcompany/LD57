@@ -13,6 +13,7 @@ config_version=5
 Global/MaxBeacon=3
 Global/MaxLife=10
 Global/MaxEnergy=100
+Global/Mines=[]
 
 [application]
 

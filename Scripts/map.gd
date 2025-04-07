@@ -31,6 +31,7 @@ func _ready():
 	add_sibling.call_deferred(shadow)
 	generate_world()
 	place_mines()
+	ProjectSettings.set_setting("Game/Global/Mines",mines)
 
 func generate_world():
 	var cavern_nodes : Array[Vector3] = generate_nodes()
