@@ -8,9 +8,9 @@ var charged : bool = true
 @onready  var mesh = $MultiMeshInstance3D
 @onready  var energy_sound = $EnergySound
 
-func _ready():
-	GlobalEventHolder.connect("player_start_scanning", _magnet_map)
-	GlobalEventHolder.connect("player_finish_scanning", _magnet_map)
+#func _ready():
+	#GlobalEventHolder.connect("player_start_scanning", _magnet_map)
+	#GlobalEventHolder.connect("player_finish_scanning", _magnet_map)
 
 func used() -> int :
 	if(not charged):

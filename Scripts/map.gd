@@ -1,15 +1,26 @@
 extends CSGCombiner3D
 
+@export var world_size : float = 100
+
+@export_category("Cavern")
 @export var cavern_nb : int = 1 ## minimum 4
 @export var cavern_points_nb : int = 2 ## minimum 2
 @export var cavern_width : float = 0
+@export_category("Cavities")
 @export var cavity_nb : int = 0
 @export var cavity_max_size : float ## minimum cavern_size
-@export var world_size : float = 100
+@export_category("spawnables")
+@export var mines_nb : int
+@export var mine_template : PackedScene
+@export var energy_template : PackedScene
+@export var fish_template : PackedScene ## fishes not fishs ...
 
 var caverns : Array[Path3D]
 var cavities : Array[CSGSphere3D]
 var shadow : CSGCombiner3D
+var energy_Nodes : Array[Node3D]
+var mines : Array[Node3D]
+var fishes : Array[Node3D]
 
 func _ready():
 	cavity_max_size = cavity_max_size if cavity_max_size < cavern_width else cavern_width
@@ -19,6 +30,7 @@ func _ready():
 	shadow.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_SHADOWS_ONLY
 	add_sibling.call_deferred(shadow)
 	generate_world()
+	place_mines()
 
 func generate_world():
 	var cavern_nodes : Array[Vector3] = generate_nodes()
@@ -82,10 +94,20 @@ func generate_world():
 		var cavern : CSGPolygon3D = CSGPolygon3D.new()
 		caverns.append(cavern_path)
 		add_child(cavern)
-		cavern.polygon = generate_cross_section(cavern_width*randf_range(0.8,1.2))
+		var width : float = cavern_width*randf_range(0.8,1.2)
+		cavern.polygon = generate_cross_section(width)
 		cavern.mode = CSGPolygon3D.MODE_PATH
 		cavern.path_node = cavern_path.get_path()
 		cavern.operation = CSGShape3D.OPERATION_SUBTRACTION
+		var end_cap : CSGSphere3D = CSGSphere3D.new()
+		end_cap.operation= CSGShape3D.OPERATION_SUBTRACTION
+		end_cap.position = cavern_plan[0]
+		end_cap.radius = width/2
+		add_child(end_cap.duplicate())
+		shadow.add_child(end_cap.duplicate())
+		end_cap.position = cavern_plan.back()
+		add_child(end_cap.duplicate())
+		shadow.add_child(end_cap)
 		shadow.add_child(cavern.duplicate())
 	generate_cavities()
 
@@ -104,9 +126,16 @@ func generate_nodes() -> Array[Vector3] :
 		max_range -= point/cavern_nb
 		point = point * randf_range(world_size/8,world_size/4)
 		cavern_nodes.append(point)
+		
 		#to show nodes positions
 		#$debug.position = point
 		#add_child($debug.duplicate())
+		
+		if energy_template != null:
+			var nrj : Node3D = energy_template.instantiate()
+			nrj.position = point + Vector3(randf_range(-cavern_width/4,cavern_width/4),randf_range(-cavern_width/4,cavern_width/4),randf_range(-cavern_width/4,cavern_width/4))
+			$EnergyNodes.add_child(nrj)
+			energy_Nodes.append(nrj)
 	return cavern_nodes
 
 func generate_cross_section(width : float) -> PackedVector2Array:
@@ -126,10 +155,34 @@ func generate_cavities():
 		@warning_ignore("narrowing_conversion")
 		cavity.rings = sqrt(cavity.radius * PI)*2
 		cavity.operation = CSGShape3D.OPERATION_SUBTRACTION
-		var pos : int = randi_range(1,cavern_points_nb-2)
-		cavity.position = caverns.pick_random().curve.get_point_position(pos)
-		cavity.position += Vector3(randf_range(-cavity.radius,cavity.radius),randf_range(-cavity.radius,cavity.radius),randf_range(-cavity.radius,cavity.radius))
+		var origin_cavern : Curve3D = caverns.pick_random().curve
+		var pos : int = randi_range(1,origin_cavern.point_count-2)
+		cavity.position = origin_cavern.get_point_position(pos)
+		var offset : Vector3 = Vector3(randf_range(-cavity.radius,cavity.radius),randf_range(-cavity.radius,cavity.radius),randf_range(-cavity.radius,cavity.radius))
+		cavity.position += offset
 		cavity.scale = Vector3(randf_range(0.9,1.1),randf_range(0.6,1),randf_range(0.9,1.1))
+		
+		var local_school : Node3D = fish_template.instantiate()
+		var fish_offset : Vector3 = Vector3(randf_range(-1,1),randf_range(-1,1),randf_range(-1,1)).normalized()*(cavity.radius/2)
+		var traj : Curve3D = Curve3D.new()
+		traj.add_point(cavity.position+fish_offset,Vector3.ZERO,-fish_offset/10)
+		traj.add_point(origin_cavern.get_point_position(pos),offset/10,(origin_cavern.get_point_position(pos)-origin_cavern.get_point_position(pos+1))/10)
+		traj.add_point(origin_cavern.get_point_position(pos+1),(origin_cavern.get_point_position(pos+1)-origin_cavern.get_point_position(pos))/10)
+		local_school.get_child(0).curve = traj
+		$Fishes.add_child(local_school)
+		
 		add_child(cavity)
 		shadow.add_child(cavity.duplicate())
 		cavities.append(cavity)
+
+func place_mines():
+	for i in mines_nb:
+		var cavern : Curve3D = caverns.pick_random().curve
+		var rand_index : int = randi_range(1,cavern.point_count-1)
+		var pos : Vector3 = cavern.get_point_position(rand_index)
+		var offset : Vector3 = Vector3(randf_range(-1,1),randf_range(-1,1),randf_range(-1,1)).normalized()*cavern_width/3
+		var mine : Node3D = mine_template.instantiate()
+		mine.position = pos+offset
+		mines.append(mine)
+		$Mines.add_child(mine)
+		

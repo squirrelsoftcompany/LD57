@@ -4,7 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://dqbw1tiffrucc" path="res://Scenes/submarine.tscn" id="2_ht1xv"]
 [ext_resource type="PackedScene" uid="uid://cavo4y7twdfwx" path="res://Scenes/world_environment.tscn" id="3_ht1xv"]
 [ext_resource type="Material" uid="uid://canc04kko8af6" path="res://Material/mine.tres" id="5_owiha"]
-[ext_resource type="Material" uid="uid://bmuf4evonw7m0" path="res://Material/energy.tres" id="6_ojiuy"]
+[ext_resource type="Material" uid="uid://cusnt5lf7ucjh" path="res://Material/energy.tres" id="6_ojiuy"]
 [ext_resource type="Material" uid="uid://csp8j88xpmqog" path="res://Material/energy_aura.tres" id="6_uque0"]
 
 [sub_resource type="TorusMesh" id="TorusMesh_xfw24"]

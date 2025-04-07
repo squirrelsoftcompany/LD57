@@ -6,15 +6,17 @@ extends Node3D
 
 # PathFollow3D node to follow the path
 @onready var path_follow = $Path3D/PathFollow3D
-@onready var body = $Area3D
-@onready var multimesh = $Area3D/MultiMeshInstance3D
+@onready var body = $Path3D/PathFollow3D/Area3D
+@onready var multimesh = $Path3D/PathFollow3D/Area3D/MultiMeshInstance3D
 
 func _ready():
 	# Initialize the PathFollow3D position to the start of the path
 	path_follow.set_h_offset(0.0)
 	# Todo : generate procedural path here ?
+	# done in map gen
 
 func _process(delta):
+	#TODO : move by submarine step
 	var next_step_ratio = path_follow.get_progress_ratio() + speed * delta
 	
 	# Move the PathFollow3D along the path

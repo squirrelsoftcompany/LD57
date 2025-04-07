@@ -1,7 +1,7 @@
 [gd_scene load_steps=10 format=3 uid="uid://cao25obr6us7l"]
 
 [ext_resource type="Script" uid="uid://bsra1b6fvbne8" path="res://Scripts/Energy/energyZone.gd" id="1_7nu2g"]
-[ext_resource type="Material" uid="uid://bmuf4evonw7m0" path="res://Material/energy.tres" id="2_sx2dy"]
+[ext_resource type="Material" uid="uid://cusnt5lf7ucjh" path="res://Material/energy.tres" id="2_sx2dy"]
 [ext_resource type="Script" uid="uid://dfkgrkkemn2lq" path="res://Scripts/Foes/foes_visu.gd" id="3_kevkx"]
 [ext_resource type="AudioStream" uid="uid://be7fgbfpeh3ha" path="res://SFX/Energy.mp3" id="4_sx2dy"]
 [ext_resource type="Material" uid="uid://csp8j88xpmqog" path="res://Material/energy_aura.tres" id="5_kevkx"]

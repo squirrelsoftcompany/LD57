@@ -1,7 +1,7 @@
 [gd_scene load_steps=9 format=3 uid="uid://b7os2ay0p0dab"]
 
 [ext_resource type="Script" uid="uid://bj75nnhvkk4xg" path="res://Scripts/Foes/fishs.gd" id="1_8oyus"]
-[ext_resource type="Material" uid="uid://djnjvaelugxea" path="res://Material/fishs.tres" id="2_3unq2"]
+[ext_resource type="Material" uid="uid://dmg37doa3e5j6" path="res://Material/sonar_return.tres" id="2_3unq2"]
 [ext_resource type="Script" uid="uid://dfkgrkkemn2lq" path="res://Scripts/Foes/foes_visu.gd" id="2_8oyus"]
 
 [sub_resource type="Curve3D" id="Curve3D_3unq2"]
@@ -34,19 +34,20 @@ curve = SubResource("Curve3D_3unq2")
 [node name="PathFollow3D" type="PathFollow3D" parent="Path3D"]
 transform = Transform3D(0.000478698, 0.0024625, 0.999991, -1.16415e-10, 0.999991, -0.0024625, -0.999995, 1.17868e-06, 0.000478697, 1.5591, -0.00674731, -0.00254944)
 
-[node name="Area3D" type="Area3D" parent="." groups=["Fishs"]]
+[node name="Area3D" type="Area3D" parent="Path3D/PathFollow3D" groups=["Fishs"]]
+transform = Transform3D(0.000478703, -1.16417e-10, -1, 0.00246253, 1, 1.1787e-06, 1, -0.00246253, 0.000478702, 0, 0, 0)
 collision_layer = 4
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Path3D/PathFollow3D/Area3D"]
 shape = SubResource("SphereShape3D_3unq2")
 
-[node name="MultiMeshInstance3D" type="MultiMeshInstance3D" parent="Area3D"]
+[node name="MultiMeshInstance3D" type="MultiMeshInstance3D" parent="Path3D/PathFollow3D/Area3D"]
 transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0, 0, 0)
 cast_shadow = 0
 multimesh = SubResource("MultiMesh_mwvl2")
 script = ExtResource("2_8oyus")
 
-[node name="DebugMesh" type="MeshInstance3D" parent="Area3D"]
+[node name="DebugMesh" type="MeshInstance3D" parent="Path3D/PathFollow3D/Area3D"]
 transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, 0, 0, 0)
 visible = false
 mesh = SubResource("SphereMesh_8oyus")
