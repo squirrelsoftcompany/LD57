@@ -19,7 +19,7 @@ func _ready():
 
 
 func _input(event: InputEvent) -> void:
-	if GlobalEventHolder._moving: return
+	if !GlobalEventHolder.CanNavigate(): return
 
 	if event is InputEventKey:
 		if event.is_action_pressed("av_back", false, true):

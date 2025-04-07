@@ -2,12 +2,20 @@ extends Node
 class_name Archive
 
 
+enum SonarState {
+	SONAR_NONE,
+	SONAR_MINI,
+	SONAR_HUGE
+}
+
+
 class TimePoint:
 	var time_of_arrival :int= 0
 	var time_of_departure :int= int(INF)
 	var scaled_time :int= 0
 	var player_position:Vector3
 	var player_rotation:Vector3
+	var sonar_state := SonarState.SONAR_NONE
 
 
 signal tp_cleared()
@@ -20,9 +28,14 @@ var _archive : Array[TimePoint]
 
 func _ready() -> void:
 	GlobalEventHolder.connect("player_start_moving", func(_x, _y): self._leave_last_timepoint())
-	GlobalEventHolder.connect("player_start_moving", add_timepoint)
-	GlobalEventHolder.connect("player_moving", update_last_timepoint)
+	GlobalEventHolder.connect("player_finish_moving", add_timepoint)
+	GlobalEventHolder.connect("player_finish_scanning", _on_player_finish_scanning)
 	pass
+
+
+func _on_player_finish_scanning(sonar_state: Archive.SonarState):
+	if sonar_state == Archive.SonarState.SONAR_NONE: return # ignore this one its used only for animation
+	update_last_timepoint_sonar_state(sonar_state)
 
 
 func clear():
@@ -63,6 +76,14 @@ func update_last_timepoint(player_position : Vector3, player_rotation : Vector3)
 	back_tp.scaled_time += neo_engine_time_of_arrival - back_tp.time_of_arrival
 	back_tp.time_of_arrival = neo_engine_time_of_arrival
 	emit_signal("last_tp_updated", _archive.size()-1, _archive.back())
+
+
+func update_last_timepoint_sonar_state(sonar_state: Archive.SonarState):
+	if _archive.is_empty():
+		push_error("Trying to update last timepoint but _archive is empty")
+		return
+	var back_tp := _archive.back() as TimePoint
+	back_tp.sonar_state = sonar_state
 
 
 func get_timepoint_by_index(idx : int) -> TimePoint:

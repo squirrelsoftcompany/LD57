@@ -6,7 +6,6 @@ extends Node3D
 
 
 @onready var _moving_interaction : MovingInteraction = $MovingInteraction
-@onready var _shader_globals_override : ShaderGlobalsOverride = $ShaderGlobalsOverride
 
 
 var _selecting_movement := false
@@ -20,8 +19,7 @@ func _ready() -> void:
 
 
 func _input(event: InputEvent) -> void:
-	if GlobalEventHolder._moving or GlobalEventHolder._navigating_archive:
-		return
+	if !GlobalEventHolder.CanMove(): return
 
 	if event is InputEventKey:
 		if event.is_action_pressed("mi_toggle", false, true):
@@ -43,16 +41,8 @@ func _move_player(final_position : Vector3) -> void:
 	var final_quaternion := Quaternion(Basis(left,up,forward))
 	var tween := get_tree().create_tween()
 	tween.set_parallel()
-	tween.tween_property(_shader_globals_override, "params/sonar_layer", Vector2(global_position.y,global_position.y), 0.2)
-	tween.chain()
 	tween.tween_property(self, "global_position", final_position, duration)
-	tween.tween_method(func(pos): GlobalEventHolder.emit_signal("player_moving", pos, $Submarine.rotation),
-							global_position, final_position, duration)
 	tween.tween_property($Submarine, "quaternion", final_quaternion, angular_duration)
-	tween.chain()
-	tween.tween_callback(func (): _shader_globals_override.set("params/sonar_layer", Vector2(final_position.y, final_position.y)))
-	tween.chain()
-	tween.tween_property(_shader_globals_override, "params/sonar_layer", Vector2(final_position.y + 10, final_position.y - 10), 0.5)
 	tween.chain()
 	tween.tween_callback(func (): GlobalEventHolder.emit_signal("player_finish_moving", final_position, $Submarine.rotation))
 

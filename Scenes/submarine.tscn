@@ -1,8 +1,9 @@
-[gd_scene load_steps=12 format=3 uid="uid://dqbw1tiffrucc"]
+[gd_scene load_steps=13 format=3 uid="uid://dqbw1tiffrucc"]
 
 [ext_resource type="Material" uid="uid://drbx2dl3osytb" path="res://Material/submarine.tres" id="1_hyx2r"]
 [ext_resource type="Shader" uid="uid://dk4sm3onhvv5y" path="res://Scenes/Battery.tres" id="1_ue3ij"]
 [ext_resource type="Script" uid="uid://c50o8q85h8swa" path="res://Scripts/submarine_collision.gd" id="2_74qfh"]
+[ext_resource type="Script" uid="uid://q3d6ji8vvuui" path="res://Scripts/Scanner/sonar.gd" id="3_je60v"]
 [ext_resource type="AudioStream" uid="uid://b3eksy1eph2sc" path="res://SFX/AlarmShort.mp3" id="3_tq48s"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_je60v"]
@@ -74,6 +75,10 @@ light_energy = 2.0
 shadow_enabled = true
 omni_range = 50.0
 omni_attenuation = 0.2
+script = ExtResource("3_je60v")
+
+[node name="ShaderGlobalsOverride" type="ShaderGlobalsOverride" parent="."]
+params/sonar_layer = Vector2(10, -10)
 
 [node name="Area3D" type="Area3D" parent="."]
 script = ExtResource("2_74qfh")
