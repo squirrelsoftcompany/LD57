@@ -1,0 +1,7 @@
+[gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://jgi582a0qnub"]
+
+[ext_resource type="Shader" uid="uid://dxtkql3acyfdt" path="res://Material/Shader/beacon_area.tres" id="1_bu602"]
+
+[resource]
+render_priority = 0
+shader = ExtResource("1_bu602")
