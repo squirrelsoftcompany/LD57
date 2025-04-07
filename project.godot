@@ -92,5 +92,5 @@ line_dist={
 }
 true_sight={
 "type": "bool",
-"value": true
+"value": false
 }
