@@ -15,6 +15,10 @@ run/main_scene="uid://bdujusajoavl0"
 config/features=PackedStringArray("4.4", "GL Compatibility")
 config/icon="res://icon.svg"
 
+[audio]
+
+buses/default_bus_layout="uid://chgp0sw4ratw4"
+
 [autoload]
 
 GlobalPlayerStates="*res://Scripts/global_player_states.gd"
