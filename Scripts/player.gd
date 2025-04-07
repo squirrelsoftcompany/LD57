@@ -20,6 +20,7 @@ var _move_tween : Tween = null
 var _final_position : Vector3
 
 func _ready() -> void:
+	position = get_tree().get_first_node_in_group("Map").cavities.pick_random().position
 	GlobalArchive.clear()
 	GlobalArchive.add_timepoint(position, rotation)
 	GlobalEventHolder.connect("player_navigate_archive", _on_player_navigate_archive)
