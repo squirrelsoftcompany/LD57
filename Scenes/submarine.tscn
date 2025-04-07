@@ -1,7 +1,7 @@
 [gd_scene load_steps=15 format=3 uid="uid://dqbw1tiffrucc"]
 
 [ext_resource type="Material" uid="uid://drbx2dl3osytb" path="res://Material/submarine.tres" id="1_hyx2r"]
-[ext_resource type="Shader" uid="uid://dk4sm3onhvv5y" path="res://Scenes/Battery.tres" id="1_ue3ij"]
+[ext_resource type="Shader" uid="uid://dk4sm3onhvv5y" path="res://Material/Shader/Battery.tres" id="1_ue3ij"]
 [ext_resource type="Script" uid="uid://c50o8q85h8swa" path="res://Scripts/submarine_collision.gd" id="2_74qfh"]
 [ext_resource type="Script" uid="uid://q3d6ji8vvuui" path="res://Scripts/Scanner/sonar.gd" id="3_je60v"]
 [ext_resource type="AudioStream" uid="uid://b3eksy1eph2sc" path="res://SFX/AlarmShort.mp3" id="3_tq48s"]
