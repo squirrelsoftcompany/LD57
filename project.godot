@@ -8,6 +8,12 @@
 
 config_version=5
 
+[Game]
+
+Global/MaxBeacon=3
+Global/MaxLife=10
+Global/MaxEnergy=100
+
 [application]
 
 config/name="LD57"

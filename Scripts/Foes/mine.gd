@@ -4,7 +4,9 @@ extends Node
 @onready var area = $Area3D
 @onready var explosion_sound = $ExplosionSound
 
-var deathTime = -1.0
+var _deathTime : float = -1.0
+var _disableStack : int = 0
+var _isDisable : bool = false
 
 func _ready():
 	multimesh.multimesh.mesh.material.set_shader_parameter("DistortionVector", Vector3(1.0,2.0,1.0))
@@ -17,11 +19,23 @@ func _process(delta):
 
 func explode():
 	# Death time allow to know if we have to hide or show the mine when we look at the history
-	deathTime = Time.get_ticks_msec()
+	_deathTime = Time.get_ticks_msec()
 	explosion_sound.play()
 	# Send the area 3D to th ghost layer (to disable collision with the submarine)
 	area.set_collision_layer_value(3,false)
 	area.set_collision_layer_value(9,true)
+	
+func disable():
+	_disableStack = _disableStack + 1
+	_isDisable = false
+	
+func activate():
+	_disableStack = _disableStack -1
+	if _disableStack == 0:
+		_isDisable = true
+
+func is_active():
+	return not _isDisable
 
 func _magnet_map(_x:int) -> void:
 	if _x == Archive.SonarState.MAGNET:

@@ -4,7 +4,7 @@ extends Node3D
 
 func _on_area_entered(area: Area3D) -> void:
 	if(area.is_in_group("Mine") && not area.get_collision_layer_value(9)):
-		GlobalPlayerStates.take_damage()
+		GlobalPlayerStates.take_damage(10)
 		area.get_parent().explode()
 	elif(area.is_in_group("Energy")):
 		GlobalPlayerStates.add_energy(area.get_parent().used())

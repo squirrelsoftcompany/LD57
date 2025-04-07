@@ -6,6 +6,7 @@
 [ext_resource type="Material" uid="uid://jgi582a0qnub" path="res://Material/beacon_aura.tres" id="3_q0lr3"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_xx8nj"]
+radius = 5.0
 
 [sub_resource type="SphereMesh" id="SphereMesh_m62sl"]
 material = ExtResource("2_m62sl")
@@ -40,3 +41,6 @@ shape = SubResource("SphereShape3D_xx8nj")
 [node name="BeaconSound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("3_m62sl")
 volume_db = -9.0
+
+[connection signal="area_entered" from="Area3D" to="." method="_on_area_3d_area_entered"]
+[connection signal="area_exited" from="Area3D" to="." method="_on_area_3d_area_exited"]

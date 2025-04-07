@@ -1,10 +1,11 @@
-[gd_scene load_steps=7 format=3 uid="uid://cv6ur380qfy8o"]
+[gd_scene load_steps=8 format=3 uid="uid://cv6ur380qfy8o"]
 
 [ext_resource type="Script" uid="uid://c7ga8q35vtvdu" path="res://Scripts/player.gd" id="1_vgqql"]
 [ext_resource type="PackedScene" uid="uid://dqbw1tiffrucc" path="res://Scenes/submarine.tscn" id="2_fkybt"]
 [ext_resource type="Script" uid="uid://bcblre3d3gb7m" path="res://addons/orbit_camera/orbit_camera.gd" id="3_x3wgy"]
 [ext_resource type="PackedScene" uid="uid://cyic6ghoa0be8" path="res://Scenes/IngameUI/moving_interaction.tscn" id="4_3smsa"]
 [ext_resource type="AudioStream" uid="uid://r1u1f58bw5w6" path="res://Music/LD57.mp3" id="5_fkybt"]
+[ext_resource type="AudioStream" uid="uid://d067to4nr5ofj" path="res://SFX/Underwater_vib.mp3" id="6_x3wgy"]
 
 [sub_resource type="Curve" id="Curve_3dogw"]
 _limits = [1.0, 30.0, 0.0, 1.0]
@@ -34,4 +35,13 @@ visible = false
 [node name="Music" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("5_fkybt")
 autoplay = true
-bus = &"Music"
+
+[node name="BeaconCooldown" type="Timer" parent="."]
+wait_time = 15.0
+
+[node name="MovingSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("6_x3wgy")
+volume_db = -9.0
+bus = &"SFX"
+
+[connection signal="timeout" from="BeaconCooldown" to="." method="_on_beacon_cooldown_timeout"]
