@@ -37,8 +37,9 @@ cast_shadow = 0
 multimesh = SubResource("MultiMesh_qtsk4")
 script = ExtResource("1_tyfw0")
 cube_count = 20
+is_mine = true
 
-[node name="MultiMeshInstance3D2" type="MultiMeshInstance3D" parent="MultiMeshInstance3D"]
+[node name="MultiMeshInstance3D" type="MultiMeshInstance3D" parent="MultiMeshInstance3D"]
 layers = 4
 cast_shadow = 0
 multimesh = SubResource("MultiMesh_qtsk4")
