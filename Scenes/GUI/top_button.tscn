@@ -1,0 +1,48 @@
+[gd_scene load_steps=5 format=3 uid="uid://csf7h3tyeu5ea"]
+
+[ext_resource type="Texture2D" uid="uid://b71a6e5iqi2p6" path="res://Sprites/button.png" id="1_2a1xl"]
+[ext_resource type="Script" uid="uid://brynbk2h6dnm5" path="res://Scripts/GUI/button.gd" id="1_o3fap"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_6172m"]
+font_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_o3fap"]
+line_spacing = 0.0
+font_size = 10
+
+[node name="TopButton" type="VBoxContainer"]
+anchors_preset = -1
+anchor_right = 0.05
+anchor_bottom = 0.114
+offset_right = -33.6
+offset_bottom = -47.872
+script = ExtResource("1_o3fap")
+ask_signal_name = null
+disabled = null
+
+[node name="Button" type="Button" parent="."]
+layout_mode = 2
+focus_mode = 0
+icon = ExtResource("1_2a1xl")
+icon_alignment = 1
+
+[node name="Label" type="Label" parent="Button"]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 0.714
+offset_top = 4.0
+offset_bottom = 0.0119972
+text = "A"
+label_settings = SubResource("LabelSettings_6172m")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 2
+theme_override_font_sizes/font_size = 10
+text = "do
+something"
+label_settings = SubResource("LabelSettings_o3fap")
+horizontal_alignment = 1
+vertical_alignment = 1
