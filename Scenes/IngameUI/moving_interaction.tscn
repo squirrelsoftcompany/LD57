@@ -40,6 +40,7 @@ shader_parameter/CircleAlpha = 0.5
 
 [node name="MovingInteraction" type="Node3D"]
 script = ExtResource("1_7gupg")
+use_altitude = true
 
 [node name="circleAzimuthDistance" type="MeshInstance3D" parent="."]
 transform = Transform3D(20, 0, 0, 0, 20, 0, 0, 0, 20, 0, 0, 0)

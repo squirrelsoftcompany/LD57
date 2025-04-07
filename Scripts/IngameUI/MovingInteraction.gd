@@ -4,6 +4,7 @@ class_name MovingInteraction
 
 @export var distance_range := Vector2(4, 20)
 @export var altitude_max := 10
+@export var use_altitude := false
 
 
 @onready var _circleAzimuthDistance : MeshInstance3D = $circleAzimuthDistance
@@ -75,12 +76,13 @@ func _unhandled_input(event: InputEvent) -> void:
 
 
 func _compute_azimuth_distance(mouse_pos:Vector2):
-	var plane := Plane(Vector3.UP, global_position.y)
+	var plane := Plane(Vector3.UP, _candidate_position.y if use_altitude else global_position.y)
 	var camera := get_viewport().get_camera_3d()
 	var position3d = plane.intersects_ray(
 						camera.project_ray_origin(mouse_pos),
 						camera.project_ray_normal(mouse_pos))
 	if position3d != null:
+		position3d.y = global_position.y
 		var distance : float = position3d.distance_to(global_position)
 		if distance < distance_range.x or distance > distance_range.y:
 			var direction = (position3d-global_position).normalized()
