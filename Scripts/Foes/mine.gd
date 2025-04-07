@@ -13,7 +13,7 @@ var _isDisable : bool = false
 func _ready():
 	multimesh.multimesh.mesh.material.set_shader_parameter("DistortionVector", Vector3(1.0,2.0,1.0))
 
-func _process(delta):
+func _process(_delta):
 	#multimesh.material.set_shader_parameter("DistortionVector", Vector3(2.0,1.0,3.0))
 	return
 
