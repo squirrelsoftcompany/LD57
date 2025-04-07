@@ -5,7 +5,8 @@ class_name Archive
 enum SonarState {
 	SONAR_NONE,
 	SONAR_MINI,
-	SONAR_HUGE
+	SONAR_HUGE,
+	MAGNET
 }
 
 

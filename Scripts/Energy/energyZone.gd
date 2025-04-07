@@ -8,6 +8,10 @@ var charged : bool = true
 @onready  var mesh = $MultiMeshInstance3D
 @onready  var energy_sound = $EnergySound
 
+func _ready():
+	GlobalEventHolder.connect("player_start_scanning", _magnet_map)
+	GlobalEventHolder.connect("player_finish_scanning", _magnet_map)
+
 func used() -> int :
 	if(not charged):
 		return 0
@@ -21,3 +25,11 @@ func used() -> int :
 func _on_timer_timeout() -> void:
 	charged = true
 	mesh.show()
+
+func _magnet_map(_x:int) -> void:
+	if _x == Archive.SonarState.MAGNET:
+		$Aura.show()
+		$MultiMeshInstance3D.show()
+	else:
+		$Aura.hide()
+		$MultiMeshInstance3D.hide()

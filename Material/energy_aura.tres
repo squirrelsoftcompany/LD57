@@ -1,0 +1,9 @@
+[gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://csp8j88xpmqog"]
+
+[ext_resource type="Shader" uid="uid://cgnr3y6wl70ya" path="res://Material/Shader/Aura.tres" id="1_bg6cj"]
+
+[resource]
+render_priority = 0
+shader = ExtResource("1_bg6cj")
+shader_parameter/DistortionVector = Vector3(1, 1, 1)
+shader_parameter/Color = Color(0.940433, 1, 0, 1)

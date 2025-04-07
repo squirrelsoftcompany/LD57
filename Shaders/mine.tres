@@ -71,6 +71,7 @@ op_type = 0
 operator = 2
 
 [sub_resource type="VisualShaderNodeVectorOp" id="VisualShaderNodeVectorOp_8uihe"]
+output_port_for_preview = 0
 
 [sub_resource type="VisualShaderNodeFloatOp" id="VisualShaderNodeFloatOp_4cpvf"]
 default_input_values = [0, 0.0, 1, 0.1]
@@ -159,7 +160,7 @@ input_name = "vertex"
 
 [resource]
 code = "shader_type spatial;
-render_mode blend_mix, depth_draw_opaque, cull_back, diffuse_toon, specular_disabled;
+render_mode blend_add, depth_draw_opaque, cull_back, diffuse_toon, specular_disabled;
 
 uniform vec3 DistortionVector = vec3(1.000000, 1.000000, 1.000000);
 uniform vec4 ColorParameter : source_color = vec4(0.804688, 0.740220, 0.325541, 1.000000);
@@ -371,13 +372,12 @@ void fragment() {
 
 // Output:0
 	ALBEDO = n_out55p0;
-	ALPHA = n_out55p0.x;
-	EMISSION = n_out55p0;
-	AO_LIGHT_AFFECT = n_out50p0.x;
 
 
 }
 "
+graph_offset = Vector2(-816.842, -435.069)
+modes/blend = 1
 modes/diffuse = 3
 modes/specular = 2
 nodes/vertex/0/position = Vector2(1520, -160)
@@ -473,4 +473,4 @@ nodes/fragment/53/node = SubResource("VisualShaderNodeVectorOp_5y5um")
 nodes/fragment/53/position = Vector2(420, 620)
 nodes/fragment/55/node = SubResource("VisualShaderNodeVectorOp_8uihe")
 nodes/fragment/55/position = Vector2(900, 40)
-nodes/fragment/connections = PackedInt32Array(21, 0, 11, 0, 37, 0, 24, 1, 11, 1, 37, 0, 38, 0, 24, 0, 40, 0, 23, 0, 39, 0, 23, 1, 36, 0, 43, 1, 24, 0, 43, 0, 43, 0, 27, 1, 11, 1, 38, 0, 11, 1, 36, 0, 11, 0, 39, 0, 11, 0, 40, 0, 11, 0, 41, 0, 11, 0, 42, 0, 42, 0, 45, 0, 41, 0, 45, 1, 45, 0, 44, 0, 23, 0, 44, 1, 44, 0, 27, 0, 27, 0, 51, 1, 51, 0, 50, 0, 27, 0, 52, 1, 27, 0, 53, 1, 52, 0, 50, 1, 53, 0, 50, 2, 50, 0, 55, 1, 55, 0, 0, 5, 55, 0, 0, 0, 55, 0, 0, 1, 50, 0, 0, 7, 2, 0, 55, 0, 2, 1, 51, 0, 2, 2, 52, 0, 2, 3, 53, 0)
+nodes/fragment/connections = PackedInt32Array(21, 0, 11, 0, 37, 0, 24, 1, 11, 1, 37, 0, 38, 0, 24, 0, 40, 0, 23, 0, 39, 0, 23, 1, 36, 0, 43, 1, 24, 0, 43, 0, 43, 0, 27, 1, 11, 1, 38, 0, 11, 1, 36, 0, 11, 0, 39, 0, 11, 0, 40, 0, 11, 0, 41, 0, 11, 0, 42, 0, 42, 0, 45, 0, 41, 0, 45, 1, 45, 0, 44, 0, 23, 0, 44, 1, 44, 0, 27, 0, 27, 0, 51, 1, 51, 0, 50, 0, 27, 0, 52, 1, 27, 0, 53, 1, 52, 0, 50, 1, 53, 0, 50, 2, 50, 0, 55, 1, 55, 0, 0, 0, 2, 0, 55, 0, 2, 1, 51, 0, 2, 2, 52, 0, 2, 3, 53, 0)

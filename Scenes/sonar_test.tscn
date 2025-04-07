@@ -1,8 +1,11 @@
-[gd_scene load_steps=6 format=3 uid="uid://ciwcfka75trn2"]
+[gd_scene load_steps=11 format=3 uid="uid://ciwcfka75trn2"]
 
 [ext_resource type="Material" uid="uid://dmg37doa3e5j6" path="res://Material/sonar_return.tres" id="1_ht1xv"]
 [ext_resource type="PackedScene" uid="uid://dqbw1tiffrucc" path="res://Scenes/submarine.tscn" id="2_ht1xv"]
 [ext_resource type="PackedScene" uid="uid://cavo4y7twdfwx" path="res://Scenes/world_environment.tscn" id="3_ht1xv"]
+[ext_resource type="Material" uid="uid://canc04kko8af6" path="res://Material/mine.tres" id="5_owiha"]
+[ext_resource type="Material" uid="uid://bmuf4evonw7m0" path="res://Material/energy.tres" id="6_ojiuy"]
+[ext_resource type="Material" uid="uid://csp8j88xpmqog" path="res://Material/energy_aura.tres" id="6_uque0"]
 
 [sub_resource type="TorusMesh" id="TorusMesh_xfw24"]
 flip_faces = true
@@ -11,6 +14,12 @@ outer_radius = 30.0
 
 [sub_resource type="QuadMesh" id="QuadMesh_ht1xv"]
 size = Vector2(50, 50)
+
+[sub_resource type="SphereMesh" id="SphereMesh_xfw24"]
+
+[sub_resource type="SphereMesh" id="SphereMesh_owiha"]
+radius = 2.5
+height = 5.0
 
 [node name="SonarTest" type="Node3D"]
 
@@ -26,7 +35,7 @@ mesh = SubResource("TorusMesh_xfw24")
 skeleton = NodePath("../..")
 
 [node name="Submarine" parent="." instance=ExtResource("2_ht1xv")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.248, 0, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.248, 0, -6.4592)
 
 [node name="WorldEnvironment" parent="." instance=ExtResource("3_ht1xv")]
 
@@ -35,3 +44,17 @@ transform = Transform3D(1, 0, 0, 0, 0.789748, -0.613431, 0, 0.613431, 0.789748, 
 visible = false
 material_override = ExtResource("1_ht1xv")
 mesh = SubResource("QuadMesh_ht1xv")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.81444, 25.0118, -1.79705)
+material_override = ExtResource("5_owiha")
+mesh = SubResource("SphereMesh_xfw24")
+
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.06872, 25.0118, -1.79705)
+material_override = ExtResource("6_ojiuy")
+mesh = SubResource("SphereMesh_xfw24")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="MeshInstance3D3"]
+material_override = ExtResource("6_uque0")
+mesh = SubResource("SphereMesh_owiha")
