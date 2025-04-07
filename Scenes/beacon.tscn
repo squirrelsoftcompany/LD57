@@ -18,6 +18,8 @@ shader = ExtResource("3_q0lr3")
 material = SubResource("ShaderMaterial_m62sl")
 
 [node name="Beacon" type="RigidBody3D"]
+collision_layer = 8
+collision_mask = 9
 mass = 10.0
 linear_damp = 1.0
 script = ExtResource("1_q0lr3")

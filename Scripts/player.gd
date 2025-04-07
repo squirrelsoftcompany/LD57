@@ -1,11 +1,13 @@
 extends Node3D
 
+class_name Player
 
 @export var speed := 10.0 # m/s
 @export var angular_speed := 20 # deg/s
 @export var launch_max_charge := 20
 @export var launch_speed := 20
 @export var beacon_scene_path: String = "res://Scenes/beacon.tscn"
+@export var bonk_knockback_distance := 0.5
 
 @onready var _moving_interaction : MovingInteraction = $MovingInteraction
 
@@ -13,7 +15,8 @@ extends Node3D
 var _selecting_movement := false
 var _launch_is_charging := false
 var _launch_charge_power := 0.0
-
+var _move_tween : Tween = null
+var _final_position : Vector3
 
 func _ready() -> void:
 	GlobalArchive.clear()
@@ -44,6 +47,8 @@ func _move_player(final_position : Vector3) -> void:
 	var up := forward.cross(left).normalized()
 	var final_quaternion := Quaternion(Basis(left,up,forward))
 	var tween := get_tree().create_tween()
+	_move_tween = tween
+	_final_position = final_position
 	tween.set_parallel()
 	tween.tween_property(self, "global_position", final_position, duration)
 	tween.tween_property($Submarine, "quaternion", final_quaternion, angular_duration)
@@ -90,7 +95,7 @@ func _finish_selecting_movement() -> void:
 	_selecting_movement = false
 	
 func launch_beacon(power : float) -> void:
-	# Load beacon scene and create instancew
+	# Load beacon scene and create instance
 	var beacon_scene = load(beacon_scene_path)
 	var beacon_instance = beacon_scene.instantiate()
 	get_parent().add_child(beacon_instance)
@@ -99,3 +104,16 @@ func launch_beacon(power : float) -> void:
 	var direction = $Submarine.global_transform.basis.z.normalized()
 	beacon_instance.apply_central_impulse(direction * total_force)
 	return
+	
+func bonk():
+	if _move_tween:
+		# Player knockback on hit
+		var direction = (_final_position-position).normalized()
+		position = position - (direction * bonk_knockback_distance)
+		# Stop and delete the tween
+		_move_tween.stop()
+		GlobalEventHolder.emit_signal("player_finish_moving", position, $Submarine.rotation)
+		_move_tween.tween_callback(queue_free)
+		_move_tween = null
+		# Player take damage
+		GlobalPlayerStates.take_damage()

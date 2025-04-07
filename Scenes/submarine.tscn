@@ -1,10 +1,11 @@
-[gd_scene load_steps=13 format=3 uid="uid://dqbw1tiffrucc"]
+[gd_scene load_steps=15 format=3 uid="uid://dqbw1tiffrucc"]
 
 [ext_resource type="Material" uid="uid://drbx2dl3osytb" path="res://Material/submarine.tres" id="1_hyx2r"]
 [ext_resource type="Shader" uid="uid://dk4sm3onhvv5y" path="res://Scenes/Battery.tres" id="1_ue3ij"]
 [ext_resource type="Script" uid="uid://c50o8q85h8swa" path="res://Scripts/submarine_collision.gd" id="2_74qfh"]
 [ext_resource type="Script" uid="uid://q3d6ji8vvuui" path="res://Scripts/Scanner/sonar.gd" id="3_je60v"]
 [ext_resource type="AudioStream" uid="uid://b3eksy1eph2sc" path="res://SFX/AlarmShort.mp3" id="3_tq48s"]
+[ext_resource type="AudioStream" uid="uid://civsstm6861iv" path="res://SFX/Bonk.mp3" id="6_a07w3"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_je60v"]
 render_priority = 0
@@ -38,7 +39,12 @@ cap_top = false
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_hyx2r"]
 
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_je60v"]
+radius = 1.0
+height = 5.84353
+
 [node name="Submarine" type="Node3D"]
+script = ExtResource("2_74qfh")
 
 [node name="Battery" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0)
@@ -81,7 +87,8 @@ script = ExtResource("3_je60v")
 params/sonar_layer = Vector2(10, -10)
 
 [node name="Area3D" type="Area3D" parent="."]
-script = ExtResource("2_74qfh")
+collision_layer = 2
+collision_mask = 5
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
 transform = Transform3D(4, 0, 0, 0, -1.74846e-07, -4, 0, 4, -1.74846e-07, 0, 0, 0)
@@ -91,4 +98,17 @@ shape = SubResource("CapsuleShape3D_hyx2r")
 stream = ExtResource("3_tq48s")
 volume_db = -9.0
 
-[connection signal="area_entered" from="Area3D" to="Area3D" method="_on_area_entered"]
+[node name="InnerBody" type="Area3D" parent="."]
+collision_layer = 2
+collision_mask = 5
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="InnerBody"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, -0.405)
+shape = SubResource("CapsuleShape3D_je60v")
+
+[node name="BonkSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("6_a07w3")
+bus = &"SFX"
+
+[connection signal="area_entered" from="Area3D" to="." method="_on_area_entered"]
+[connection signal="body_entered" from="InnerBody" to="." method="_on_innerBody_body_entered"]

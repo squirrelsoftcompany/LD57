@@ -1,4 +1,6 @@
-extends Area3D
+extends Node3D
+
+@onready var bonk_sound = $BonkSound
 
 func _on_area_entered(area: Area3D) -> void:
 	if(area.is_in_group("Mine") && not area.get_collision_layer_value(9)):
@@ -6,4 +8,10 @@ func _on_area_entered(area: Area3D) -> void:
 		area.get_parent().explode()
 	elif(area.is_in_group("Energy")):
 		GlobalPlayerStates.add_energy(area.get_parent().used())
-		
+
+
+func _on_innerBody_body_entered(body: Node3D) -> void:
+	bonk_sound.play()
+	var parent = get_parent()
+	if parent is Player :
+		parent.bonk()

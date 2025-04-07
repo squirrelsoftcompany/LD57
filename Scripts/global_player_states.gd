@@ -25,8 +25,8 @@ func set_life(value: int) -> void:
 		# TODO : Death
 	life = value
 	
-func take_damage():
-	set_life(get_life()-1)
+func take_damage(value: int = 1):
+	set_life(get_life()-value)
 	
-func add_energy(value : int):
+func add_energy(value: int):
 	set_energy(get_energy()+value)
