@@ -5,8 +5,13 @@ class_name Archive
 enum SonarState {
 	SONAR_NONE,
 	SONAR_MINI,
-	SONAR_HUGE,
-	MAGNET
+	SONAR_HUGE
+}
+
+
+enum MagnetState {
+	ON,
+	OFF
 }
 
 
@@ -17,6 +22,7 @@ class TimePoint:
 	var player_position:Vector3
 	var player_rotation:Vector3
 	var sonar_state := SonarState.SONAR_NONE
+	var magnet_state := MagnetState.OFF
 
 
 signal tp_cleared()
@@ -31,6 +37,7 @@ func _ready() -> void:
 	GlobalEventHolder.connect("player_start_moving", func(_x, _y): self._leave_last_timepoint())
 	GlobalEventHolder.connect("player_finish_moving", add_timepoint)
 	GlobalEventHolder.connect("player_finish_scanning", _on_player_finish_scanning)
+	GlobalEventHolder.connect("player_finish_heatmap", _on_player_finish_heatmap)
 	pass
 
 
@@ -38,6 +45,9 @@ func _on_player_finish_scanning(sonar_state: Archive.SonarState):
 	if sonar_state == Archive.SonarState.SONAR_NONE: return # ignore this one its used only for animation
 	update_last_timepoint_sonar_state(sonar_state)
 
+func _on_player_finish_heatmap(magnet_state: Archive.MagnetState):
+	if magnet_state == Archive.MagnetState.OFF: return # ignore this one its used only for animation
+	update_last_timepoint_magnet_state(magnet_state)
 
 func clear():
 	_archive.clear()
@@ -81,11 +91,18 @@ func update_last_timepoint(player_position : Vector3, player_rotation : Vector3)
 
 func update_last_timepoint_sonar_state(sonar_state: Archive.SonarState):
 	if _archive.is_empty():
-		push_error("Trying to update last timepoint but _archive is empty")
+		push_error("Trying to update sonar in last timepoint but _archive is empty")
 		return
 	var back_tp := _archive.back() as TimePoint
 	back_tp.sonar_state = sonar_state
 
+
+func update_last_timepoint_magnet_state(magnet_state: Archive.MagnetState):
+	if _archive.is_empty():
+		push_error("Trying to update magnet in last timepoint but _archive is empty")
+		return
+	var back_tp := _archive.back() as TimePoint
+	back_tp.magnet_state = magnet_state
 
 func get_timepoint_by_index(idx : int) -> TimePoint:
 	if idx < 0:

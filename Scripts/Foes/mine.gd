@@ -12,8 +12,6 @@ var _isDisable : bool = false
 
 func _ready():
 	multimesh.multimesh.mesh.material.set_shader_parameter("DistortionVector", Vector3(1.0,2.0,1.0))
-	#GlobalEventHolder.connect("player_start_scanning", _magnet_map)
-	#GlobalEventHolder.connect("player_finish_scanning", _magnet_map)
 
 func _process(delta):
 	#multimesh.material.set_shader_parameter("DistortionVector", Vector3(2.0,1.0,3.0))
@@ -42,11 +40,3 @@ func activate():
 
 func is_active():
 	return not _isDisable
-
-func _magnet_map(_x:int) -> void:
-	if _x == Archive.SonarState.MAGNET:
-		$Aura.show()
-		$MultiMeshInstance3D.show()
-	else:
-		$Aura.hide()
-		$MultiMeshInstance3D.hide()

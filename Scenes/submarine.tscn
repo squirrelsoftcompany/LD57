@@ -80,10 +80,17 @@ mesh = SubResource("CylinderMesh_74qfh")
 
 [node name="OmniLight3D" type="OmniLight3D" parent="."]
 light_energy = 2.0
+light_cull_mask = 4294967287
 shadow_enabled = true
+shadow_caster_mask = 4294967287
 omni_range = 50.0
 omni_attenuation = 0.1
 script = ExtResource("3_je60v")
+
+[node name="Magnetometer" type="OmniLight3D" parent="OmniLight3D"]
+light_cull_mask = 4294967291
+shadow_enabled = true
+omni_range = 0.0
 
 [node name="ShaderGlobalsOverride" type="ShaderGlobalsOverride" parent="."]
 params/sonar_layer = Vector2(10, -10)

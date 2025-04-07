@@ -5,7 +5,7 @@ extends Node3D
 @export var layer_huge_sonar:=Vector2(20, -20)
 @export var range_mini_sonar:= 50.0
 @export var range_huge_sonar:= 100.0
-
+@export var range_magnet := 75
 
 @onready var _shader_globals_override : ShaderGlobalsOverride = $"../ShaderGlobalsOverride"
 
@@ -17,12 +17,14 @@ func _ready() -> void:
 	GlobalEventHolder.connect("player_navigate_archive", _on_player_navigate_archive)
 	GlobalEventHolder.connect("player_quit_navigating_archive", _on_player_quit_navigating_moving)
 	GlobalEventHolder.connect("ask_sonar", func(): _animate_huge_sonar(global_position))
+	GlobalEventHolder.connect("ask_heatmap", _animate_magnet)
 	self.omni_range = 0
 	_animate_mini_sonar(global_position)
 
 
 func _on_player_start_moving(_player_position: Vector3, _player_rotation: Vector3):
 	_animate_no_sonar()
+	_animate_no_magnet()
 
 
 func _on_player_finish_moving(player_position: Vector3, _player_rotation: Vector3):
@@ -31,10 +33,12 @@ func _on_player_finish_moving(player_position: Vector3, _player_rotation: Vector
 
 func _on_player_navigate_archive(_idx: int, tp: Archive.TimePoint):
 	_set_sonar_state(tp.sonar_state, tp.player_position)
+	_set_magnet_state(tp.magnet_state)
 
 
 func _on_player_quit_navigating_moving(_idx: int, tp: Archive.TimePoint):
 	_set_sonar_state(tp.sonar_state, tp.player_position)
+	_set_magnet_state(tp.magnet_state)
 
 
 func _animate_no_sonar():
@@ -73,3 +77,25 @@ func _set_sonar_state(state : Archive.SonarState, player_position : Vector3):
 		Archive.SonarState.SONAR_HUGE:
 			self.omni_range = range_huge_sonar
 			_shader_globals_override.set("params/sonar_layer", base_sonar_layer + layer_huge_sonar)
+
+
+func _set_magnet_state(state : Archive.MagnetState):
+	match state :
+		Archive.MagnetState.ON :
+			$Magnetometer.omni_range = range_magnet
+		Archive.MagnetState.OFF :
+			$Magnetometer.omni_range = 0
+
+
+func _animate_no_magnet():
+	GlobalEventHolder.emit_signal.bind("player_start_heatmap", Archive.MagnetState.ON)
+	var tween := get_tree().create_tween()
+	tween.tween_property($Magnetometer, "omni_range",0, 1)
+	tween.tween_callback(GlobalEventHolder.emit_signal.bind("player_finish_heatmap", Archive.MagnetState.OFF))
+
+
+func _animate_magnet():
+	GlobalEventHolder.emit_signal.bind("player_start_heatmap", Archive.MagnetState.ON)
+	var tween := get_tree().create_tween()
+	tween.tween_property($Magnetometer, "omni_range", range_magnet, 1.5)
+	tween.tween_callback(GlobalEventHolder.emit_signal.bind("player_finish_heatmap", Archive.MagnetState.ON))

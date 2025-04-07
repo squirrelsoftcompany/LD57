@@ -13,6 +13,9 @@ signal player_quit_navigating_archive(idx: int, tp: Archive.TimePoint)
 #scanner
 signal player_start_scanning(state: Archive.SonarState)
 signal player_finish_scanning(state: Archive.SonarState)
+#heatmap
+signal player_start_heatmap(state: Archive.MagnetState)
+signal player_finish_heatmap(state: Archive.MagnetState)
 #ask
 @warning_ignore("unused_signal")
 signal ask_sonar()
@@ -44,6 +47,7 @@ var _moving := false
 var _navigating_archive := false
 var _scanning := false
 var _asking_beacon := false
+var _heatmap := false
 
 
 func CanMove() -> bool: return !_moving and !_navigating_archive and !_scanning and !_asking_beacon
@@ -59,5 +63,7 @@ func _ready() -> void:
 	connect("player_quit_navigating_archive", func(_x, _y): _navigating_archive = false)
 	connect("player_start_scanning", func(_x): _scanning = true)
 	connect("player_finish_scanning", func(_x): _scanning = false)
+	connect("player_start_heatmap", func(_x): _heatmap = true)
+	connect("player_finish_heatmap", func(_x): _heatmap = false)
 	connect("ask_beacon_start", func(): _asking_beacon = true)
 	connect("ask_beacon_finish", func(): _asking_beacon = false)

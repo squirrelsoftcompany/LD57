@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://cl7b76mxru8tl"]
+[gd_scene load_steps=20 format=3 uid="uid://cl7b76mxru8tl"]
 
 [ext_resource type="Script" uid="uid://dxacdxwlt5ufc" path="res://Scripts/GUI/gui.gd" id="1_jyhc4"]
 [ext_resource type="PackedScene" uid="uid://csf7h3tyeu5ea" path="res://Scenes/GUI/top_button.tscn" id="1_psa72"]
@@ -21,6 +21,12 @@ pressed = true
 
 [sub_resource type="Shortcut" id="Shortcut_jtdjp"]
 events = [SubResource("InputEventAction_b4lgj")]
+
+[sub_resource type="InputEventAction" id="InputEventAction_p8y2k"]
+action = &"scan_magnet"
+
+[sub_resource type="Shortcut" id="Shortcut_wfw4l"]
+events = [SubResource("InputEventAction_p8y2k")]
 
 [sub_resource type="InputEventAction" id="InputEventAction_jyhc4"]
 action = &"mi_toggle"
@@ -136,7 +142,8 @@ metadata/_edit_use_anchors_ = true
 [node name="HeatmapButton" parent="Control/VBoxContainer/HBoxContainer" instance=ExtResource("2_gm40n")]
 layout_mode = 2
 key = "D"
-help = "HEATMAP"
+help = "MAGNETOMETER"
+shortcut = SubResource("Shortcut_wfw4l")
 ask_signal_name = "ask_heatmap"
 metadata/_edit_use_anchors_ = true
 

@@ -2,12 +2,12 @@
 
 [ext_resource type="Script" uid="uid://bvrge511tdlao" path="res://Scripts/Foes/mine.gd" id="1_qtsk4"]
 [ext_resource type="Script" uid="uid://dfkgrkkemn2lq" path="res://Scripts/Foes/foes_visu.gd" id="1_tyfw0"]
-[ext_resource type="Material" uid="uid://canc04kko8af6" path="res://Material/mine.tres" id="2_1rt2h"]
+[ext_resource type="Material" uid="uid://dmg37doa3e5j6" path="res://Material/sonar_return.tres" id="2_sw1bi"]
 [ext_resource type="AudioStream" uid="uid://l4a5jgkmlffj" path="res://SFX/Explosion.mp3" id="4_1rt2h"]
 [ext_resource type="Shader" uid="uid://cgnr3y6wl70ya" path="res://Material/Shader/Aura.tres" id="5_sw1bi"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_sw1bi"]
-material = ExtResource("2_1rt2h")
+material = ExtResource("2_sw1bi")
 
 [sub_resource type="MultiMesh" id="MultiMesh_qtsk4"]
 transform_format = 1
@@ -31,10 +31,17 @@ height = 6.0
 script = ExtResource("1_qtsk4")
 
 [node name="MultiMeshInstance3D" type="MultiMeshInstance3D" parent="."]
-transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0, 0, 0)
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
+layers = 8
 cast_shadow = 0
 multimesh = SubResource("MultiMesh_qtsk4")
 script = ExtResource("1_tyfw0")
+cube_count = 20
+
+[node name="MultiMeshInstance3D2" type="MultiMeshInstance3D" parent="MultiMeshInstance3D"]
+layers = 4
+cast_shadow = 0
+multimesh = SubResource("MultiMesh_qtsk4")
 
 [node name="Area3D" type="Area3D" parent="." groups=["Mine"]]
 
@@ -46,6 +53,7 @@ stream = ExtResource("4_1rt2h")
 volume_db = -9.0
 
 [node name="Aura" type="MeshInstance3D" parent="."]
+layers = 8
 material_override = SubResource("ShaderMaterial_rphas")
 mesh = SubResource("SphereMesh_ypq41")
 skeleton = NodePath("../MultiMeshInstance3D")
