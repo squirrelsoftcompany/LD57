@@ -10,6 +10,6 @@ func _ready():
 	material_override.set_shader_parameter("max_charge",max_charge)
 	GlobalEventHolder.connect("energy_state_changed", _energy_change)
 
-func _energy_change():
-	charge = (GlobalPlayerStates.current_energy *  max_charge ) / GlobalPlayerStates.maxEnergy
+func _energy_change(val: int, maximum: int):
+	charge = (val *  max_charge ) / maximum
 	material_override.set_shader_parameter("charge",charge)
