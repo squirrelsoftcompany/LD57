@@ -62,5 +62,5 @@ func _on_button_toggled(toggled_on: bool) -> void:
 	assert(mode == 1)
 	if !ask_signal_name.is_empty():
 		var ask_signal_name_full := ask_signal_name + ("_start" if toggled_on else "_finish")
-		print(name, " pressed(", toggled_on, ") -> ", ask_signal_name_full)
+		print(name, " toggled(", toggled_on, ") -> ", ask_signal_name_full)
 		GlobalEventHolder.emit_signal(ask_signal_name_full)

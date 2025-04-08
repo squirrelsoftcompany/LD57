@@ -1,9 +1,15 @@
-[gd_scene load_steps=20 format=3 uid="uid://cl7b76mxru8tl"]
+[gd_scene load_steps=30 format=3 uid="uid://cl7b76mxru8tl"]
 
 [ext_resource type="Script" uid="uid://dxacdxwlt5ufc" path="res://Scripts/GUI/gui.gd" id="1_jyhc4"]
 [ext_resource type="PackedScene" uid="uid://csf7h3tyeu5ea" path="res://Scenes/GUI/top_button.tscn" id="1_psa72"]
 [ext_resource type="PackedScene" uid="uid://bg5tc4tw3t6bv" path="res://Scenes/GUI/bottom_button.tscn" id="2_gm40n"]
 [ext_resource type="Texture2D" uid="uid://d4d1682bns04p" path="res://Sprites/right_click.png" id="4_b4lgj"]
+[ext_resource type="Texture2D" uid="uid://c67oeho3qh4m4" path="res://Sprites/health.png" id="5_jtdjp"]
+[ext_resource type="Texture2D" uid="uid://da2ufh82pi13n" path="res://Sprites/energy.png" id="6_p8y2k"]
+[ext_resource type="Script" uid="uid://cod0yjphulu1j" path="res://Scripts/GUI/state_progress_bar.gd" id="6_wfw4l"]
+[ext_resource type="Texture2D" uid="uid://brvy1vh1sk3y0" path="res://Sprites/mine.png" id="7_wfw4l"]
+[ext_resource type="Texture2D" uid="uid://cokpyraa8uyor" path="res://Sprites/beacon.png" id="8_tjoyq"]
+[ext_resource type="Script" uid="uid://co1h8rx5o4ko0" path="res://Scripts/GUI/state_progress_label.gd" id="9_tjoyq"]
 
 [sub_resource type="InputEventAction" id="InputEventAction_gm40n"]
 action = &"mi_switch"
@@ -55,6 +61,44 @@ pressed = true
 
 [sub_resource type="Shortcut" id="Shortcut_5m8o7"]
 events = [SubResource("InputEventAction_jtdjp")]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_whnys"]
+draw_center = false
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.300356, 0.656854, 1, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_p8y2k"]
+bg_color = Color(1, 0, 0, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_wfw4l"]
+draw_center = false
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.300356, 0.656854, 1, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_tjoyq"]
+bg_color = Color(1, 0.639216, 0, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
 
 [node name="Gui" type="Control"]
 layout_mode = 3
@@ -214,3 +258,79 @@ layout_mode = 2
 text = "SCANNER ARCHIVE"
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="VBoxContainer3" type="VBoxContainer" parent="Control"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Control/VBoxContainer3"]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="Control/VBoxContainer3/HBoxContainer"]
+layout_mode = 2
+texture = ExtResource("5_jtdjp")
+
+[node name="HealthProgressBar" type="ProgressBar" parent="Control/VBoxContainer3/HBoxContainer"]
+custom_minimum_size = Vector2(100, 10)
+layout_mode = 2
+size_flags_vertical = 4
+theme_override_styles/background = SubResource("StyleBoxFlat_whnys")
+theme_override_styles/fill = SubResource("StyleBoxFlat_p8y2k")
+step = 1.0
+value = 20.0
+show_percentage = false
+script = ExtResource("6_wfw4l")
+initial_value_project_settings_name = "Game/Global/MaxLife"
+state_changed_signal_name = "life_state_changed"
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="Control/VBoxContainer3"]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="Control/VBoxContainer3/HBoxContainer2"]
+layout_mode = 2
+texture = ExtResource("6_p8y2k")
+
+[node name="EnergyProgressBar" type="ProgressBar" parent="Control/VBoxContainer3/HBoxContainer2"]
+custom_minimum_size = Vector2(100, 10)
+layout_mode = 2
+size_flags_vertical = 4
+theme_override_styles/background = SubResource("StyleBoxFlat_wfw4l")
+theme_override_styles/fill = SubResource("StyleBoxFlat_tjoyq")
+value = 50.0
+show_percentage = false
+script = ExtResource("6_wfw4l")
+initial_value_project_settings_name = "Game/Global/MaxEnergy"
+state_changed_signal_name = "energy_state_changed"
+
+[node name="HBoxContainer4" type="HBoxContainer" parent="Control/VBoxContainer3"]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="Control/VBoxContainer3/HBoxContainer4"]
+layout_mode = 2
+texture = ExtResource("8_tjoyq")
+
+[node name="BeaconCountLabel" type="RichTextLabel" parent="Control/VBoxContainer3/HBoxContainer4"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+text = "3 / 4"
+script = ExtResource("9_tjoyq")
+initial_value_project_settings_name = "Game/Global/MaxBeacon"
+state_changed_signal_name = "beacon_state_changed"
+template_text = "%d / %d"
+
+[node name="HBoxContainer3" type="HBoxContainer" parent="Control/VBoxContainer3"]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="Control/VBoxContainer3/HBoxContainer3"]
+layout_mode = 2
+texture = ExtResource("7_wfw4l")
+
+[node name="MineCountLabel" type="RichTextLabel" parent="Control/VBoxContainer3/HBoxContainer3"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+text = "3 / 4"
+script = ExtResource("9_tjoyq")
+initial_value_project_settings_name = "Game/Global/MaxMine"
+state_changed_signal_name = "mine_state_changed"
+template_text = "%d / %d"

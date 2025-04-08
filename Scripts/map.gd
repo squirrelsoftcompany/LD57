@@ -10,7 +10,6 @@ extends CSGCombiner3D
 @export var cavity_nb : int = 0
 @export var cavity_max_size : float ## minimum cavern_size
 @export_category("spawnables")
-@export var mines_nb : int
 @export var mine_template : PackedScene
 @export var energy_template : PackedScene
 @export var fish_template : PackedScene ## fishes not fishs ...
@@ -21,6 +20,10 @@ var shadow : CSGCombiner3D
 var energy_Nodes : Array[Node3D]
 var mines : Array[Node3D]
 var fishes : Array[Node3D]
+
+
+@onready var mines_nb : int = ProjectSettings.get_setting("Game/Global/MaxMines", 10)
+
 
 func _ready():
 	cavity_max_size = cavity_max_size if cavity_max_size < cavern_width else cavern_width

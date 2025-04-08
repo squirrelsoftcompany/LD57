@@ -37,10 +37,18 @@ signal ask_next_entry()
 signal ask_present()
 @warning_ignore("unused_signal")
 signal ask_show_help()
+#game state changed
 @warning_ignore("unused_signal")
 signal mine_state_changed()
 @warning_ignore("unused_signal")
-signal energy_state_changed()
+signal gameover(win: bool)
+#player state changed
+@warning_ignore("unused_signal")
+signal energy_state_changed(val: int, maximum: int)
+@warning_ignore("unused_signal")
+signal life_state_changed(val: int, maximum: int)
+@warning_ignore("unused_signal")
+signal beacon_state_changed(val: int, maximum: int)
 
 
 var _moving := false
