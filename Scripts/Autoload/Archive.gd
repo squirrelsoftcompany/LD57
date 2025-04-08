@@ -120,3 +120,6 @@ func get_timepoint_by_time(time : float) -> TimePoint:
 		push_error("No timepoint corresponding to time ", time, "ms.")
 		return null
 	return get_timepoint_by_index(idx)
+
+func get_last_tp() -> TimePoint:
+	return _archive.back()

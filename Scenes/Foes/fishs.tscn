@@ -33,6 +33,7 @@ curve = SubResource("Curve3D_3unq2")
 
 [node name="PathFollow3D" type="PathFollow3D" parent="Path3D"]
 transform = Transform3D(0.000478698, 0.0024625, 0.999991, -1.16415e-10, 0.999991, -0.0024625, -0.999995, 1.17868e-06, 0.000478697, 1.5591, -0.00674731, -0.00254944)
+loop = false
 
 [node name="Area3D" type="Area3D" parent="Path3D/PathFollow3D" groups=["Fishs"]]
 transform = Transform3D(0.000478703, -1.16417e-10, -1, 0.00246253, 1, 1.1787e-06, 1, -0.00246253, 0.000478702, 0, 0, 0)
@@ -42,10 +43,11 @@ collision_layer = 4
 shape = SubResource("SphereShape3D_3unq2")
 
 [node name="MultiMeshInstance3D" type="MultiMeshInstance3D" parent="Path3D/PathFollow3D/Area3D"]
-transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0, 0, 0)
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
 cast_shadow = 0
 multimesh = SubResource("MultiMesh_mwvl2")
 script = ExtResource("2_8oyus")
+cube_count = 50
 
 [node name="DebugMesh" type="MeshInstance3D" parent="Path3D/PathFollow3D/Area3D"]
 transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, 0, 0, 0)
