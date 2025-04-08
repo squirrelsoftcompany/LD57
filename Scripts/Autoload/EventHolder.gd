@@ -41,6 +41,8 @@ signal ask_show_help()
 @warning_ignore("unused_signal")
 signal mine_state_changed()
 @warning_ignore("unused_signal")
+signal mine_state_changed_really(val: int, maximum: int)
+@warning_ignore("unused_signal")
 signal gameover(win: bool)
 #player state changed
 @warning_ignore("unused_signal")
