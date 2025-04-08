@@ -10,7 +10,7 @@ var _mine_max : int = 0
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	_mine_max = ProjectSettings.get_setting("Game/Global/MaxMines", 10)
-	GlobalEventHolder.gameover.connect(_on_gameover)
+	GlobalEventHolder.gameover.connect(_on_gameover, CONNECT_DEFERRED)
 	GlobalEventHolder.ask_beacon_finish.connect(func(): _beacon_launched+=1)
 	GlobalEventHolder.player_finish_moving.connect(func(_x, _y): _moves+=1)
 	GlobalEventHolder.mine_state_changed_really.connect(func(val, _maximum): _mine_left = val)
