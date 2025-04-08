@@ -1,15 +1,15 @@
 extends Control
 
 
-@onready var _move_button : SpecialButton = $Control/VBoxContainer/HBoxContainer/MoveButton
-@onready var _advanced_move_button : Control = $Control/VBoxContainer/AdvancedMoveHelp
-@onready var _sonar_button : SpecialButton = $Control/VBoxContainer/HBoxContainer/SonarButton
-@onready var _heatmap_button : SpecialButton = $Control/VBoxContainer/HBoxContainer/HeatmapButton
-@onready var _beacon_button : SpecialButton = $Control/VBoxContainer/HBoxContainer/BeaconButton
-@onready var _beacon_true_button : Button = $Control/VBoxContainer/HBoxContainer/BeaconButton/Button
-@onready var _prev_button : SpecialButton = $Control/VBoxContainer2/HBoxContainer2/PrevButton
-@onready var _next_button : SpecialButton = $Control/VBoxContainer2/HBoxContainer2/NextButton
-@onready var _present_button : SpecialButton = $Control/VBoxContainer2/HBoxContainer2/PresentButton
+@onready var _move_button : SpecialButton = $MainControl/VBoxContainer/HBoxContainer/MoveButton
+@onready var _advanced_move_button : Control = $MainControl/VBoxContainer/AdvancedMoveHelp
+@onready var _sonar_button : SpecialButton = $MainControl/VBoxContainer/HBoxContainer/SonarButton
+@onready var _heatmap_button : SpecialButton = $MainControl/VBoxContainer/HBoxContainer/HeatmapButton
+@onready var _beacon_button : SpecialButton = $MainControl/VBoxContainer/HBoxContainer/BeaconButton
+@onready var _beacon_true_button : Button = $MainControl/VBoxContainer/HBoxContainer/BeaconButton/Button
+@onready var _prev_button : SpecialButton = $MainControl/VBoxContainer2/HBoxContainer2/PrevButton
+@onready var _next_button : SpecialButton = $MainControl/VBoxContainer2/HBoxContainer2/NextButton
+@onready var _present_button : SpecialButton = $MainControl/VBoxContainer2/HBoxContainer2/PresentButton
 
 
 # Called when the node enters the scene tree for the first time.

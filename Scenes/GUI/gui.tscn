@@ -1,4 +1,4 @@
-[gd_scene load_steps=30 format=3 uid="uid://cl7b76mxru8tl"]
+[gd_scene load_steps=33 format=3 uid="uid://cl7b76mxru8tl"]
 
 [ext_resource type="Script" uid="uid://dxacdxwlt5ufc" path="res://Scripts/GUI/gui.gd" id="1_jyhc4"]
 [ext_resource type="PackedScene" uid="uid://csf7h3tyeu5ea" path="res://Scenes/GUI/top_button.tscn" id="1_psa72"]
@@ -10,6 +10,7 @@
 [ext_resource type="Texture2D" uid="uid://brvy1vh1sk3y0" path="res://Sprites/mine.png" id="7_wfw4l"]
 [ext_resource type="Texture2D" uid="uid://cokpyraa8uyor" path="res://Sprites/beacon.png" id="8_tjoyq"]
 [ext_resource type="Script" uid="uid://co1h8rx5o4ko0" path="res://Scripts/GUI/state_progress_label.gd" id="9_tjoyq"]
+[ext_resource type="Script" uid="uid://bvhqqs3eife8q" path="res://Scripts/GUI/game_over_control.gd" id="11_whnys"]
 
 [sub_resource type="InputEventAction" id="InputEventAction_gm40n"]
 action = &"mi_switch"
@@ -100,6 +101,11 @@ corner_radius_top_right = 5
 corner_radius_bottom_right = 5
 corner_radius_bottom_left = 5
 
+[sub_resource type="LabelSettings" id="LabelSettings_tjoyq"]
+font_size = 25
+
+[sub_resource type="LabelSettings" id="LabelSettings_whnys"]
+
 [node name="Gui" type="Control"]
 layout_mode = 3
 anchors_preset = 15
@@ -110,7 +116,7 @@ grow_vertical = 2
 mouse_filter = 2
 script = ExtResource("1_jyhc4")
 
-[node name="Control" type="Control" parent="."]
+[node name="MainControl" type="Control" parent="."]
 layout_mode = 1
 anchor_left = 0.02
 anchor_top = 0.03
@@ -121,7 +127,7 @@ grow_vertical = 2
 mouse_filter = 2
 metadata/_edit_use_anchors_ = true
 
-[node name="HelpButton" parent="Control" instance=ExtResource("1_psa72")]
+[node name="HelpButton" parent="MainControl" instance=ExtResource("1_psa72")]
 layout_mode = 1
 anchor_left = 0.949653
 anchor_right = 1.0
@@ -133,7 +139,7 @@ key = "H"
 help = "HELP"
 metadata/_edit_use_anchors_ = true
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Control"]
+[node name="VBoxContainer" type="VBoxContainer" parent="MainControl"]
 layout_mode = 1
 anchors_preset = 2
 anchor_top = 1.0
@@ -142,10 +148,10 @@ offset_top = -60.0
 offset_right = 244.0
 grow_vertical = 0
 
-[node name="AdvancedMoveHelp" type="HBoxContainer" parent="Control/VBoxContainer"]
+[node name="AdvancedMoveHelp" type="HBoxContainer" parent="MainControl/VBoxContainer"]
 layout_mode = 2
 
-[node name="SwitchButton" parent="Control/VBoxContainer/AdvancedMoveHelp" instance=ExtResource("2_gm40n")]
+[node name="SwitchButton" parent="MainControl/VBoxContainer/AdvancedMoveHelp" instance=ExtResource("2_gm40n")]
 layout_mode = 2
 key = "TAB"
 help = "SWITCH
@@ -154,11 +160,11 @@ HEADING"
 shortcut = SubResource("Shortcut_jyhc4")
 ask_signal_name = "ask_switch"
 
-[node name="ValidateRect" type="VBoxContainer" parent="Control/VBoxContainer/AdvancedMoveHelp"]
+[node name="ValidateRect" type="VBoxContainer" parent="MainControl/VBoxContainer/AdvancedMoveHelp"]
 layout_mode = 2
 alignment = 2
 
-[node name="Label" type="Label" parent="Control/VBoxContainer/AdvancedMoveHelp/ValidateRect"]
+[node name="Label" type="Label" parent="MainControl/VBoxContainer/AdvancedMoveHelp/ValidateRect"]
 layout_mode = 2
 text = "VALIDATE
 POSITION
@@ -168,14 +174,14 @@ horizontal_alignment = 1
 vertical_alignment = 1
 uppercase = true
 
-[node name="TextureRect" type="TextureRect" parent="Control/VBoxContainer/AdvancedMoveHelp/ValidateRect"]
+[node name="TextureRect" type="TextureRect" parent="MainControl/VBoxContainer/AdvancedMoveHelp/ValidateRect"]
 layout_mode = 2
 texture = ExtResource("4_b4lgj")
 
-[node name="HBoxContainer" type="HBoxContainer" parent="Control/VBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="MainControl/VBoxContainer"]
 layout_mode = 2
 
-[node name="SonarButton" parent="Control/VBoxContainer/HBoxContainer" instance=ExtResource("2_gm40n")]
+[node name="SonarButton" parent="MainControl/VBoxContainer/HBoxContainer" instance=ExtResource("2_gm40n")]
 layout_mode = 2
 key = "S"
 help = "SONAR"
@@ -183,7 +189,7 @@ shortcut = SubResource("Shortcut_jtdjp")
 ask_signal_name = "ask_sonar"
 metadata/_edit_use_anchors_ = true
 
-[node name="HeatmapButton" parent="Control/VBoxContainer/HBoxContainer" instance=ExtResource("2_gm40n")]
+[node name="HeatmapButton" parent="MainControl/VBoxContainer/HBoxContainer" instance=ExtResource("2_gm40n")]
 layout_mode = 2
 key = "D"
 help = "MAGNETO-
@@ -192,7 +198,7 @@ shortcut = SubResource("Shortcut_wfw4l")
 ask_signal_name = "ask_heatmap"
 metadata/_edit_use_anchors_ = true
 
-[node name="BeaconButton" parent="Control/VBoxContainer/HBoxContainer" instance=ExtResource("2_gm40n")]
+[node name="BeaconButton" parent="MainControl/VBoxContainer/HBoxContainer" instance=ExtResource("2_gm40n")]
 layout_mode = 2
 key = "SPACE"
 help = "BEACON"
@@ -200,7 +206,7 @@ ask_signal_name = "ask_beacon"
 mode = 1
 metadata/_edit_use_anchors_ = true
 
-[node name="MoveButton" parent="Control/VBoxContainer/HBoxContainer" instance=ExtResource("2_gm40n")]
+[node name="MoveButton" parent="MainControl/VBoxContainer/HBoxContainer" instance=ExtResource("2_gm40n")]
 layout_mode = 2
 key = "M"
 help = "MOVE"
@@ -209,14 +215,14 @@ ask_signal_name = "ask_move"
 mode = 2
 metadata/_edit_use_anchors_ = true
 
-[node name="Label" type="Label" parent="Control/VBoxContainer"]
+[node name="Label" type="Label" parent="MainControl/VBoxContainer"]
 layout_mode = 2
 text = "SUBMARINE"
 horizontal_alignment = 1
 vertical_alignment = 1
 uppercase = true
 
-[node name="VBoxContainer2" type="VBoxContainer" parent="Control"]
+[node name="VBoxContainer2" type="VBoxContainer" parent="MainControl"]
 layout_mode = 1
 anchors_preset = 3
 anchor_left = 1.0
@@ -228,10 +234,10 @@ offset_top = -74.0
 grow_horizontal = 0
 grow_vertical = 0
 
-[node name="HBoxContainer2" type="HBoxContainer" parent="Control/VBoxContainer2"]
+[node name="HBoxContainer2" type="HBoxContainer" parent="MainControl/VBoxContainer2"]
 layout_mode = 2
 
-[node name="PrevButton" parent="Control/VBoxContainer2/HBoxContainer2" instance=ExtResource("2_gm40n")]
+[node name="PrevButton" parent="MainControl/VBoxContainer2/HBoxContainer2" instance=ExtResource("2_gm40n")]
 layout_mode = 2
 key = "←"
 help = "PREV
@@ -239,7 +245,7 @@ ENTRY"
 shortcut = SubResource("Shortcut_vh4xu")
 ask_signal_name = "ask_prev_entry"
 
-[node name="NextButton" parent="Control/VBoxContainer2/HBoxContainer2" instance=ExtResource("2_gm40n")]
+[node name="NextButton" parent="MainControl/VBoxContainer2/HBoxContainer2" instance=ExtResource("2_gm40n")]
 layout_mode = 2
 key = "→"
 help = "next
@@ -247,32 +253,32 @@ entry"
 shortcut = SubResource("Shortcut_p8y2k")
 ask_signal_name = "ask_next_entry"
 
-[node name="PresentButton" parent="Control/VBoxContainer2/HBoxContainer2" instance=ExtResource("2_gm40n")]
+[node name="PresentButton" parent="MainControl/VBoxContainer2/HBoxContainer2" instance=ExtResource("2_gm40n")]
 layout_mode = 2
 key = "ESC"
 help = "present"
 shortcut = SubResource("Shortcut_5m8o7")
 ask_signal_name = "ask_present"
 
-[node name="Label" type="Label" parent="Control/VBoxContainer2"]
+[node name="Label" type="Label" parent="MainControl/VBoxContainer2"]
 layout_mode = 2
 text = "SCANNER ARCHIVE"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="VBoxContainer3" type="VBoxContainer" parent="Control"]
+[node name="VBoxContainer3" type="VBoxContainer" parent="MainControl"]
 layout_mode = 0
 offset_right = 40.0
 offset_bottom = 40.0
 
-[node name="HBoxContainer" type="HBoxContainer" parent="Control/VBoxContainer3"]
+[node name="HBoxContainer" type="HBoxContainer" parent="MainControl/VBoxContainer3"]
 layout_mode = 2
 
-[node name="TextureRect" type="TextureRect" parent="Control/VBoxContainer3/HBoxContainer"]
+[node name="TextureRect" type="TextureRect" parent="MainControl/VBoxContainer3/HBoxContainer"]
 layout_mode = 2
 texture = ExtResource("5_jtdjp")
 
-[node name="HealthProgressBar" type="ProgressBar" parent="Control/VBoxContainer3/HBoxContainer"]
+[node name="HealthProgressBar" type="ProgressBar" parent="MainControl/VBoxContainer3/HBoxContainer"]
 custom_minimum_size = Vector2(100, 10)
 layout_mode = 2
 size_flags_vertical = 4
@@ -285,14 +291,14 @@ script = ExtResource("6_wfw4l")
 initial_value_project_settings_name = "Game/Global/MaxLife"
 state_changed_signal_name = "life_state_changed"
 
-[node name="HBoxContainer2" type="HBoxContainer" parent="Control/VBoxContainer3"]
+[node name="HBoxContainer2" type="HBoxContainer" parent="MainControl/VBoxContainer3"]
 layout_mode = 2
 
-[node name="TextureRect" type="TextureRect" parent="Control/VBoxContainer3/HBoxContainer2"]
+[node name="TextureRect" type="TextureRect" parent="MainControl/VBoxContainer3/HBoxContainer2"]
 layout_mode = 2
 texture = ExtResource("6_p8y2k")
 
-[node name="EnergyProgressBar" type="ProgressBar" parent="Control/VBoxContainer3/HBoxContainer2"]
+[node name="EnergyProgressBar" type="ProgressBar" parent="MainControl/VBoxContainer3/HBoxContainer2"]
 custom_minimum_size = Vector2(100, 10)
 layout_mode = 2
 size_flags_vertical = 4
@@ -304,14 +310,14 @@ script = ExtResource("6_wfw4l")
 initial_value_project_settings_name = "Game/Global/MaxEnergy"
 state_changed_signal_name = "energy_state_changed"
 
-[node name="HBoxContainer4" type="HBoxContainer" parent="Control/VBoxContainer3"]
+[node name="HBoxContainer4" type="HBoxContainer" parent="MainControl/VBoxContainer3"]
 layout_mode = 2
 
-[node name="TextureRect" type="TextureRect" parent="Control/VBoxContainer3/HBoxContainer4"]
+[node name="TextureRect" type="TextureRect" parent="MainControl/VBoxContainer3/HBoxContainer4"]
 layout_mode = 2
 texture = ExtResource("8_tjoyq")
 
-[node name="BeaconCountLabel" type="RichTextLabel" parent="Control/VBoxContainer3/HBoxContainer4"]
+[node name="BeaconCountLabel" type="RichTextLabel" parent="MainControl/VBoxContainer3/HBoxContainer4"]
 custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
 text = "3 / 4"
@@ -320,14 +326,14 @@ initial_value_project_settings_name = "Game/Global/MaxBeacon"
 state_changed_signal_name = "beacon_state_changed"
 template_text = "%d / %d"
 
-[node name="HBoxContainer3" type="HBoxContainer" parent="Control/VBoxContainer3"]
+[node name="HBoxContainer3" type="HBoxContainer" parent="MainControl/VBoxContainer3"]
 layout_mode = 2
 
-[node name="TextureRect" type="TextureRect" parent="Control/VBoxContainer3/HBoxContainer3"]
+[node name="TextureRect" type="TextureRect" parent="MainControl/VBoxContainer3/HBoxContainer3"]
 layout_mode = 2
 texture = ExtResource("7_wfw4l")
 
-[node name="MineCountLabel" type="RichTextLabel" parent="Control/VBoxContainer3/HBoxContainer3"]
+[node name="MineCountLabel" type="RichTextLabel" parent="MainControl/VBoxContainer3/HBoxContainer3"]
 custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
 text = "3 / 4"
@@ -336,3 +342,58 @@ initial_value_project_settings_name = "Game/Global/MaxMines"
 state_changed_signal_name = "mine_state_changed_really"
 template_text = "%d / %d"
 initial_value_at_max = false
+
+[node name="GameOverControl" type="Control" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("11_whnys")
+
+[node name="PanelContainer" type="PanelContainer" parent="GameOverControl"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.3
+anchor_top = 0.1
+anchor_right = 0.7
+anchor_bottom = 0.4
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="GameOverControl/PanelContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="TitleLabel" type="Label" parent="GameOverControl/PanelContainer/VBoxContainer"]
+layout_mode = 2
+text = "GAME OVER"
+label_settings = SubResource("LabelSettings_tjoyq")
+horizontal_alignment = 1
+uppercase = true
+
+[node name="spacer" type="Control" parent="GameOverControl/PanelContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 20)
+layout_mode = 2
+
+[node name="TextLabel" type="Label" parent="GameOverControl/PanelContainer/VBoxContainer"]
+layout_mode = 2
+text = "YOU FOUND %d / %d MINES
+YOU USED ONLY %d BEACONS
+YOU MOVED ONLY %d TIMES"
+label_settings = SubResource("LabelSettings_whnys")
+horizontal_alignment = 1
+
+[node name="spacer2" type="Control" parent="GameOverControl/PanelContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 20)
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="GameOverControl/PanelContainer/VBoxContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="Button" type="Button" parent="GameOverControl/PanelContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+text = "Play Again ?"
