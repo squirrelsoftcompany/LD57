@@ -55,11 +55,11 @@ func _on_mine_state_changed() -> void:
 	var mineLeft = 0
 	for _mine in _minesArray:
 		var mine: Mine = _mine
-		if not mine.is_active():
+		if mine.is_active():
 			mineLeft = mineLeft+1
 	if(mineLeft == 0):
 		win()
-	GlobalEventHolder.mine_state_changed_really.emit(mineLeft, _minesArray.size())
+	GlobalEventHolder.mine_state_changed_really.emit(_minesArray.size()-mineLeft, _minesArray.size())
 
 func take_damage(value: int = 1):
 	set_life(get_life()-value)

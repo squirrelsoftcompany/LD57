@@ -128,5 +128,6 @@ func bonk():
 
 func _on_beacon_cooldown_timeout() -> void:
 	GlobalPlayerStates.add_beacon()
+	_beacon_cooldown.stop()
 	if (not GlobalPlayerStates.is_beacon_full()):
 		_beacon_cooldown.start()

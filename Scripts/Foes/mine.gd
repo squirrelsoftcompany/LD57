@@ -29,13 +29,13 @@ func explode():
 	
 func disable():
 	_disableStack = _disableStack + 1
-	_isDisable = false
+	_isDisable = true
 	GlobalEventHolder.mine_state_changed.emit()
 	
 func activate():
 	_disableStack = _disableStack -1
 	if _disableStack == 0:
-		_isDisable = true
+		_isDisable = false
 	GlobalEventHolder.mine_state_changed.emit()
 
 func is_active():
