@@ -186,7 +186,8 @@ metadata/_edit_use_anchors_ = true
 [node name="HeatmapButton" parent="Control/VBoxContainer/HBoxContainer" instance=ExtResource("2_gm40n")]
 layout_mode = 2
 key = "D"
-help = "MAGNETOMETER"
+help = "MAGNETO-
+METER"
 shortcut = SubResource("Shortcut_wfw4l")
 ask_signal_name = "ask_heatmap"
 metadata/_edit_use_anchors_ = true
