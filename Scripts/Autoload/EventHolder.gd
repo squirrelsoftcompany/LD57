@@ -5,6 +5,7 @@ extends Node
 signal player_start_mi()
 @warning_ignore("unused_signal")
 signal player_finish_mi()
+@warning_ignore("unused_signal")
 signal player_spawn()
 signal player_start_moving(start_position:Vector3, player_rotation : Vector3)
 signal player_finish_moving(finish_position:Vector3, player_rotation : Vector3)
