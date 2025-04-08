@@ -332,6 +332,6 @@ custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
 text = "3 / 4"
 script = ExtResource("9_tjoyq")
-initial_value_project_settings_name = "Game/Global/MaxMine"
+initial_value_project_settings_name = "Game/Global/MaxMines"
 state_changed_signal_name = "mine_state_changed"
 template_text = "%d / %d"

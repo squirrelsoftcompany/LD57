@@ -14,7 +14,7 @@ Global/MaxBeacon=3
 Global/MaxLife=10
 Global/MaxEnergy=100
 Global/Mines=[]
-Global/MaxMines=0
+Global/MaxMines=10
 
 [application]
 
