@@ -34,7 +34,8 @@ func _on_visibility_changed() -> void:
 	if visible:
 		GlobalEventHolder.emit_signal("player_start_mi")
 		_candidate_altitude = 0
-		_candidate_position = _candidate_azimuth_distance
+		_candidate_azimuth_distance = global_position
+		_candidate_position = global_position
 		_switched = false
 		_update_drawings()
 	else:
