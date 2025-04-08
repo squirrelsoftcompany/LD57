@@ -45,6 +45,8 @@ cast_shadow = 0
 multimesh = SubResource("MultiMesh_qtsk4")
 
 [node name="Area3D" type="Area3D" parent="." groups=["Mine"]]
+collision_layer = 4
+collision_mask = 13
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
 shape = SubResource("SphereShape3D_tyfw0")

@@ -20,7 +20,6 @@ var _move_tween : Tween = null
 var _final_position : Vector3
 
 func _ready() -> void:
-	position = get_tree().get_first_node_in_group("Map").cavities.pick_random().position
 	GlobalArchive.clear()
 	GlobalArchive.add_timepoint(position, rotation)
 	GlobalEventHolder.connect("player_navigate_archive", _on_player_navigate_archive)
@@ -59,7 +58,7 @@ func _move_player(final_position : Vector3) -> void:
 	_moving_sound.play()
 
 func _process(_delta: float) -> void:
-	if GlobalEventHolder._asking_beacon:
+	if Input.is_action_pressed("mi_launch"):
 		_launch_is_charging = true
 		if _launch_charge_power < launch_max_charge:
 			_launch_charge_power += _delta

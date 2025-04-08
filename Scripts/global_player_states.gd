@@ -45,6 +45,7 @@ func set_life(value: int) -> void:
 	current_life = value
 	
 func _on_mine_state_changed() -> void:
+	var minesArray: Array = ProjectSettings.get_setting("Game/Global/Mines")
 	var mineLeft = 0
 	for _mine in minesArray:
 		var mine: Mine = _mine
