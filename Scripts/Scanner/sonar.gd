@@ -7,6 +7,9 @@ extends Node3D
 @export var range_huge_sonar:= 100.0
 @export var range_magnet := 75
 
+@export var huge_sonar_cost := 10
+@export var magnet_cost := 10
+
 @onready var _shader_globals_override : ShaderGlobalsOverride = $"../ShaderGlobalsOverride"
 
 
@@ -59,13 +62,15 @@ func _animate_mini_sonar(player_position: Vector3):
 
 
 func _animate_huge_sonar(player_position: Vector3):
-	GlobalEventHolder.emit_signal("player_start_scanning", Archive.SonarState.SONAR_HUGE)
-	var base_sonar_layer := Vector2(player_position.y, player_position.y)
-	var tween := get_tree().create_tween()
-	tween.tween_property(self, "omni_range", 0, 0.5)
-	tween.tween_callback(_shader_globals_override.set.bind("params/sonar_layer", base_sonar_layer + layer_huge_sonar))
-	tween.tween_property(self, "omni_range", range_huge_sonar, 1.5)
-	tween.tween_callback(GlobalEventHolder.emit_signal.bind("player_finish_scanning", Archive.SonarState.SONAR_HUGE))
+	if GlobalPlayerStates.get_energy() > huge_sonar_cost:
+		GlobalPlayerStates.remove_energy(huge_sonar_cost)
+		GlobalEventHolder.emit_signal("player_start_scanning", Archive.SonarState.SONAR_HUGE)
+		var base_sonar_layer := Vector2(player_position.y, player_position.y)
+		var tween := get_tree().create_tween()
+		tween.tween_property(self, "omni_range", 0, 0.5)
+		tween.tween_callback(_shader_globals_override.set.bind("params/sonar_layer", base_sonar_layer + layer_huge_sonar))
+		tween.tween_property(self, "omni_range", range_huge_sonar, 1.5)
+		tween.tween_callback(GlobalEventHolder.emit_signal.bind("player_finish_scanning", Archive.SonarState.SONAR_HUGE))
 
 
 func _set_sonar_state(state : Archive.SonarState, player_position : Vector3):
@@ -95,7 +100,9 @@ func _animate_no_magnet():
 
 
 func _animate_magnet():
-	GlobalEventHolder.emit_signal.bind("player_start_heatmap", Archive.MagnetState.ON)
-	var tween := get_tree().create_tween()
-	tween.tween_property($Magnetometer, "omni_range", range_magnet, 1.5)
-	tween.tween_callback(GlobalEventHolder.emit_signal.bind("player_finish_heatmap", Archive.MagnetState.ON))
+	if GlobalPlayerStates.get_energy() > magnet_cost:
+		GlobalPlayerStates.remove_energy(magnet_cost)
+		GlobalEventHolder.emit_signal.bind("player_start_heatmap", Archive.MagnetState.ON)
+		var tween := get_tree().create_tween()
+		tween.tween_property($Magnetometer, "omni_range", range_magnet, 1.5)
+		tween.tween_callback(GlobalEventHolder.emit_signal.bind("player_finish_heatmap", Archive.MagnetState.ON))
