@@ -111,7 +111,7 @@ func launch_beacon(power : float) -> void:
 	return
 	
 func bonk():
-	if _move_tween:
+	if _move_tween != null and _move_tween.is_valid():
 		# Player knockback on hit
 		var direction = (_final_position-position).normalized()
 		position = position - (direction * bonk_knockback_distance)
