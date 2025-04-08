@@ -59,12 +59,13 @@ var _navigating_archive := false
 var _scanning := false
 var _asking_beacon := false
 var _heatmap := false
+var _gameover := false
 
 
-func CanMove() -> bool: return !_moving and !_navigating_archive and !_scanning and !_asking_beacon
-func CanNavigate() -> bool: return !_moving and !_scanning and !_asking_beacon
-func CanScan() -> bool: return !_moving and !_navigating_archive and !_scanning and !_asking_beacon
-func CanBeacon() -> bool: return !_moving and !_navigating_archive and !_scanning
+func CanMove() -> bool: return !_moving and !_navigating_archive and !_scanning and !_heatmap and !_asking_beacon and !_gameover
+func CanNavigate() -> bool: return !_moving and !_scanning and !_heatmap and !_asking_beacon and !_gameover
+func CanScan() -> bool: return !_moving and !_navigating_archive and !_scanning and !_heatmap and !_asking_beacon and !_gameover
+func CanBeacon() -> bool: return !_moving and !_navigating_archive and !_scanning and !_heatmap and !_gameover
 
 
 func _ready() -> void:
@@ -78,3 +79,4 @@ func _ready() -> void:
 	connect("player_finish_heatmap", func(_x): _heatmap = false)
 	connect("ask_beacon_start", func(): _asking_beacon = true)
 	connect("ask_beacon_finish", func(): _asking_beacon = false)
+	connect("gameover", func(): _gameover = true)
