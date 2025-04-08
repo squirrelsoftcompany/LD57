@@ -21,7 +21,11 @@ func _ready() -> void:
 	GlobalEventHolder.connect("player_quit_navigating_archive", _on_player_quit_navigating_moving)
 	GlobalEventHolder.connect("ask_sonar", func(): _animate_huge_sonar(global_position))
 	GlobalEventHolder.connect("ask_heatmap", _animate_magnet)
+	GlobalEventHolder.connect("player_spawn",_initialize)
 	self.omni_range = 0
+
+
+func _initialize():
 	_animate_mini_sonar(global_position)
 
 
