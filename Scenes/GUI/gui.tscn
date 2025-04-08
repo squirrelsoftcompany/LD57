@@ -335,3 +335,4 @@ script = ExtResource("9_tjoyq")
 initial_value_project_settings_name = "Game/Global/MaxMines"
 state_changed_signal_name = "mine_state_changed_really"
 template_text = "%d / %d"
+initial_value_at_max = false
