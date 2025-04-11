@@ -38,6 +38,11 @@ func _ready() -> void:
 	GlobalEventHolder.connect("player_finish_moving", add_timepoint)
 	GlobalEventHolder.connect("player_finish_sonar", _on_player_finish_sonar)
 	GlobalEventHolder.connect("player_finish_heatmap", _on_player_finish_heatmap)
+	GlobalEventHolder.connect("reload_game", _on_reload_game)
+
+
+func _on_reload_game():
+	_archive.clear()
 
 
 func _on_player_finish_sonar(sonar_state: Archive.SonarState):

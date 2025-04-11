@@ -1,6 +1,9 @@
 extends Control
 
 
+@onready var _reload_button = $PanelContainer/VBoxContainer/HBoxContainer/Button
+
+
 var _beacon_launched :int= 0
 var _moves : int = 0
 var _mine_left : int = 0
@@ -15,6 +18,7 @@ func _ready() -> void:
 	GlobalEventHolder.player_finish_moving.connect(func(_x, _y): _moves+=1)
 	GlobalEventHolder.mine_state_changed_really.connect(func(val, _maximum): _mine_left = val)
 	GlobalEventHolder.mine_state_changed_really.connect(func(_val, maximum): _mine_max = maximum)
+	_reload_button.connect("pressed", _on_reload_button_pressed)
 
 
 func _on_gameover(win: bool):
@@ -22,3 +26,8 @@ func _on_gameover(win: bool):
 	var text_label : Label = $PanelContainer/VBoxContainer/TextLabel
 	text_label.text = text_label.text.to_lower() % [ _mine_left, _mine_max, _beacon_launched, _moves ]
 	visible = true
+
+
+func _on_reload_button_pressed():
+	GlobalEventHolder.reload_game.emit()
+	get_tree().reload_current_scene.call_deferred()

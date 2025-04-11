@@ -19,6 +19,11 @@ func _ready():
 	GlobalEventHolder.connect("ask_present", quit_navigation)
 	for i in GlobalArchive._archive.size():
 		_on_tp_added(i, GlobalArchive._archive[i])
+	GlobalEventHolder.connect("reload_game", _on_reload_game)
+
+
+func _on_reload_game():
+	_on_tp_cleared()
 
 
 var _visiting_idx := -1
@@ -47,6 +52,7 @@ func _on_tp_cleared() -> void:
 	_polygon.queue_free()
 	_polygon = null
 	_path3d.curve.clear_points()
+	_visiting_idx = -1
 
 
 func _on_tp_added(_idx: int, tp: Archive.TimePoint) -> void:

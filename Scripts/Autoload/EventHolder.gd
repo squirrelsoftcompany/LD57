@@ -46,6 +46,7 @@ signal mine_state_changed()
 signal mine_state_changed_really(val: int, maximum: int)
 @warning_ignore("unused_signal")
 signal gameover(win: bool)
+signal reload_game()
 #player state changed
 @warning_ignore("unused_signal")
 signal energy_state_changed(val: int, maximum: int)
@@ -94,3 +95,16 @@ func _ready() -> void:
 	connect("ask_beacon_finish", func(): _asking_beacon = false)
 	connect("beacon_state_changed", func(val, _x): _beacon_available = val > 0)
 	connect("gameover", func(_x): _gameover = true)
+	connect("reload_game", _on_reload_game)
+
+
+func _on_reload_game():
+	_moving = false
+	_sonar = false
+	_sonar_done = false
+	_heatmap = false
+	_heatmap_done = false
+	_asking_beacon = false
+	_beacon_available = true
+	_navigating_archive = false
+	_gameover = false

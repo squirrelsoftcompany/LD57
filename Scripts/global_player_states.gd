@@ -17,6 +17,13 @@ func _ready() -> void:
 	current_beacon = maxBeacon
 	current_life = maxLife
 	GlobalEventHolder.connect("mine_state_changed", _on_mine_state_changed)
+	GlobalEventHolder.connect("reload_game", _on_reload_game)
+
+
+func _on_reload_game():
+	current_energy = maxEnergy
+	current_beacon = maxBeacon
+	current_life = maxLife
 
 
 func get_energy() -> int:
