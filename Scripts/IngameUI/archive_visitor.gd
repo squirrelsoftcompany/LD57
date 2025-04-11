@@ -55,9 +55,12 @@ func _on_tp_cleared() -> void:
 
 
 func _on_tp_added(_idx: int, tp: Archive.TimePoint) -> void:
-	_path3d.curve.add_point(tp.player_position)
-	if _polygon == null and is_path_valid_for_polygon():
-		generate_polygon()
+	if _path3d.curve.point_count == 0 or tp.player_position.distance_to(_path3d.curve.get_point_position(_path3d.curve.point_count-1)) > 0.01:
+		_path3d.curve.add_point(tp.player_position)
+		if _polygon == null and is_path_valid_for_polygon():
+			generate_polygon()
+	else:
+		print("Point ignored in path because too close to previous one.")
 	if !GlobalEventHolder._navigating_archive:
 		_visiting_idx = _path3d.curve.point_count-1
 

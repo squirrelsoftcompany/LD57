@@ -42,10 +42,10 @@ func _move_player(final_position : Vector3) -> void:
 	GlobalEventHolder.emit_signal("player_start_moving", position, $Submarine.rotation)
 	var duration := position.distance_to(final_position) / speed
 	var angular_duration := position.distance_to(final_position) / angular_speed
-	var forward := (final_position-position).normalized()
+	var forward := (final_position-position).normalized() if final_position.distance_to(position) > 0.1 else global_basis.z
 	var left := Vector3.UP.cross(forward).normalized()
 	var up := forward.cross(left).normalized()
-	var final_quaternion := Quaternion(Basis(left,up,forward))
+	var final_quaternion := Quaternion(Basis(left,up,forward).orthonormalized())
 	var tween := get_tree().create_tween()
 	_move_tween = tween
 	_final_position = final_position
