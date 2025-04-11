@@ -21,3 +21,5 @@ func used() -> int :
 func _on_timer_timeout() -> void:
 	charged = true
 	mesh.show()
+	# TODO instead of a timer use the timepoint structure
+	# energyZone should reset according to scaled time not engine time

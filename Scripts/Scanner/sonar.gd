@@ -75,6 +75,9 @@ func _animate_huge_sonar(player_position: Vector3):
 		tween.tween_callback(_shader_globals_override.set.bind("params/sonar_layer", base_sonar_layer + layer_huge_sonar))
 		tween.tween_property(self, "omni_range", range_huge_sonar, 1.5)
 		tween.tween_callback(GlobalEventHolder.emit_signal.bind("player_finish_sonar", Archive.SonarState.SONAR_HUGE))
+	else:
+		# TODO play not enough energy sound
+		pass
 
 
 func _set_sonar_state(state : Archive.SonarState, player_position : Vector3):
@@ -110,3 +113,6 @@ func _animate_magnet():
 		var tween := get_tree().create_tween()
 		tween.tween_property($Magnetometer, "omni_range", range_magnet, 1.5)
 		tween.tween_callback(GlobalEventHolder.emit_signal.bind("player_finish_heatmap", Archive.MagnetState.ON))
+	else:
+		# TODO play not enough energy sound
+		pass
