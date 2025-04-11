@@ -13,7 +13,6 @@ var _polygon : CSGPolygon3D = null
 func _ready():
 	GlobalArchive.connect("tp_cleared", _on_tp_cleared)
 	GlobalArchive.connect("tp_added", _on_tp_added)
-	GlobalArchive.connect("last_tp_updated", _on_last_tp_updated)
 	GlobalEventHolder.connect("ask_prev_entry", navigate_back)
 	GlobalEventHolder.connect("ask_next_entry", navigate_forward)
 	GlobalEventHolder.connect("ask_present", quit_navigation)
@@ -61,12 +60,6 @@ func _on_tp_added(_idx: int, tp: Archive.TimePoint) -> void:
 		generate_polygon()
 	if !GlobalEventHolder._navigating_archive:
 		_visiting_idx = _path3d.curve.point_count-1
-
-
-func _on_last_tp_updated(_idx: int, tp: Archive.TimePoint) -> void:
-	_path3d.curve.set_point_position(_path3d.curve.point_count-1, tp.player_position)
-	if _polygon == null and is_path_valid_for_polygon():
-		generate_polygon()
 
 
 func generate_polygon():
