@@ -23,8 +23,8 @@ func _ready() -> void:
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta: float) -> void:
 	_move_button.disabled = !GlobalEventHolder.CanMove()
-	_sonar_button.disabled = !GlobalEventHolder.CanScan()
-	_heatmap_button.disabled = !GlobalEventHolder.CanScan()
+	_sonar_button.disabled = !GlobalEventHolder.CanSonar()
+	_heatmap_button.disabled = !GlobalEventHolder.CanHeatmap()
 	_beacon_button.disabled = !GlobalEventHolder.CanBeacon()
 	_prev_button.disabled = !GlobalEventHolder.CanNavigate()
 	_next_button.disabled = !GlobalEventHolder.CanNavigate()

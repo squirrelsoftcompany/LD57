@@ -36,12 +36,11 @@ var _archive : Array[TimePoint]
 func _ready() -> void:
 	GlobalEventHolder.connect("player_start_moving", func(_x, _y): self._leave_last_timepoint())
 	GlobalEventHolder.connect("player_finish_moving", add_timepoint)
-	GlobalEventHolder.connect("player_finish_scanning", _on_player_finish_scanning)
+	GlobalEventHolder.connect("player_finish_sonar", _on_player_finish_sonar)
 	GlobalEventHolder.connect("player_finish_heatmap", _on_player_finish_heatmap)
-	pass
 
 
-func _on_player_finish_scanning(sonar_state: Archive.SonarState):
+func _on_player_finish_sonar(sonar_state: Archive.SonarState):
 	if sonar_state == Archive.SonarState.SONAR_NONE: return # ignore this one its used only for animation
 	update_last_timepoint_sonar_state(sonar_state)
 
@@ -95,6 +94,7 @@ func update_last_timepoint_sonar_state(sonar_state: Archive.SonarState):
 		return
 	var back_tp := _archive.back() as TimePoint
 	back_tp.sonar_state = sonar_state
+	emit_signal("last_tp_updated", _archive.size()-1, _archive.back())
 
 
 func update_last_timepoint_magnet_state(magnet_state: Archive.MagnetState):
@@ -103,6 +103,7 @@ func update_last_timepoint_magnet_state(magnet_state: Archive.MagnetState):
 		return
 	var back_tp := _archive.back() as TimePoint
 	back_tp.magnet_state = magnet_state
+	emit_signal("last_tp_updated", _archive.size()-1, _archive.back())
 
 func get_timepoint_by_index(idx : int) -> TimePoint:
 	if idx < 0:

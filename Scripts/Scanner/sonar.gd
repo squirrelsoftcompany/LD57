@@ -49,32 +49,32 @@ func _on_player_quit_navigating_moving(_idx: int, tp: Archive.TimePoint):
 
 
 func _animate_no_sonar():
-	GlobalEventHolder.emit_signal("player_start_scanning", Archive.SonarState.SONAR_NONE)
+	GlobalEventHolder.emit_signal("player_start_sonar", Archive.SonarState.SONAR_NONE)
 	var tween := get_tree().create_tween()
 	tween.tween_property(self, "omni_range", 0, 0.1)
 	tween.tween_callback(_shader_globals_override.set.bind("params/sonar_layer", Vector2.ZERO))
-	tween.tween_callback(GlobalEventHolder.emit_signal.bind("player_finish_scanning", Archive.SonarState.SONAR_NONE))
+	tween.tween_callback(GlobalEventHolder.emit_signal.bind("player_finish_sonar", Archive.SonarState.SONAR_NONE))
 
 
 func _animate_mini_sonar(player_position: Vector3):
-	GlobalEventHolder.emit_signal("player_start_scanning", Archive.SonarState.SONAR_MINI)
+	GlobalEventHolder.emit_signal("player_start_sonar", Archive.SonarState.SONAR_MINI)
 	var base_sonar_layer := Vector2(player_position.y, player_position.y)
 	var tween := get_tree().create_tween()
 	tween.tween_callback(_shader_globals_override.set.bind("params/sonar_layer", base_sonar_layer + layer_mini_sonar))
 	tween.tween_property(self, "omni_range", range_mini_sonar, 2)
-	tween.tween_callback(GlobalEventHolder.emit_signal.bind("player_finish_scanning", Archive.SonarState.SONAR_MINI))
+	tween.tween_callback(GlobalEventHolder.emit_signal.bind("player_finish_sonar", Archive.SonarState.SONAR_MINI))
 
 
 func _animate_huge_sonar(player_position: Vector3):
 	if GlobalPlayerStates.get_energy() > huge_sonar_cost:
 		GlobalPlayerStates.remove_energy(huge_sonar_cost)
-		GlobalEventHolder.emit_signal("player_start_scanning", Archive.SonarState.SONAR_HUGE)
+		GlobalEventHolder.emit_signal("player_start_sonar", Archive.SonarState.SONAR_HUGE)
 		var base_sonar_layer := Vector2(player_position.y, player_position.y)
 		var tween := get_tree().create_tween()
 		tween.tween_property(self, "omni_range", 0, 0.5)
 		tween.tween_callback(_shader_globals_override.set.bind("params/sonar_layer", base_sonar_layer + layer_huge_sonar))
 		tween.tween_property(self, "omni_range", range_huge_sonar, 1.5)
-		tween.tween_callback(GlobalEventHolder.emit_signal.bind("player_finish_scanning", Archive.SonarState.SONAR_HUGE))
+		tween.tween_callback(GlobalEventHolder.emit_signal.bind("player_finish_sonar", Archive.SonarState.SONAR_HUGE))
 
 
 func _set_sonar_state(state : Archive.SonarState, player_position : Vector3):
@@ -97,7 +97,7 @@ func _set_magnet_state(state : Archive.MagnetState):
 
 
 func _animate_no_magnet():
-	GlobalEventHolder.emit_signal.bind("player_start_heatmap", Archive.MagnetState.ON)
+	GlobalEventHolder.emit_signal("player_start_heatmap", Archive.MagnetState.ON)
 	var tween := get_tree().create_tween()
 	tween.tween_property($Magnetometer, "omni_range",0, 1)
 	tween.tween_callback(GlobalEventHolder.emit_signal.bind("player_finish_heatmap", Archive.MagnetState.OFF))
@@ -106,7 +106,7 @@ func _animate_no_magnet():
 func _animate_magnet():
 	if GlobalPlayerStates.get_energy() > magnet_cost:
 		GlobalPlayerStates.remove_energy(magnet_cost)
-		GlobalEventHolder.emit_signal.bind("player_start_heatmap", Archive.MagnetState.ON)
+		GlobalEventHolder.emit_signal("player_start_heatmap", Archive.MagnetState.ON)
 		var tween := get_tree().create_tween()
 		tween.tween_property($Magnetometer, "omni_range", range_magnet, 1.5)
 		tween.tween_callback(GlobalEventHolder.emit_signal.bind("player_finish_heatmap", Archive.MagnetState.ON))
