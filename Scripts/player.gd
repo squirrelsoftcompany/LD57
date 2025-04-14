@@ -69,11 +69,13 @@ func _process(_delta: float) -> void:
 	pass
 
 func _on_player_navigate_archive(_idx: int, tp: Archive.TimePoint) -> void:
+	$Submarine.present = false # deactivate interactions in archive mode
 	global_position = tp.player_position
 	$Submarine.global_rotation = tp.player_rotation
 
 
 func _on_player_quit_navigating_archive(_idx: int, tp: Archive.TimePoint) -> void:
+	$Submarine.present = true # reactivate interactions
 	global_position = tp.player_position
 	$Submarine.global_rotation = tp.player_rotation
 
