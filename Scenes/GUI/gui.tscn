@@ -1,12 +1,14 @@
-[gd_scene load_steps=33 format=3 uid="uid://cl7b76mxru8tl"]
+[gd_scene load_steps=35 format=3 uid="uid://cl7b76mxru8tl"]
 
 [ext_resource type="Script" uid="uid://dxacdxwlt5ufc" path="res://Scripts/GUI/gui.gd" id="1_jyhc4"]
 [ext_resource type="PackedScene" uid="uid://csf7h3tyeu5ea" path="res://Scenes/GUI/top_button.tscn" id="1_psa72"]
 [ext_resource type="PackedScene" uid="uid://bg5tc4tw3t6bv" path="res://Scenes/GUI/bottom_button.tscn" id="2_gm40n"]
 [ext_resource type="Texture2D" uid="uid://d4d1682bns04p" path="res://Sprites/right_click.png" id="4_b4lgj"]
 [ext_resource type="Texture2D" uid="uid://c67oeho3qh4m4" path="res://Sprites/health.png" id="5_jtdjp"]
+[ext_resource type="Texture2D" uid="uid://c8xvv7086t6el" path="res://Sprites/button_left.png" id="6_1wuyf"]
 [ext_resource type="Texture2D" uid="uid://da2ufh82pi13n" path="res://Sprites/energy.png" id="6_p8y2k"]
 [ext_resource type="Script" uid="uid://cod0yjphulu1j" path="res://Scripts/GUI/state_progress_bar.gd" id="6_wfw4l"]
+[ext_resource type="Texture2D" uid="uid://coo0lnkxede3o" path="res://Sprites/button_right.png" id="7_uyj30"]
 [ext_resource type="Texture2D" uid="uid://brvy1vh1sk3y0" path="res://Sprites/mine.png" id="7_wfw4l"]
 [ext_resource type="Texture2D" uid="uid://cokpyraa8uyor" path="res://Sprites/beacon.png" id="8_tjoyq"]
 [ext_resource type="Script" uid="uid://co1h8rx5o4ko0" path="res://Scripts/GUI/state_progress_label.gd" id="9_tjoyq"]
@@ -240,17 +242,19 @@ layout_mode = 2
 
 [node name="PrevButton" parent="MainControl/VBoxContainer2/HBoxContainer2" instance=ExtResource("2_gm40n")]
 layout_mode = 2
-key = "←"
+key = ""
 help = "PREV
 ENTRY"
+icon = ExtResource("6_1wuyf")
 shortcut = SubResource("Shortcut_vh4xu")
 ask_signal_name = "ask_prev_entry"
 
 [node name="NextButton" parent="MainControl/VBoxContainer2/HBoxContainer2" instance=ExtResource("2_gm40n")]
 layout_mode = 2
-key = "→"
+key = ""
 help = "next
 entry"
+icon = ExtResource("7_uyj30")
 shortcut = SubResource("Shortcut_p8y2k")
 ask_signal_name = "ask_next_entry"
 
