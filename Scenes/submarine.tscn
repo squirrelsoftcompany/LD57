@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://dqbw1tiffrucc"]
+[gd_scene load_steps=17 format=3 uid="uid://dqbw1tiffrucc"]
 
 [ext_resource type="Material" uid="uid://drbx2dl3osytb" path="res://Material/submarine.tres" id="1_hyx2r"]
 [ext_resource type="Shader" uid="uid://dk4sm3onhvv5y" path="res://Material/Shader/Battery.tres" id="1_ue3ij"]
@@ -7,6 +7,7 @@
 [ext_resource type="Script" uid="uid://fbxmq0aom74v" path="res://Scripts/battery.gd" id="3_s8co7"]
 [ext_resource type="AudioStream" uid="uid://b3eksy1eph2sc" path="res://SFX/AlarmShort.mp3" id="3_tq48s"]
 [ext_resource type="AudioStream" uid="uid://civsstm6861iv" path="res://SFX/Bonk.mp3" id="6_a07w3"]
+[ext_resource type="AudioStream" uid="uid://dra50015mxobi" path="res://SFX/NoEnergy.mp3" id="8_wqqa5"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_je60v"]
 render_priority = 0
@@ -91,6 +92,11 @@ script = ExtResource("3_je60v")
 light_cull_mask = 4294967291
 shadow_enabled = true
 omni_range = 0.0
+
+[node name="NoEnergy" type="AudioStreamPlayer" parent="OmniLight3D"]
+stream = ExtResource("8_wqqa5")
+volume_db = -0.52
+bus = &"SFX"
 
 [node name="ShaderGlobalsOverride" type="ShaderGlobalsOverride" parent="."]
 params/sonar_layer = Vector2(10, -10)

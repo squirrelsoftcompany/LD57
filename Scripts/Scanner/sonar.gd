@@ -11,7 +11,7 @@ extends Node3D
 @export var magnet_cost := 10
 
 @onready var _shader_globals_override : ShaderGlobalsOverride = $"../ShaderGlobalsOverride"
-
+@onready var no_energy_sound = $NoEnergy
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -66,7 +66,7 @@ func _animate_mini_sonar(player_position: Vector3):
 
 
 func _animate_huge_sonar(player_position: Vector3):
-	if GlobalPlayerStates.get_energy() > huge_sonar_cost:
+	if GlobalPlayerStates.get_energy() >= huge_sonar_cost:
 		GlobalPlayerStates.remove_energy(huge_sonar_cost)
 		GlobalEventHolder.emit_signal("player_start_sonar", Archive.SonarState.SONAR_HUGE)
 		var base_sonar_layer := Vector2(player_position.y, player_position.y)
@@ -76,7 +76,7 @@ func _animate_huge_sonar(player_position: Vector3):
 		tween.tween_property(self, "omni_range", range_huge_sonar, 1.5)
 		tween.tween_callback(GlobalEventHolder.emit_signal.bind("player_finish_sonar", Archive.SonarState.SONAR_HUGE))
 	else:
-		# TODO play not enough energy sound
+		no_energy_sound.play()
 		pass
 
 
@@ -107,12 +107,12 @@ func _animate_no_magnet():
 
 
 func _animate_magnet():
-	if GlobalPlayerStates.get_energy() > magnet_cost:
+	if GlobalPlayerStates.get_energy() >= magnet_cost:
 		GlobalPlayerStates.remove_energy(magnet_cost)
 		GlobalEventHolder.emit_signal("player_start_heatmap", Archive.MagnetState.ON)
 		var tween := get_tree().create_tween()
 		tween.tween_property($Magnetometer, "omni_range", range_magnet, 1.5)
 		tween.tween_callback(GlobalEventHolder.emit_signal.bind("player_finish_heatmap", Archive.MagnetState.ON))
 	else:
-		# TODO play not enough energy sound
+		no_energy_sound.play()
 		pass
