@@ -17,6 +17,7 @@ radius = 5.0
 [sub_resource type="SphereShape3D" id="SphereShape3D_q0lr3"]
 
 [node name="Beacon" type="RigidBody3D"]
+collision_layer = 8
 script = ExtResource("1_q0lr3")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
@@ -29,6 +30,7 @@ cast_shadow = 0
 mesh = SubResource("SphereMesh_gqavp")
 
 [node name="Area3D" type="Area3D" parent="." groups=["Beacon"]]
+collision_layer = 8
 collision_mask = 4
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
