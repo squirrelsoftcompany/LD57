@@ -32,7 +32,7 @@ func get_energy() -> int:
 func set_energy(value: int) -> void:
 	if value < 0:
 		value = 0
-	current_energy = value
+	current_energy = value if value < maxEnergy else maxEnergy
 	GlobalEventHolder.energy_state_changed.emit(value, maxEnergy)
 
 

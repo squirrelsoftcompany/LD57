@@ -12,13 +12,13 @@ config_version=5
 
 Global/MaxBeacon=3
 Global/MaxLife=10
-Global/MaxEnergy=100
+Global/MaxEnergy=6
 Global/Mines=[]
-Global/MaxMines=10
+Global/MaxMines=5
 
 [application]
 
-config/name="LD57"
+config/name="LD57_IntoTheDepth"
 run/main_scene="uid://bdujusajoavl0"
 config/features=PackedStringArray("4.4", "GL Compatibility")
 config/icon="res://icon.svg"

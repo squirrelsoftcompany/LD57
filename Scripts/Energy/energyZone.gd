@@ -1,7 +1,7 @@
 extends Node
 
 @export var energy_value = 10
-@export var cooldown : float = 10000000 # in µs (10^-6s)
+@export var cooldown : float = 10000000 ## in µs (10^-6s)
 
 @onready  var mesh = $MultiMeshInstance3D
 @onready  var energy_sound = $EnergySound
