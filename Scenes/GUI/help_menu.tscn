@@ -1,0 +1,187 @@
+[gd_scene load_steps=31 format=3 uid="uid://yfr6gqs64gb0"]
+
+[ext_resource type="Script" uid="uid://cpjfvtc3rt35a" path="res://Scripts/GUI/help_menu.gd" id="1_36hl6"]
+[ext_resource type="Script" uid="uid://b7go0ierlqmb8" path="res://Scripts/GUI/help_page.gd" id="1_cfjqo"]
+[ext_resource type="Texture2D" uid="uid://brvy1vh1sk3y0" path="res://Sprites/mine.png" id="2_36hl6"]
+[ext_resource type="Script" uid="uid://dm1teuiyskk6d" path="res://Scripts/GUI/help_data.gd" id="2_osmg1"]
+[ext_resource type="Texture2D" uid="uid://c8xvv7086t6el" path="res://Sprites/button_left.png" id="3_osmg1"]
+[ext_resource type="Texture2D" uid="uid://dt58krdddax8i" path="res://Sprites/Help/0_submarine.png" id="3_u548a"]
+[ext_resource type="Texture2D" uid="uid://bxm6hq71synix" path="res://Sprites/Help/1_mine.png" id="4_a0lqj"]
+[ext_resource type="Texture2D" uid="uid://cokpyraa8uyor" path="res://Sprites/beacon.png" id="4_dvmp3"]
+[ext_resource type="Texture2D" uid="uid://coo0lnkxede3o" path="res://Sprites/button_right.png" id="4_t0kp7"]
+[ext_resource type="Texture2D" uid="uid://c67oeho3qh4m4" path="res://Sprites/health.png" id="5_u548a"]
+[ext_resource type="Texture2D" uid="uid://bw03iivip6sr0" path="res://Sprites/Help/2_mi.png" id="6_5d00p"]
+[ext_resource type="Texture2D" uid="uid://da2ufh82pi13n" path="res://Sprites/energy.png" id="6_i0c8a"]
+[ext_resource type="Texture2D" uid="uid://o3g6xdkgealj" path="res://Sprites/Help/3_beacon.png" id="7_t28kk"]
+[ext_resource type="Texture2D" uid="uid://xxxjo1ykacci" path="res://Sprites/Help/6_sonar.png" id="8_i0c8a"]
+[ext_resource type="Texture2D" uid="uid://dwvecphmhxvfv" path="res://Sprites/Help/4_life.png" id="9_kbjvh"]
+[ext_resource type="Texture2D" uid="uid://c4wr7u2fodbuf" path="res://Sprites/Help/7_magnet.png" id="11_5d00p"]
+[ext_resource type="Texture2D" uid="uid://d3k1n4cmdpvg2" path="res://Sprites/Help/5_energy.png" id="11_rth3u"]
+[ext_resource type="Texture2D" uid="uid://bnseiljddhdk4" path="res://Sprites/Help/8_fish.png" id="15_rth3u"]
+[ext_resource type="Texture2D" uid="uid://c7k3ewm0oigy1" path="res://Sprites/Help/9_archive.png" id="16_u4k0p"]
+
+[sub_resource type="Resource" id="Resource_k2ehs"]
+script = ExtResource("2_osmg1")
+title = "1/10 SUBMARINE"
+action_name = &""
+text = "Yourself.
+You perceive the world around you only thanks to its sensor and the full archive of your previous position and scan results.
+Destroy your submarine and the game is over."
+help_image = ExtResource("3_u548a")
+metadata/_custom_type_script = "uid://dm1teuiyskk6d"
+
+[sub_resource type="Resource" id="Resource_t0kp7"]
+script = ExtResource("2_osmg1")
+title = "2/10 MINES"
+action_name = &""
+text = "Your objective is to find them and mark them using the beacons. They will appear as red in the magnetometer scan and look like a wall in sonar scan. Be careful, they don't like when submarine gets too closed."
+icon = ExtResource("2_36hl6")
+help_image = ExtResource("4_a0lqj")
+metadata/_custom_type_script = "uid://dm1teuiyskk6d"
+
+[sub_resource type="Resource" id="Resource_dvmp3"]
+script = ExtResource("2_osmg1")
+title = "3/10 MOVEMENT"
+action_name = &"mi_toggle"
+text = "You can move your submarine thanks to an Homeworld-like movement.
+Select your position on a disk or the altitude (press TAB to switch) and right click to validate the movement."
+help_image = ExtResource("6_5d00p")
+metadata/_custom_type_script = "uid://dm1teuiyskk6d"
+
+[sub_resource type="Resource" id="Resource_a0lqj"]
+script = ExtResource("2_osmg1")
+title = "4/10 BEACON"
+action_name = &""
+text = "Your submarine can launch beacon to disable mines and mark them. You can hold the beacon key to launch them farther. The mines should be in the lighted area of the beacon to be disabled. Beacon will not disappear during the game."
+icon = ExtResource("4_dvmp3")
+help_image = ExtResource("7_t28kk")
+metadata/_custom_type_script = "uid://dm1teuiyskk6d"
+
+[sub_resource type="Resource" id="Resource_2ehg7"]
+script = ExtResource("2_osmg1")
+title = "5/10 LIFE"
+action_name = &""
+text = "Your lifepoints. You will lose some when hitting walls of the caverns or mines. You can't restore them."
+icon = ExtResource("5_u548a")
+help_image = ExtResource("9_kbjvh")
+metadata/_custom_type_script = "uid://dm1teuiyskk6d"
+
+[sub_resource type="Resource" id="Resource_5d00p"]
+script = ExtResource("2_osmg1")
+title = "6/10 ENERGY"
+action_name = &""
+text = "Your energy. Using your scanners will consume your energy. You can restore energy by hitting energy points in the caverns. They will appear as yellow in magnetometer scan and will not appear in the sonar scan. When your energy is fully depleted you can't use anymore your scanners."
+icon = ExtResource("6_i0c8a")
+help_image = ExtResource("11_rth3u")
+metadata/_custom_type_script = "uid://dm1teuiyskk6d"
+
+[sub_resource type="Resource" id="Resource_mcwc8"]
+script = ExtResource("2_osmg1")
+title = "7/10 SONAR"
+action_name = &"scan_huge_sonar"
+text = "Your submarine has a passive small sonar used after each movement. You have also an active sonar that you can use to extend your vision. Sonar can see caverns walls and mines. Using the active sonar will consume your energy."
+help_image = ExtResource("8_i0c8a")
+metadata/_custom_type_script = "uid://dm1teuiyskk6d"
+
+[sub_resource type="Resource" id="Resource_xvcfv"]
+script = ExtResource("2_osmg1")
+title = "8/10 MAGNETOMETER"
+action_name = &"scan_magnet"
+text = "Your submarine has an active magnetometer that will glow red on mines and glow yellow on energy point. Using the magnetometer consume your energy."
+help_image = ExtResource("11_5d00p")
+metadata/_custom_type_script = "uid://dm1teuiyskk6d"
+
+[sub_resource type="Resource" id="Resource_t28kk"]
+script = ExtResource("2_osmg1")
+title = "9/10 FISH"
+action_name = &""
+text = "Some fish are swimming in the caverns. They are totally harmless but they will appear the same way as mines in the sonar scan. Fish move when you move so use the archive to differentiate moving fish and static mines."
+help_image = ExtResource("15_rth3u")
+metadata/_custom_type_script = "uid://dm1teuiyskk6d"
+
+[sub_resource type="Resource" id="Resource_kbjvh"]
+script = ExtResource("2_osmg1")
+title = "10/10 ARCHIVE"
+action_name = &""
+text = "Your submarine archive all your past positions and scan results (sonar and magnetometer). You can navigate in the archive along the green path to look for information you may have missed."
+help_image = ExtResource("16_u4k0p")
+metadata/_custom_type_script = "uid://dm1teuiyskk6d"
+
+[sub_resource type="LabelSettings" id="LabelSettings_duigm"]
+font_size = 20
+
+[node name="HelpMenu" type="HBoxContainer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+
+[node name="HelpMenu" type="VBoxContainer" parent="."]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+alignment = 1
+script = ExtResource("1_36hl6")
+helpDatum = Array[ExtResource("2_osmg1")]([SubResource("Resource_k2ehs"), SubResource("Resource_t0kp7"), SubResource("Resource_dvmp3"), SubResource("Resource_a0lqj"), SubResource("Resource_2ehg7"), SubResource("Resource_5d00p"), SubResource("Resource_mcwc8"), SubResource("Resource_xvcfv"), SubResource("Resource_t28kk"), SubResource("Resource_kbjvh")])
+
+[node name="HelpPage" type="HBoxContainer" parent="HelpMenu"]
+layout_mode = 2
+alignment = 1
+script = ExtResource("1_cfjqo")
+title = "MAGNET"
+action_name = &"scan_magnet"
+text = "TEST
+TEST2
+TEST3"
+icon = ExtResource("2_36hl6")
+
+[node name="DescriptionContainer" type="VBoxContainer" parent="HelpMenu/HelpPage"]
+custom_minimum_size = Vector2(200, 200)
+layout_mode = 2
+
+[node name="TitleContainer" type="HBoxContainer" parent="HelpMenu/HelpPage/DescriptionContainer"]
+layout_mode = 2
+
+[node name="Icon" type="TextureRect" parent="HelpMenu/HelpPage/DescriptionContainer/TitleContainer"]
+custom_minimum_size = Vector2(50, 34)
+layout_mode = 2
+size_flags_vertical = 4
+texture = ExtResource("2_36hl6")
+
+[node name="Title" type="Label" parent="HelpMenu/HelpPage/DescriptionContainer/TitleContainer"]
+custom_minimum_size = Vector2(146, 28)
+layout_mode = 2
+size_flags_horizontal = 3
+text = "MAGNET"
+label_settings = SubResource("LabelSettings_duigm")
+uppercase = true
+
+[node name="Text" type="Label" parent="HelpMenu/HelpPage/DescriptionContainer"]
+custom_minimum_size = Vector2(300, 162)
+layout_mode = 2
+size_flags_vertical = 3
+text = "TEST
+TEST2
+TEST3"
+vertical_alignment = 1
+autowrap_mode = 3
+
+[node name="HelpImage" type="TextureRect" parent="HelpMenu/HelpPage"]
+custom_minimum_size = Vector2(300, 200)
+layout_mode = 2
+expand_mode = 4
+stretch_mode = 5
+
+[node name="HBoxContainer" type="HBoxContainer" parent="HelpMenu"]
+layout_mode = 2
+alignment = 1
+
+[node name="PrevButton" type="Button" parent="HelpMenu/HBoxContainer"]
+layout_mode = 2
+icon = ExtResource("3_osmg1")
+
+[node name="NextButton" type="Button" parent="HelpMenu/HBoxContainer"]
+layout_mode = 2
+icon = ExtResource("4_t0kp7")

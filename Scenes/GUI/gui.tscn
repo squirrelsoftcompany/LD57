@@ -1,8 +1,9 @@
-[gd_scene load_steps=35 format=3 uid="uid://cl7b76mxru8tl"]
+[gd_scene load_steps=38 format=3 uid="uid://cl7b76mxru8tl"]
 
 [ext_resource type="Script" uid="uid://dxacdxwlt5ufc" path="res://Scripts/GUI/gui.gd" id="1_jyhc4"]
 [ext_resource type="PackedScene" uid="uid://csf7h3tyeu5ea" path="res://Scenes/GUI/top_button.tscn" id="1_psa72"]
 [ext_resource type="PackedScene" uid="uid://bg5tc4tw3t6bv" path="res://Scenes/GUI/bottom_button.tscn" id="2_gm40n"]
+[ext_resource type="Texture2D" uid="uid://b71a6e5iqi2p6" path="res://Sprites/button.png" id="3_1wuyf"]
 [ext_resource type="Texture2D" uid="uid://d4d1682bns04p" path="res://Sprites/right_click.png" id="4_b4lgj"]
 [ext_resource type="Texture2D" uid="uid://c67oeho3qh4m4" path="res://Sprites/health.png" id="5_jtdjp"]
 [ext_resource type="Texture2D" uid="uid://c8xvv7086t6el" path="res://Sprites/button_left.png" id="6_1wuyf"]
@@ -13,6 +14,8 @@
 [ext_resource type="Texture2D" uid="uid://cokpyraa8uyor" path="res://Sprites/beacon.png" id="8_tjoyq"]
 [ext_resource type="Script" uid="uid://co1h8rx5o4ko0" path="res://Scripts/GUI/state_progress_label.gd" id="9_tjoyq"]
 [ext_resource type="Script" uid="uid://bvhqqs3eife8q" path="res://Scripts/GUI/game_over_control.gd" id="11_whnys"]
+[ext_resource type="PackedScene" uid="uid://yfr6gqs64gb0" path="res://Scenes/GUI/help_menu.tscn" id="14_jnahm"]
+[ext_resource type="Script" uid="uid://dqjo4f37fcwjc" path="res://Scenes/GUI/help_control.gd" id="15_uyj30"]
 
 [sub_resource type="InputEventAction" id="InputEventAction_gm40n"]
 action = &"mi_switch"
@@ -130,7 +133,7 @@ mouse_filter = 2
 metadata/_edit_use_anchors_ = true
 
 [node name="HelpButton" parent="MainControl" instance=ExtResource("1_psa72")]
-visible = false
+z_index = 100
 layout_mode = 1
 anchor_left = 0.949653
 anchor_right = 1.0
@@ -140,6 +143,9 @@ offset_bottom = 0.0
 grow_horizontal = 0
 key = "H"
 help = "HELP"
+icon = ExtResource("3_1wuyf")
+ask_signal_name = "ask_show_help"
+mode = 2
 metadata/_edit_use_anchors_ = true
 
 [node name="VBoxContainer" type="VBoxContainer" parent="MainControl"]
@@ -402,3 +408,27 @@ alignment = 1
 [node name="Button" type="Button" parent="GameOverControl/PanelContainer/VBoxContainer/HBoxContainer"]
 layout_mode = 2
 text = "Play Again ?"
+
+[node name="HelpControl" type="Control" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("15_uyj30")
+
+[node name="PanelContainer" type="PanelContainer" parent="HelpControl"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.238
+anchor_top = 0.2
+anchor_right = 0.762
+anchor_bottom = 0.7
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="HelpMenu" parent="HelpControl/PanelContainer" instance=ExtResource("14_jnahm")]
+layout_mode = 2

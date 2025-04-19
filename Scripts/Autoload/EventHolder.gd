@@ -65,15 +65,17 @@ var _asking_beacon := false
 var _beacon_available := true
 var _navigating_archive := false
 var _gameover := false
+var _help_shown := false
 
 
 func _Animating() -> bool: return _moving or _sonar or _heatmap or _asking_beacon
-func CanMove() -> bool: return !_Animating() and !_navigating_archive and !_gameover
-func CanNavigate() -> bool: return !_Animating() and !_gameover
-func _CanScan() -> bool: return !_Animating() and !_navigating_archive and !_gameover
+func _InMenu() -> bool: return _gameover or _help_shown
+func CanMove() -> bool: return !_Animating() and !_navigating_archive and !_InMenu()
+func CanNavigate() -> bool: return !_Animating() and !_InMenu()
+func _CanScan() -> bool: return !_Animating() and !_navigating_archive and !_InMenu()
 func CanSonar() -> bool: return _CanScan() and !_sonar_done
 func CanHeatmap() -> bool: return _CanScan() and !_heatmap_done
-func CanBeacon() -> bool: return !_moving and !_sonar and !_heatmap and !_navigating_archive and !_gameover and _beacon_available
+func CanBeacon() -> bool: return !_moving and !_sonar and !_heatmap and !_navigating_archive and !_InMenu() and _beacon_available
 
 
 func _ready() -> void:
@@ -96,6 +98,7 @@ func _ready() -> void:
 	connect("beacon_state_changed", func(val, _x): _beacon_available = val > 0)
 	connect("gameover", func(_x): _gameover = true)
 	connect("reload_game", _on_reload_game)
+	ask_show_help.connect(func(): _help_shown = !_help_shown)
 
 
 func _on_reload_game():
@@ -108,3 +111,4 @@ func _on_reload_game():
 	_beacon_available = true
 	_navigating_archive = false
 	_gameover = false
+	_help_shown = false
