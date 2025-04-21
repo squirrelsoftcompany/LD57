@@ -106,11 +106,6 @@ corner_radius_top_right = 5
 corner_radius_bottom_right = 5
 corner_radius_bottom_left = 5
 
-[sub_resource type="LabelSettings" id="LabelSettings_tjoyq"]
-font_size = 25
-
-[sub_resource type="LabelSettings" id="LabelSettings_whnys"]
-
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_uyj30"]
 bg_color = Color(0.332031, 0.332031, 0.332031, 0.792157)
 border_width_left = 3
@@ -124,6 +119,11 @@ expand_margin_top = 2.0
 expand_margin_right = 2.0
 expand_margin_bottom = 2.0
 shadow_size = 1
+
+[sub_resource type="LabelSettings" id="LabelSettings_tjoyq"]
+font_size = 25
+
+[sub_resource type="LabelSettings" id="LabelSettings_whnys"]
 
 [node name="Gui" type="Control"]
 layout_mode = 3
@@ -387,6 +387,7 @@ anchor_right = 0.7
 anchor_bottom = 0.4
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_uyj30")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="GameOverControl/PanelContainer"]
 layout_mode = 2
@@ -405,9 +406,16 @@ layout_mode = 2
 
 [node name="TextLabel" type="Label" parent="GameOverControl/PanelContainer/VBoxContainer"]
 layout_mode = 2
-text = "YOU FOUND %d / %d MINES
-YOU USED ONLY %d BEACONS
-YOU MOVED ONLY %d TIMES"
+text = "You died...
+but you found %d / %d mines
+"
+label_settings = SubResource("LabelSettings_whnys")
+horizontal_alignment = 1
+
+[node name="TextLabel2" type="Label" parent="GameOverControl/PanelContainer/VBoxContainer"]
+layout_mode = 2
+text = "You used %d beacons
+You moved %d times"
 label_settings = SubResource("LabelSettings_whnys")
 horizontal_alignment = 1
 

@@ -22,9 +22,14 @@ func _ready() -> void:
 
 
 func _on_gameover(win: bool):
-	$PanelContainer/VBoxContainer/TitleLabel.text = "game over" if !win else "congratulations"
+	$PanelContainer/VBoxContainer/TitleLabel.text = "Game over" if !win else "Congratulations"
 	var text_label : Label = $PanelContainer/VBoxContainer/TextLabel
-	text_label.text = text_label.text.to_lower() % [ _mine_left, _mine_max, _beacon_launched, _moves ]
+	var text_label2 : Label = $PanelContainer/VBoxContainer/TextLabel2
+	if win :
+		text_label.text = "You did it! you found and marked all the mines !"
+	else :
+		text_label.text = text_label.text.to_lower() % [ _mine_left, _mine_max]
+	text_label2.text = text_label2.text.to_lower() % [ _beacon_launched, _moves]
 	visible = true
 
 
