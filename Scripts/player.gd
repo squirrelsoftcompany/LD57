@@ -8,11 +8,12 @@ class_name Player
 @export var launch_speed := 20
 @export var beacon_scene_path: String = "res://Scenes/beacon.tscn"
 @export var bonk_knockback_distance := 0.5
+@export var beacon_cooldown_time : float = 2.5 ## s
 
 @onready var _moving_interaction : MovingInteraction = $MovingInteraction
-@onready var _beacon_cooldown : Timer = $BeaconCooldown
 @onready var _moving_sound : AudioStreamPlayer = $MovingSound
 
+var _beacon_timer : float = 0
 var _selecting_movement := false
 var _launch_is_charging := false
 var _launch_charge_power := 0.0
@@ -27,7 +28,6 @@ func _ready() -> void:
 	GlobalEventHolder.connect("player_navigate_archive", _on_player_navigate_archive)
 	GlobalEventHolder.connect("player_quit_navigating_archive", _on_player_quit_navigating_archive)
 	GlobalEventHolder.connect("ask_move", _toggle_selecting_movement)
-
 
 func _input(event: InputEvent) -> void:
 	if !GlobalEventHolder.CanMove(): return
@@ -55,6 +55,8 @@ func _move_player(final_position : Vector3) -> void:
 	tween.chain()
 	tween.tween_callback(func (): GlobalEventHolder.emit_signal("player_finish_moving", final_position, $Submarine.rotation))
 	_moving_sound.play()
+	if not GlobalPlayerStates.is_beacon_full():
+			_check_beacon_cooldown(duration)
 
 func _process(_delta: float) -> void:
 	if GlobalEventHolder._asking_beacon:
@@ -106,7 +108,6 @@ func launch_beacon(power : float) -> void:
 		var total_force = (power * launch_speed)
 		var direction = $Submarine.global_transform.basis.z.normalized()
 		beacon_instance.apply_central_impulse(direction * total_force)
-		_beacon_cooldown.start()
 		GlobalPlayerStates.remove_beacon()
 	return
 	
@@ -124,9 +125,11 @@ func bonk():
 		GlobalPlayerStates.take_damage()
 		_moving_sound.stop()
 
-
-func _on_beacon_cooldown_timeout() -> void:
-	GlobalPlayerStates.add_beacon()
-	_beacon_cooldown.stop()
-	if (not GlobalPlayerStates.is_beacon_full()):
-		_beacon_cooldown.start()
+func _check_beacon_cooldown(duration : float):
+	_beacon_timer += duration
+	while _beacon_timer > beacon_cooldown_time:
+		GlobalPlayerStates.add_beacon()
+		if GlobalPlayerStates.is_beacon_full():
+			_beacon_timer = 0
+		else :
+			_beacon_timer -= beacon_cooldown_time
