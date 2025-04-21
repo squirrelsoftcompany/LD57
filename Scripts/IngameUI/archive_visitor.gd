@@ -70,7 +70,7 @@ func generate_polygon():
 	_polygon.mode = CSGPolygon3D.MODE_PATH
 	_polygon.path_node = _path3d.get_path()
 	_polygon.material = material
-	_polygon.polygon = generate_circle_points(36, 0.1)
+	_polygon.polygon = generate_circle_points(18, 0.1)
 	_polygon.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
 	add_child(_polygon)
 
