@@ -28,7 +28,7 @@ text = "Yourself.
 You only perceive the world around you thanks to your sensors.
 The archive stores your sensors returns.
 
-If your submarine is desrtroyed the game is over."
+If your submarine is destroyed the game is over."
 help_image = ExtResource("3_u548a")
 metadata/_custom_type_script = "uid://dm1teuiyskk6d"
 
@@ -93,9 +93,9 @@ script = ExtResource("2_osmg1")
 title = "7/10 SONAR"
 action_name = &"scan_huge_sonar"
 text = "Your submarine has a passive small sonar used after each movement. You also have an active sonar that you can use to extend your vision.
-Sonar can see caverns walls fishes and mines.
+Sonar can see caverns, walls, fishes and mines.
 
-Using the active sonar will consume energy."
+Using the active sonar consume energy."
 help_image = ExtResource("8_i0c8a")
 metadata/_custom_type_script = "uid://dm1teuiyskk6d"
 
