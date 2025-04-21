@@ -10,4 +10,5 @@ func _ready():
 
 func _energy_change(val: int, maximum: int):
 	charge = (val *  max_charge ) / maximum
-	material_override.set_shader_parameter("charge",charge)
+	var tween = create_tween()
+	tween.tween_property(material_override,"shader_parameter/charge",charge,0.25)
