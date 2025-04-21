@@ -22,6 +22,7 @@ func _ready() -> void:
 	GlobalEventHolder.connect("ask_sonar", func(): _animate_huge_sonar(global_position))
 	GlobalEventHolder.connect("ask_heatmap", _animate_magnet)
 	GlobalEventHolder.connect("player_spawn",_initialize)
+	GlobalEventHolder.connect("gameover",_light)
 	self.omni_range = 0
 
 
@@ -116,3 +117,6 @@ func _animate_magnet():
 	else:
 		no_energy_sound.play()
 		pass
+
+func _light(_x):
+	_shader_globals_override.set("params/true_sight",true)
