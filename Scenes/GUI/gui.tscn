@@ -27,6 +27,13 @@ events = [SubResource("InputEventAction_gm40n")]
 [sub_resource type="LabelSettings" id="LabelSettings_jtdjp"]
 font_size = 10
 
+[sub_resource type="InputEventAction" id="InputEventAction_jyhc4"]
+action = &"mi_toggle"
+pressed = true
+
+[sub_resource type="Shortcut" id="Shortcut_b4lgj"]
+events = [SubResource("InputEventAction_jyhc4")]
+
 [sub_resource type="InputEventAction" id="InputEventAction_b4lgj"]
 action = &"scan_huge_sonar"
 pressed = true
@@ -39,13 +46,6 @@ action = &"scan_magnet"
 
 [sub_resource type="Shortcut" id="Shortcut_wfw4l"]
 events = [SubResource("InputEventAction_p8y2k")]
-
-[sub_resource type="InputEventAction" id="InputEventAction_jyhc4"]
-action = &"mi_toggle"
-pressed = true
-
-[sub_resource type="Shortcut" id="Shortcut_b4lgj"]
-events = [SubResource("InputEventAction_jyhc4")]
 
 [sub_resource type="InputEventAction" id="InputEventAction_5m8o7"]
 action = &"av_back"
@@ -155,9 +155,9 @@ anchor_bottom = 0.114198
 offset_right = 0.0
 offset_bottom = 0.0
 grow_horizontal = 0
-key = "H"
 help = "HELP"
 icon = ExtResource("3_1wuyf")
+shortcut = SubResource("Shortcut_k1y4c")
 ask_signal_name = "ask_show_help"
 mode = 2
 metadata/_edit_use_anchors_ = true
@@ -176,7 +176,6 @@ layout_mode = 2
 
 [node name="SwitchButton" parent="MainControl/VBoxContainer/AdvancedMoveHelp" instance=ExtResource("2_gm40n")]
 layout_mode = 2
-key = "TAB"
 help = "SWITCH
 ALTITUDE
 HEADING"
@@ -204,9 +203,16 @@ texture = ExtResource("4_b4lgj")
 [node name="HBoxContainer" type="HBoxContainer" parent="MainControl/VBoxContainer"]
 layout_mode = 2
 
+[node name="MoveButton" parent="MainControl/VBoxContainer/HBoxContainer" instance=ExtResource("2_gm40n")]
+layout_mode = 2
+help = "MOVE"
+shortcut = SubResource("Shortcut_b4lgj")
+ask_signal_name = "ask_move"
+mode = 2
+metadata/_edit_use_anchors_ = true
+
 [node name="SonarButton" parent="MainControl/VBoxContainer/HBoxContainer" instance=ExtResource("2_gm40n")]
 layout_mode = 2
-key = "S"
 help = "SONAR"
 shortcut = SubResource("Shortcut_jtdjp")
 ask_signal_name = "ask_sonar"
@@ -214,7 +220,6 @@ metadata/_edit_use_anchors_ = true
 
 [node name="HeatmapButton" parent="MainControl/VBoxContainer/HBoxContainer" instance=ExtResource("2_gm40n")]
 layout_mode = 2
-key = "D"
 help = "MAGNETO-
 METER"
 shortcut = SubResource("Shortcut_wfw4l")
@@ -223,19 +228,10 @@ metadata/_edit_use_anchors_ = true
 
 [node name="BeaconButton" parent="MainControl/VBoxContainer/HBoxContainer" instance=ExtResource("2_gm40n")]
 layout_mode = 2
-key = "SPACE"
+force_key_text = "SPACE"
 help = "BEACON"
 ask_signal_name = "ask_beacon"
 mode = 1
-metadata/_edit_use_anchors_ = true
-
-[node name="MoveButton" parent="MainControl/VBoxContainer/HBoxContainer" instance=ExtResource("2_gm40n")]
-layout_mode = 2
-key = "M"
-help = "MOVE"
-shortcut = SubResource("Shortcut_b4lgj")
-ask_signal_name = "ask_move"
-mode = 2
 metadata/_edit_use_anchors_ = true
 
 [node name="Label" type="Label" parent="MainControl/VBoxContainer"]
@@ -262,7 +258,7 @@ layout_mode = 2
 
 [node name="PrevButton" parent="MainControl/VBoxContainer2/HBoxContainer2" instance=ExtResource("2_gm40n")]
 layout_mode = 2
-key = ""
+force_key_text = " "
 help = "PREV
 ENTRY"
 icon = ExtResource("6_1wuyf")
@@ -271,7 +267,7 @@ ask_signal_name = "ask_prev_entry"
 
 [node name="NextButton" parent="MainControl/VBoxContainer2/HBoxContainer2" instance=ExtResource("2_gm40n")]
 layout_mode = 2
-key = ""
+force_key_text = " "
 help = "next
 entry"
 icon = ExtResource("7_uyj30")
@@ -280,7 +276,6 @@ ask_signal_name = "ask_next_entry"
 
 [node name="PresentButton" parent="MainControl/VBoxContainer2/HBoxContainer2" instance=ExtResource("2_gm40n")]
 layout_mode = 2
-key = "ESC"
 help = "present"
 shortcut = SubResource("Shortcut_5m8o7")
 ask_signal_name = "ask_present"
