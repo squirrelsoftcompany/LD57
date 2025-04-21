@@ -56,6 +56,7 @@ signal life_state_changed(val: int, maximum: int)
 signal beacon_state_changed(val: int, maximum: int)
 
 
+var _mi_shown := false
 var _moving := false
 var _sonar := false
 var _sonar_done := false
@@ -71,11 +72,11 @@ var _help_shown := false
 func _Animating() -> bool: return _moving or _sonar or _heatmap or _asking_beacon
 func _InMenu() -> bool: return _gameover or _help_shown
 func CanMove() -> bool: return !_Animating() and !_navigating_archive and !_InMenu()
-func CanNavigate() -> bool: return !_Animating() and !_InMenu()
-func _CanScan() -> bool: return !_Animating() and !_navigating_archive and !_InMenu()
+func CanNavigate() -> bool: return !_Animating() and !_InMenu() and ! _mi_shown
+func _CanScan() -> bool: return !_Animating() and !_navigating_archive and !_InMenu() and ! _mi_shown
 func CanSonar() -> bool: return _CanScan() and !_sonar_done
 func CanHeatmap() -> bool: return _CanScan() and !_heatmap_done
-func CanBeacon() -> bool: return !_moving and !_sonar and !_heatmap and !_navigating_archive and !_InMenu() and _beacon_available
+func CanBeacon() -> bool: return !_moving and !_sonar and !_heatmap and !_navigating_archive and !_InMenu() and ! _mi_shown and _beacon_available
 
 
 func _ready() -> void:
@@ -99,6 +100,8 @@ func _ready() -> void:
 	connect("gameover", func(_x): _gameover = true)
 	connect("reload_game", _on_reload_game)
 	ask_show_help.connect(func(): _help_shown = !_help_shown)
+	player_start_mi.connect(func(): _mi_shown = true)
+	player_finish_mi.connect(func(): _mi_shown = false)
 
 
 func _on_reload_game():
