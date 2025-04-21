@@ -1,4 +1,4 @@
-[gd_scene load_steps=38 format=3 uid="uid://cl7b76mxru8tl"]
+[gd_scene load_steps=39 format=3 uid="uid://cl7b76mxru8tl"]
 
 [ext_resource type="Script" uid="uid://dxacdxwlt5ufc" path="res://Scripts/GUI/gui.gd" id="1_jyhc4"]
 [ext_resource type="PackedScene" uid="uid://csf7h3tyeu5ea" path="res://Scenes/GUI/top_button.tscn" id="1_psa72"]
@@ -110,6 +110,20 @@ corner_radius_bottom_left = 5
 font_size = 25
 
 [sub_resource type="LabelSettings" id="LabelSettings_whnys"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_uyj30"]
+bg_color = Color(0.332031, 0.332031, 0.332031, 0.792157)
+border_width_left = 3
+border_width_bottom = 3
+corner_radius_top_left = 1
+corner_radius_top_right = 1
+corner_radius_bottom_right = 1
+corner_radius_bottom_left = 20
+expand_margin_left = 10.0
+expand_margin_top = 2.0
+expand_margin_right = 2.0
+expand_margin_bottom = 2.0
+shadow_size = 1
 
 [node name="Gui" type="Control"]
 layout_mode = 3
@@ -429,6 +443,7 @@ anchor_right = 0.762
 anchor_bottom = 0.7
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_uyj30")
 
 [node name="HelpMenu" parent="HelpControl/PanelContainer" instance=ExtResource("14_jnahm")]
 layout_mode = 2

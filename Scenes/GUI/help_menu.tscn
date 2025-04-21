@@ -25,8 +25,10 @@ script = ExtResource("2_osmg1")
 title = "1/10 SUBMARINE"
 action_name = &""
 text = "Yourself.
-You perceive the world around you only thanks to its sensor and the full archive of your previous position and scan results.
-Destroy your submarine and the game is over."
+You only perceive the world around you thanks to your sensors.
+The archive stores your sensors returns.
+
+If your submarine is desrtroyed the game is over."
 help_image = ExtResource("3_u548a")
 metadata/_custom_type_script = "uid://dm1teuiyskk6d"
 
@@ -34,7 +36,10 @@ metadata/_custom_type_script = "uid://dm1teuiyskk6d"
 script = ExtResource("2_osmg1")
 title = "2/10 MINES"
 action_name = &""
-text = "Your objective is to find them and mark them using the beacons. They will appear as red in the magnetometer scan and look like a wall in sonar scan. Be careful, they don't like when submarine gets too closed."
+text = "Your objective is to find them and mark them using the beacons.
+They have a red aura in the magnetometer scan and look like any obstacle in sonar scan.
+
+Be careful, they don't like when submarines gets too close."
 icon = ExtResource("2_36hl6")
 help_image = ExtResource("4_a0lqj")
 metadata/_custom_type_script = "uid://dm1teuiyskk6d"
@@ -44,7 +49,8 @@ script = ExtResource("2_osmg1")
 title = "3/10 MOVEMENT"
 action_name = &"mi_toggle"
 text = "You can move your submarine thanks to an Homeworld-like movement.
-Select your position on a disk or the altitude (press TAB to switch) and right click to validate the movement."
+Select your bearing on the disk and your altitude separately (press TAB to switch).
+Right click to validate the movement."
 help_image = ExtResource("6_5d00p")
 metadata/_custom_type_script = "uid://dm1teuiyskk6d"
 
@@ -52,7 +58,11 @@ metadata/_custom_type_script = "uid://dm1teuiyskk6d"
 script = ExtResource("2_osmg1")
 title = "4/10 BEACON"
 action_name = &""
-text = "Your submarine can launch beacon to disable mines and mark them. You can hold the beacon key to launch them farther. The mines should be in the lighted area of the beacon to be disabled. Beacon will not disappear during the game."
+text = "Your submarine can launch beacons to mark mines.
+You can hold the beacon key to launch them farther.
+The mines should be in the lit area of the beacon to be marked.
+
+Beacon stays indefinitely."
 icon = ExtResource("4_dvmp3")
 help_image = ExtResource("7_t28kk")
 metadata/_custom_type_script = "uid://dm1teuiyskk6d"
@@ -61,7 +71,9 @@ metadata/_custom_type_script = "uid://dm1teuiyskk6d"
 script = ExtResource("2_osmg1")
 title = "5/10 LIFE"
 action_name = &""
-text = "Your lifepoints. You will lose some when hitting walls of the caverns or mines. You can't restore them."
+text = "Your lifepoints. You will lose some when hitting obstacles or mines. 
+
+You can't restore them."
 icon = ExtResource("5_u548a")
 help_image = ExtResource("9_kbjvh")
 metadata/_custom_type_script = "uid://dm1teuiyskk6d"
@@ -70,7 +82,8 @@ metadata/_custom_type_script = "uid://dm1teuiyskk6d"
 script = ExtResource("2_osmg1")
 title = "6/10 ENERGY"
 action_name = &""
-text = "Your energy. Using your scanners will consume your energy. You can restore energy by hitting energy points in the caverns. They will appear as yellow in magnetometer scan and will not appear in the sonar scan. When your energy is fully depleted you can't use anymore your scanners."
+text = "Your energy. Using your sensors will consume it.
+You can recover energy by touching energy points in the caverns. They will be yellow in magnetometer scans but will not appear in the sonar scan."
 icon = ExtResource("6_i0c8a")
 help_image = ExtResource("11_rth3u")
 metadata/_custom_type_script = "uid://dm1teuiyskk6d"
@@ -79,7 +92,10 @@ metadata/_custom_type_script = "uid://dm1teuiyskk6d"
 script = ExtResource("2_osmg1")
 title = "7/10 SONAR"
 action_name = &"scan_huge_sonar"
-text = "Your submarine has a passive small sonar used after each movement. You have also an active sonar that you can use to extend your vision. Sonar can see caverns walls and mines. Using the active sonar will consume your energy."
+text = "Your submarine has a passive small sonar used after each movement. You also have an active sonar that you can use to extend your vision.
+Sonar can see caverns walls fishes and mines.
+
+Using the active sonar will consume energy."
 help_image = ExtResource("8_i0c8a")
 metadata/_custom_type_script = "uid://dm1teuiyskk6d"
 
@@ -87,7 +103,9 @@ metadata/_custom_type_script = "uid://dm1teuiyskk6d"
 script = ExtResource("2_osmg1")
 title = "8/10 MAGNETOMETER"
 action_name = &"scan_magnet"
-text = "Your submarine has an active magnetometer that will glow red on mines and glow yellow on energy point. Using the magnetometer consume your energy."
+text = "Your submarine has an active magnetometer that will light  mines in red and energy points in yellow.
+
+Using the magnetometer consume energy."
 help_image = ExtResource("11_5d00p")
 metadata/_custom_type_script = "uid://dm1teuiyskk6d"
 
@@ -95,7 +113,9 @@ metadata/_custom_type_script = "uid://dm1teuiyskk6d"
 script = ExtResource("2_osmg1")
 title = "9/10 FISH"
 action_name = &""
-text = "Some fish are swimming in the caverns. They are totally harmless but they will appear the same way as mines in the sonar scan. Fish move when you move so use the archive to differentiate moving fish and static mines."
+text = "Some fish are swimming in the caverns. They are totally harmless but they will appear the same way as mines in the sonar scan.
+
+Fish move when you move so use the archive to differentiate moving fish and static mines."
 help_image = ExtResource("15_rth3u")
 metadata/_custom_type_script = "uid://dm1teuiyskk6d"
 
@@ -147,13 +167,14 @@ layout_mode = 2
 [node name="Icon" type="TextureRect" parent="HelpMenu/HelpPage/DescriptionContainer/TitleContainer"]
 custom_minimum_size = Vector2(50, 34)
 layout_mode = 2
+size_flags_horizontal = 0
 size_flags_vertical = 4
 texture = ExtResource("2_36hl6")
 
 [node name="Title" type="Label" parent="HelpMenu/HelpPage/DescriptionContainer/TitleContainer"]
 custom_minimum_size = Vector2(146, 28)
 layout_mode = 2
-size_flags_horizontal = 3
+size_flags_horizontal = 6
 text = "MAGNET"
 label_settings = SubResource("LabelSettings_duigm")
 uppercase = true
@@ -180,8 +201,10 @@ alignment = 1
 
 [node name="PrevButton" type="Button" parent="HelpMenu/HBoxContainer"]
 layout_mode = 2
+focus_mode = 0
 icon = ExtResource("3_osmg1")
 
 [node name="NextButton" type="Button" parent="HelpMenu/HBoxContainer"]
 layout_mode = 2
+focus_mode = 0
 icon = ExtResource("4_t0kp7")
