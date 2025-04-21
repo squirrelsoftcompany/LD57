@@ -1,4 +1,4 @@
-[gd_scene load_steps=39 format=3 uid="uid://cl7b76mxru8tl"]
+[gd_scene load_steps=41 format=3 uid="uid://cl7b76mxru8tl"]
 
 [ext_resource type="Script" uid="uid://dxacdxwlt5ufc" path="res://Scripts/GUI/gui.gd" id="1_jyhc4"]
 [ext_resource type="PackedScene" uid="uid://csf7h3tyeu5ea" path="res://Scenes/GUI/top_button.tscn" id="1_psa72"]
@@ -16,6 +16,13 @@
 [ext_resource type="Script" uid="uid://bvhqqs3eife8q" path="res://Scripts/GUI/game_over_control.gd" id="11_whnys"]
 [ext_resource type="PackedScene" uid="uid://yfr6gqs64gb0" path="res://Scenes/GUI/help_menu.tscn" id="14_jnahm"]
 [ext_resource type="Script" uid="uid://dqjo4f37fcwjc" path="res://Scenes/GUI/help_control.gd" id="15_uyj30"]
+
+[sub_resource type="InputEventAction" id="InputEventAction_uyj30"]
+action = &"show_help"
+pressed = true
+
+[sub_resource type="Shortcut" id="Shortcut_k1y4c"]
+events = [SubResource("InputEventAction_uyj30")]
 
 [sub_resource type="InputEventAction" id="InputEventAction_gm40n"]
 action = &"mi_switch"
